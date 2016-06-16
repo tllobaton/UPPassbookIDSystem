@@ -1,0 +1,139 @@
+@extends('layouts.app')
+
+@section('content')
+
+<head>
+<style>
+	
+	.buttons
+	{
+		margin-left: 42%;
+	}
+	.container
+	{
+		text-transform: uppercase;
+	}
+</style>
+  
+</head>	
+
+<div class = "container">
+	<div class = "header">
+			<ul>
+							<div class="dropdown">
+							  <li><a href="#">Question</a></li>							  
+							  <div class="dropdown-content">
+								<a href="{{ url('/dbview') }}">View Question</a>
+								<a href="{{ url('/addquestion') }}">Add Question</a>
+							  </div>
+							</div>							
+							<div class="dropdown">
+							  <li><a href="#">Subjects</a></li>							  
+							  <div class="dropdown-content">
+								<a href="{{ url('/addsubject') }}">Add subject</a>
+								<a href="{{ url('/delsubject') }}">Delete Subject</a>
+							  </div>
+							</div>
+							<div class="dropdown">
+							  <li><a href="#">Manage Exam</a></li>							  
+							  <div class="dropdown-content">
+								<a href="{{ url('/viewingexams') }}">View exam</a>
+								<a href="{{ url('/generateexam') }}">Generate Exam</a>
+							  </div>
+							</div>
+							<div class="dropdown">
+							  <li class="current_page_item"><a href="#">Account</a></li>							  
+							  <div class="dropdown-content">
+								@if (Auth::user()->type == "admin")
+								<a href="{{ url('/kappa') }}">Create account </a>
+								<a href="{{ url('/changeFpw')}}">Change faculty password</a>
+								@endif
+								<a href="{{url('/changesettings')}}">Change username</a>
+								<a href="{{url('/changeID')}}">Change ID</a>
+								<a href="{{ url('/changepassword') }}">Change password</a>
+							  </div>
+							</div>
+						</ul>
+			</div>
+		</div>
+		
+			<div class = "headertitle">
+				
+				<center><ul>
+				<li class="current_page_item" id="hd"> Change Password </li>		
+				</ul></center>
+			</div>
+<div class = "container">			
+	<div class = "bg">
+		<br>
+		
+		<br>
+		<?php
+				if (count($errors) > 0){
+					echo"<div class='alert alert-danger'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					<ul>";
+					foreach ($errors->all() as $error){
+						echo"<li> $error </li>";
+					}
+					echo "</ul>
+					</div>";
+				}
+				elseif (session('success')){
+					echo"<div class='alert alert-success'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						".session('success')."
+						</div>";
+				}
+				elseif (session('fail')){
+					echo"<div class='alert alert-danger'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						".session('fail')."
+						</div>";
+				}
+		?>
+			<form method = "post" action = "{{url('/changepassword')}}">
+			{!! csrf_field() !!}
+				<p>
+				
+					<label class="col-md-4 control-label">New Password</label>
+
+                            <div class="col-md-3">
+								<input type = "password" class="form-control" name = "password">
+                                
+                            </div>
+				<br>
+				<br>
+				<br>
+					<label class="col-md-4 control-label">Re-type New password</label>
+
+                            <div class="col-md-3">
+								<input type = "password" class="form-control" name = "password_confirmation">
+                                
+                            </div>
+							
+				<br>
+				<br>
+				<br>
+					<label class="col-md-4 control-label">Confirm Old Password</label>
+
+                            <div class="col-md-3">
+								<input type = "password" class="form-control" name = "old_password">
+                                
+                            </div>
+							
+							
+				</p>
+				<br>
+				<br>
+				<div class = "buttons">
+				<br><br>
+					<input type = "submit" name = "submit" value = "SUBMIT" class="btn">
+				</div>	
+				<br>
+			</form>
+			<br>
+			
+	</div>	
+</div>
+@endsection
