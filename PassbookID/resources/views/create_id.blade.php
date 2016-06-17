@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
 <html>
     <head>
         <title>Login</title>
@@ -36,6 +38,10 @@
 			.space {
 				height:10px;
 			}
+			
+			label,input {
+				margin-top:5px;
+			}
         </style>
     </head>
     <body>
@@ -71,3 +77,4 @@
         </div>
     </body>
 </html>
+@endsection

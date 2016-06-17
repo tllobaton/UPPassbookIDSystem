@@ -17,6 +17,12 @@ Route::group(['middleware' => 'web'], function () {
 		return view('auth\login');
 	});
 	Route::get('/form', function(){
+		return view('create_id');
+	});
+	Route::get('/UPV', function(){
+		return view('UPV');
+	});
+	Route::get('/test', function(){
 		return view('test');
 	});
 });

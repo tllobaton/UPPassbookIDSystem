@@ -24,9 +24,9 @@
             margin-right: 6px;
         }
 		
-		.navbar navbar-default navbar-static-top{
-			background-color: black;
-			
+		.navbar-default{
+			background-color: #800000;
+			height: 50px;
 		}
     </style>
 </head>
