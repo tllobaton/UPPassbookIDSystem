@@ -26,3 +26,5 @@ Route::group(['middleware' => 'web'], function () {
 		return view('test');
 	});
 });
+
+Route::get('admin','StudViewController@index');
