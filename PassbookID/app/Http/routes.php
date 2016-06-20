@@ -11,32 +11,32 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-	Route::get('/', function () {
-		return view('auth\login');
-	});
-	Route::get('/form', function(){
-		return view('create_id');
-	});
-	Route::get('/UPV', function(){
-		return view('UPV');
-	});
-	Route::get('/UPD', function(){
-		return view('UPD');
-	});
-	Route::get('/UPB', function(){
-		return view('UPB');
-	});
-	Route::get('/UPM', function(){
-		return view('UPM');
-	});
-	Route::get('/create', function(){
-		return view('admin_create');
-	});
-	Route::get('/test', function(){
-		return view('test');
-	});
+
+Route::auth();
+Route::get('/', function () {
+	return view('auth\login');
 });
+Route::get('/form', function(){
+	return view('create_id');
+});
+Route::get('/UPV', function(){
+	return view('UPV');
+});
+Route::get('/UPD', function(){
+	return view('UPD');
+});
+Route::get('/UPB', function(){
+	return view('UPB');
+});
+Route::get('/UPM', function(){
+	return view('UPM');
+});
+Route::get('/create', function(){
+	return view('admin_create');
+});
+Route::get('/test', function(){
+	return view('test');
+});
+
 
 Route::get('admin','StudViewController@index');
