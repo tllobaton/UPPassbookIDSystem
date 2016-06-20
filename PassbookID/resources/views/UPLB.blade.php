@@ -7,11 +7,16 @@
         <style>
 			.card {
 				position:absolute;
+				vertical-align: middle;
+				horizontal-align: middle;
 				border: .5px;
 				border-radius: 10px;
 				border-style:solid;
 				height: 205px;
 				width: 326px;
+				transform: translate(-50%, -50%);
+				top: 50%;
+				left: 50%;
 			}
 			.upper {
 				position:absolute;
