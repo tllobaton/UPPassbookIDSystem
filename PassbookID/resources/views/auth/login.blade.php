@@ -63,4 +63,6 @@
         </div>
     </div>
 </div>
+
+<a href="/redirect">G+</a>
 @endsection
