@@ -25,6 +25,12 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/UPD', function(){
 		return view('UPD');
 	});
+	Route::get('/UPB', function(){
+		return view('UPB');
+	});
+	Route::get('/UPM', function(){
+		return view('UPM');
+	});
 	Route::get('/test', function(){
 		return view('test');
 	});
