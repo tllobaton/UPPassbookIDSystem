@@ -5,8 +5,6 @@
     <head>
         <title>Create ID</title>
         <style>
-			body{text-align:center}
-			
 			.box {
 				border-style:solid;
 				position: fixed;
@@ -14,6 +12,7 @@
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
+				text-align: center;
 			}
 			
 			form {
@@ -42,13 +41,18 @@
 			label,input {
 				margin-top:5px;
 			}
+			
+			.header {
+				font-size: 50px;
+			}
         </style>
     </head>
     <body>
         <div class="container">
-			<h1>Create ID</h1>
             <form>
+				
 				<div class="box">
+					<label class = "header">Create ID</label>
 					<t>
 						<label class = "intable">Full Name:</label>
 						<input class = "intable"type="text" placeholder="example@up.edu.ph"></input><br><br>

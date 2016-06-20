@@ -7,14 +7,19 @@
         <style>
 			.card {
 				position:absolute;
+				vertical-align: middle;
+				horizontal-align: middle;
 				border: .5px;
 				border-radius: 10px;
 				border-style:solid;
 				height: 205px;
 				width: 326px;
+				transform: translate(-50%, -50%);
+				top: 50%;
+				left: 50%;
 			}
 			.upper {
-				position:absolute;
+				position:inherit;
 				text-align: right;
 				height: 84px;
 				width:325px;
@@ -22,7 +27,7 @@
 				border-top-right-radius: 10px;
 			}
 			.lower {
-				position:absolute;
+				position:inherit;
 				height: 112.5px;
 				width:325px;
 				top: 84px;
@@ -31,28 +36,28 @@
 			}
 			
 			.campus {
-				position:absolute;
+				position:inherit;
 				right: 0px;
 				margin-right:5px;
 				font-family: "Verdana";
 				color: #800000;
 			}
 			#UP {
-				position:absolute;
+				position:inherit;
 				margin-top:5px;
 			}
 			#CU {
-				position:absolute;
+				position:inherit;
 				margin-top:-20px;
 			}
 			#logo {
-				position:absolute;
+				position:inherit;
 				left: 0px;
 				margin-top:5px;
 				margin-left:5px;
 			}
 			.details{
-				position:absolute;
+				position:inherit;
 				left:0px;
 				top: 0px;
 				margin-left:50px;
@@ -61,7 +66,7 @@
 				
 			}
 			#pic {
-				position:absolute;
+				position:inherit;
 				right: 0px;
 				bottom: 0px;
 				border: 5px solid white;
@@ -69,7 +74,7 @@
 				margin-bottom: 6px;
 			}
 			.imgback {
-				position:absolute;
+				position:inherit;
 				right: 0px;
 				bottom: 0px;
 				height: 132px;

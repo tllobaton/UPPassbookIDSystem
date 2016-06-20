@@ -28,6 +28,14 @@
 			background-color: #800000;
 			height: 50px;
 		}
+		.navbar-brand{
+			font-family: 'Times New Roman';
+			font-size: 25px;
+			position: fixed;
+			margin-left: auto;
+			margin-right: auto;
+			min-width: 1100px;
+		}
     </style>
 </head>
 <body id="app-layout">
