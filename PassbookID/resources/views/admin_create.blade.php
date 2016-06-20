@@ -5,8 +5,6 @@
     <head>
         <title>Create ID</title>
         <style>
-			body{text-align:center}
-			
 			.box {
 				border-style:solid;
 				position: fixed;
@@ -14,6 +12,7 @@
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
+				text-align: center;
 			}
 			
 			form {
@@ -28,6 +27,7 @@
 				padding-bottom: 5px;
 				padding-top: 5px;
 				display: table-row
+				width:10px;
 			}
 			.intable {
 				display: table-cell;
@@ -39,16 +39,25 @@
 				height:10px;
 			}
 			
-			label,input {
+			label,input{
 				margin-top:5px;
+			}
+			
+			select {
+				margin-left:10px;
+			}
+			.header {
+				font-size: 50px;
+				margin-bottom: 30px;
 			}
         </style>
     </head>
     <body>
         <div class="container">
-			<h1>Promote to Admin</h1>
+			
             <form>
 				<div class="box">
+					<label class = "header">Promote to Admin</label><br>
 					<t>
 						<label class = "intable">User Email:</label>
 						<select class = "intable">
