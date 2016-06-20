@@ -31,12 +31,14 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/UPM', function(){
 		return view('UPM');
 	});
+	Route::get('/UPLB', function(){
+		return view('UPLB');
+	});
 	Route::get('/create', function(){
 		return view('admin_create');
 	});
 	Route::get('/test', function(){
 		return view('test');
 	});
+	Route::get('/admin','StudViewController@index');
 });
-
-Route::get('admin','StudViewController@index');
