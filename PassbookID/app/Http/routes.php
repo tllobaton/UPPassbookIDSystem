@@ -31,6 +31,9 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/UPM', function(){
 		return view('UPM');
 	});
+	Route::get('/create', function(){
+		return view('admin_create');
+	});
 	Route::get('/test', function(){
 		return view('test');
 	});

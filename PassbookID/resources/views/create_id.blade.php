@@ -3,7 +3,7 @@
 @section('content')
 <html>
     <head>
-        <title>Login</title>
+        <title>Create ID</title>
         <style>
 			body{text-align:center}
 			
@@ -46,6 +46,7 @@
     </head>
     <body>
         <div class="container">
+			<h1>Create ID</h1>
             <form>
 				<div class="box">
 					<t>
