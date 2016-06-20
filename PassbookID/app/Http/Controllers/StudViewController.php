@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class StudViewController extends Controller {
    public function index(){
-      $users = DB::select('select id, name from users');
+      $users = DB::select('SELECT id, name FROM users');
       return view('admin',['users'=>$users]);
    }
 }
