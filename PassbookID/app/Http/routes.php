@@ -22,6 +22,9 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/UPV', function(){
 		return view('UPV');
 	});
+	Route::get('/UPD', function(){
+		return view('UPD');
+	});
 	Route::get('/test', function(){
 		return view('test');
 	});
