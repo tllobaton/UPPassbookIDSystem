@@ -8,13 +8,16 @@
 			.card {
 				position:absolute;
 				border: .5px;
+				transform: translate(-50%, -50%);
+				top: 50%;
+				left: 50%;
 				border-radius: 10px;
 				border-style:solid;
 				height: 205px;
 				width: 326px;
 			}
 			.upper {
-				position:absolute;
+				position:inherit;
 				text-align: right;
 				height: 92.5px;
 				width:325px;
@@ -22,7 +25,7 @@
 				border-top-right-radius: 10px;
 			}
 			.lower {
-				position:absolute;
+				position:inherit;
 				height: 112.5px;
 				width:325px;
 				top: 92.5px;
@@ -31,30 +34,30 @@
 			}
 			
 			.campus {
-				position:absolute;
+				position:inherit;
 				left: 0px;
 				margin-left:28%;
 				text-align: left;
 				font-family: "Times New Roman";
 			}
 			#UP {
-				position:absolute;
+				position:inherit;
 				margin-top:5px;
 				color: #800000;
 				font-size: 18px;
 			}
 			#CU {
-				position:absolute;
+				position:inherit;
 				margin-top:-20px;
 			}
 			#logo {
-				position:absolute;
+				position:inherit;
 				left: 0px;
 				margin-top:5px;
 				margin-left:5px;
 			}
 			.details{
-				position:absolute;
+				position:inherit;
 				left:0px;
 				top: 0px;
 				margin-left:35px;
@@ -62,7 +65,7 @@
 				
 			}
 			#pic {
-				position:absolute;
+				position:inherit;
 				right: 0px;
 				bottom: 0px;
 				border: 2px solid #800000;
