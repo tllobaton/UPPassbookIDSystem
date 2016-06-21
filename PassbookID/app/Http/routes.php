@@ -13,8 +13,14 @@
 
 Route::auth();
 Route::get('/', function () {
-	return view('auth\login');
+	return redirect('/login');
 });
+
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
+
+Route::group(['middleware' => 'auth'], function () {
+
 Route::get('/form', function(){
 	return view('create_id');
 });
@@ -33,10 +39,8 @@ Route::get('/UPM', function(){
 Route::get('/create', function(){
 	return view('admin_create');
 });
-Route::get('/test', function(){
-	return view('test');
-});
 
-Route::get('/redirect', 'SocialAuthController@redirect');
-Route::get('/callback', 'SocialAuthController@callback');
+
 Route::get('admin','StudViewController@index');
+
+});
