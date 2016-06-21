@@ -6,7 +6,8 @@
         <title>Create ID</title>
         <style>
 			.box {
-				border-style:solid;
+				border-style:ridge;
+				border-color:maroon;
 				position: fixed;
 				top: 50%;
 				left: 50%;

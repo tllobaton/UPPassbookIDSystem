@@ -6,7 +6,8 @@
         <title>Create ID</title>
         <style>
 			.box {
-				border-style:solid;
+				border-style:ridge;
+				border-color: maroon;
 				position: fixed;
 				top: 50%;
 				left: 50%;
@@ -56,11 +57,11 @@
 					<label class = "header">Create ID</label>
 					<t>
 						<label class = "intable">Full Name:</label>
-						<input class = "intable"type="text" placeholder="example@up.edu.ph"></input><br><br>
+						<input class = "intable"type="text"></input><br><br>
 					</t>
 					<t>
 						<label class = "intable">Student Number/Employee ID:</label>
-						<input class = "intable" type="text"></input><br><br>
+						<input class = "intable" type="text" placeholder = "XXXXYYYYY"></input><br><br>
 					</t>
 					<t>
 						<label class = "intable">Office/Department/College:</label>
