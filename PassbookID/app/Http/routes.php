@@ -30,6 +30,9 @@ Route::get('/Contacts', 'CreateIdController@showCreateContacts');
 
 Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
 
+Route::get('/AdminView', 'AdminController@index');
+
+Route::get('/AdminCreate', 'AdminController@showPromoteView');
 Route::get('/UPV', function(){
 	return view('UPV');
 });
