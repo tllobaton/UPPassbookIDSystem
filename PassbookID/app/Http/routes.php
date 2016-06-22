@@ -30,6 +30,15 @@ Route::get('/UPB', function(){
 Route::get('/UPM', function(){
 	return view('UPM');
 });
+Route::get('/UPLB', function(){
+	return view('UPLB');
+});
+Route::get('/UPOU', function(){
+	return view('UPOU');
+});
+Route::get('/UPOU_admin', function(){
+	return view('UPOU_admin');
+});
 Route::get('/create', function(){
 	return view('admin_create');
 });
