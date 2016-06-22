@@ -21,7 +21,7 @@ class SocialAuthController extends Controller
 
 		if ($user != NULL) {
 			auth()->login($user);
-			return redirect()->to('/form');
+			return redirect()->to('/StudentID');
 		}
 		else {
 			return redirect("/login");

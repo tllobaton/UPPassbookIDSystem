@@ -21,9 +21,10 @@ Route::get('/callback', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/form', function(){
-	return view('create_id');
-});
+Route::get('/StudentID', 'CreateIdController@showCreateIdDetails');
+
+Route::get('/Contacts', 'CreateIdController@showCreateContacts');
+
 Route::get('/UPV', function(){
 	return view('UPV');
 });
@@ -36,11 +37,11 @@ Route::get('/UPB', function(){
 Route::get('/UPM', function(){
 	return view('UPM');
 });
-Route::get('/create', function(){
-	return view('admin_create');
+Route::get('/AdminCreate', function(){
+	return view('AdminCreate');
 });
 
 
-Route::get('admin','StudViewController@index');
+Route::get('/AdminView','AdminController@index');
 
 });
