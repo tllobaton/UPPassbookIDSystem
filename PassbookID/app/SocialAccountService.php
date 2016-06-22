@@ -15,14 +15,16 @@ class SocialAccountService
             return $account;
         }
 		else {
-
-            $user = new User();
-			$user->name = $providerUser->getName();
-			$user->email = $providerUser->getEmail();
-			
-			$user->save();
-            return $user;
-
+			if (isset($providerUser->user['domain'])) {
+				if ($providerUser->user['domain'] == "up.edu.ph") {
+					$user = new User();
+					$user->name = $providerUser->getName();
+					$user->email = $providerUser->getEmail();
+					$user->save();
+					return $user;
+				}
+			}
+			return NULL;
         }
 
     }

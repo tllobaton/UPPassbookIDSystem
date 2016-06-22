@@ -19,27 +19,40 @@
         body {
             font-family: 'Lato';
         }
-
+		
+		#navbarlogo {
+			height: 70px;
+			width: 70px;
+			margin-right: 10px;
+		}
         .fa-btn {
             margin-right: 6px;
         }
 		
 		.navbar-default{
 			background-color: #800000;
-			height: 50px;
+			height: 80px;
 		}
-		.navbar-brand{
+		
+		.navbar-left {
 			font-family: 'Times New Roman';
 			font-size: 25px;
-			position: fixed;
-			margin-left: auto;
-			margin-right: auto;
-			min-width: 1100px;
+			margin-left: 10px;
+			margin-top: 5px;
+			float: left;
+			min-width: 500px;
+			color: white;
+		}
+		
+		.dropdown-toggle {
+			margin-top: 10px;
+			font-size: 20px;
 		}
     </style>
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
+		
         <div class="container">
             <div id = "bars" class="navbar-header">
 
@@ -52,9 +65,8 @@
                 </button>->
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    UNIVERSITY OF THE PHILIPPINES
-                </a>
+				<h class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png">UNIVERSITY OF THE PHILIPPINES</h>
+				<a href = "#" class = "navbar-brand"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">

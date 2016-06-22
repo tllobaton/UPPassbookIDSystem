@@ -19,8 +19,12 @@ class SocialAuthController extends Controller
     {
         $user = $service->createOrGetUser(Socialite::driver('google')->user());
 
-        auth()->login($user);
-
-        return redirect()->to('/UPD');
+		if ($user != NULL) {
+			auth()->login($user);
+			return redirect()->to('/form');
+		}
+		else {
+			return redirect("/login");
+		}
     }
 }
