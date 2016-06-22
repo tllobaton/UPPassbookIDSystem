@@ -30,9 +30,18 @@
 
 </style>
 <div class = "container">
-	<div class = "box">
+	
+	<div class = "box">		
 		<h1>UP ID GENERATOR</h1>
 		<a href="/redirect"><button><img src = "/img/UPLogo.png">Sign in with UP Mail</button></a>
+		<?php
+			if (session('xdomain')){
+				echo"<br><br><div class='alert alert-danger'>
+					<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+					".session('xdomain')."
+					</div>";
+			}
+		?>
 	</div>
 </div>
 @endsection

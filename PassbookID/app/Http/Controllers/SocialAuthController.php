@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Socialite;
+use Session;
 use App\SocialAccountService;
 class SocialAuthController extends Controller
 {
@@ -21,9 +22,11 @@ class SocialAuthController extends Controller
 
 		if ($user != NULL) {
 			auth()->login($user);
-			return redirect()->to('/form');
+			
+			return redirect()->to('/Details');
 		}
 		else {
+			Session::flash('xdomain', 'Please use @up.edu.ph.');
 			return redirect("/login");
 		}
     }

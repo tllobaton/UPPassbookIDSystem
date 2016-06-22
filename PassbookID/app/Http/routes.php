@@ -13,6 +13,9 @@
 
 Route::auth();
 Route::get('/', function () {
+	if (Auth::check()){
+		return Redirect::to('/Details');
+	}
 	return redirect('/login');
 });
 
@@ -21,9 +24,12 @@ Route::get('/callback', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/form', function(){
-	return view('create_id');
-});
+Route::get('/Details', 'CreateIdController@showCreateIdDetails');
+
+Route::get('/Contacts', 'CreateIdController@showCreateContacts');
+
+Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
+
 Route::get('/UPV', function(){
 	return view('UPV');
 });
@@ -45,11 +51,5 @@ Route::get('/UPOU', function(){
 Route::get('/UPOU_admin', function(){
 	return view('UPOU_admin');
 });
-Route::get('/create', function(){
-	return view('admin_create');
-});
-
-
-Route::get('admin','StudViewController@index');
 
 });
