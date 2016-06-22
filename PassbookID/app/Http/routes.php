@@ -13,6 +13,9 @@
 
 Route::auth();
 Route::get('/', function () {
+	if (Auth::check()){
+		return Redirect::to('/Details');
+	}
 	return redirect('/login');
 });
 
