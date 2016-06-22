@@ -31,7 +31,9 @@
 		
 		.navbar-default{
 			background-color: #800000;
-			height: 80px;
+			margin-left: auto;
+			margin-right: auto;
+			//height: 80px;
 		}
 		
 		.navbar-left {
@@ -39,40 +41,58 @@
 			font-size: 25px;
 			margin-left: 10px;
 			margin-top: 5px;
-			float: left;
-			min-width: 500px;
 			color: white;
+		}
+		
+		.navbar-toggle{
+			margin-top: 22px;
+		}
+		
+		.nav{
+			background-color: #800000;
+		}
+		
+		.navbar{
 		}
 		
 		.dropdown-toggle {
 			margin-top: 10px;
 			font-size: 20px;
 		}
+		
+		#UP{
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin-left: 88px;
+			margin-top: 30px;
+		}
+		
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-full navbar-inverse navbar-default navbar-static-top">
 		
         <div class="container">
             <div id = "bars" class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
-                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed row" data-toggle="collapse" data-target="#app-navbar-collapse">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>->
+                </button>
 
                 <!-- Branding Image -->
-				<h class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png">UNIVERSITY OF THE PHILIPPINES</h>
+				<h1 class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UP">U.P.</span></h1>
 				<a href = "#" class = "navbar-brand"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/logout') }}">Logout</a></li>
                 </ul>-->
 
                 <!-- Right Side Of Navbar -->
