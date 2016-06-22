@@ -15,4 +15,8 @@ class CreateIdController extends Controller
    public function showCreateContacts() {
 	   return view('IdCreateEmergency');
    }
+   
+   public function showCreateEmpDetails() {
+	   return view('IdCreateEmpDetails');
+   }
 }
