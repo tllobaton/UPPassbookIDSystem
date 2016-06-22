@@ -108,7 +108,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-sign-out"></i>View List of Users</a></li>
+									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-sign-out"></i>Promote a User</a></li>
+									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                     @endif
