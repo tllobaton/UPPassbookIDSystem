@@ -39,11 +39,14 @@ Route::get('/UPB', function(){
 Route::get('/UPM', function(){
 	return view('UPM');
 });
-Route::get('/AdminCreate', function(){
-	return view('AdminCreate');
+Route::get('/UPLB', function(){
+	return view('UPLB');
 });
-
-
-Route::get('/AdminView','AdminController@index');
+Route::get('/UPOU', function(){
+	return view('UPOU');
+});
+Route::get('/UPOU_admin', function(){
+	return view('UPOU_admin');
+});
 
 });
