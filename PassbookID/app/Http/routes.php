@@ -19,6 +19,19 @@ Route::get('/', function () {
 	return redirect('/login');
 });
 
+Route::get(
+    'barcode/img/{text}/{size?}/{scale?}/{codeType?}/{orientation?}',
+    
+    function ($text, $size = 35, $scale = 1.15, $codeType = 'code39', $orientation = 'horizontal') {
+        
+        $barcode = new \PicoPrime\BarcodeGen\BarcodeGenerator();
+
+        return $barcode
+            ->generate(compact('text', 'size', 'orientation', 'codeType', 'scale'))
+            ->response('png');
+    }
+);
+
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@callback');
 
@@ -27,6 +40,12 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/Details', 'CreateIdController@showCreateIdDetails');
 
 Route::get('/Contacts', 'CreateIdController@showCreateContacts');
+
+Route::get('/ViewEmergency', 'ViewInfoController@showEmergencyDetails');		//first back_of_id format; contains person to contact
+
+Route::get('/ViewEmergency1', 'ViewInfoController@showEmergencyDetails1');		//second format; contains person to contact as well as barcode
+
+Route::get('/ViewEmergency2', 'ViewInfoController@showEmergencyDetails2');		//third format for admin
 
 Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
 

@@ -55,6 +55,7 @@
 				left: 0px;
 				margin-top:5px;
 				margin-left:5px;
+				height: auto;
 			}
 			.details{
 				position:absolute;

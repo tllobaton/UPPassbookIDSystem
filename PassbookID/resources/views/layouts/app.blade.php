@@ -60,7 +60,7 @@
 			font-size: 20px;
 		}
 		
-		#UP{
+		#UPlogo{
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -85,7 +85,7 @@
                 </button>
 
                 <!-- Branding Image -->
-				<h1 class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UP">U.P.</span></h1>
+				<h1 class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
 				<a href = "#" class = "navbar-brand"></a>
             </div>
 
@@ -108,8 +108,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-sign-out"></i>View List of Users</a></li>
-									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-sign-out"></i>Promote a User</a></li>
+									<li><a href="{{ url('/Details') }}"><i class="fa fa-btn fa-user"></i>My Passbook</a></li>
+									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-users"></i>View List of Users</a></li>
+									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

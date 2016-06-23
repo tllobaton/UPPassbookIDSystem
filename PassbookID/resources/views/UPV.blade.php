@@ -83,7 +83,7 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label>TAYLOR A. SWIFT</label><br>
+						<label>TAYLOR A. SWIFT</label><a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
 						<label>2007-01230<br/>B.S. in Music<br/>College of Music</label>
 					</div>
 					
