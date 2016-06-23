@@ -23,11 +23,11 @@ class SocialAuthController extends Controller
 		if ($user != NULL) {
 			auth()->login($user);
 			
-			return redirect()->to('/Details');
+			return redirect()->to('/Landing');
 		}
 		else {
 			Session::flash('xdomain', 'Please use @up.edu.ph.');
-			return redirect("/login");
+			return redirect("/Landing");
 		}
     }
 }

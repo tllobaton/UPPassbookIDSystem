@@ -11,10 +11,8 @@
 			  box-sizing: border-box;
 			}
 			.box {
-				border-style:ridge;
-				border-color: maroon;
-				position: fixed;
-				top: 50%;
+				position: absolute;
+				top: 500px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
@@ -42,8 +40,8 @@
     </head>
     <body>
         <div class="container">
-            <form>
-				
+            <form method = "post" action = {{url('/CreateId')}}>
+				{!! csrf_field() !!}
 				<div class="box">
 					<label class = "header">Person to contact in case of emergency</label><br>
 					<label class = "inform">Name:</label>

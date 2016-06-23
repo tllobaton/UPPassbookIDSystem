@@ -11,18 +11,9 @@
 			  box-sizing: border-box;
 			  
 			}
-			.outerbox {
-				width: 100%;
-				height: 100%;
-				border: 10px solid red;
-			}
 			.box {
-				
-				max-height: 700px;
-				border-style:ridge;
-				border-color: maroon;
-				position: fixed;
-				top: 50%;
+				position: absolute;
+				top: 500px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
@@ -41,19 +32,34 @@
 				padding: 5px;
 				margin:0px;
 			}
-			.header {
-				font-size: 50px;
+			.header, .idtype{
+				font-size: 30px;
 			}
-		
-			
+			.idtype {
+				border: none;
+			}
         </style>
     </head>
     <body>
         <div class="container">
-            <form method = "get" action = "{{url('/Contacts')}}">
+            <form method = "post" action = "{{url('/Branch')}}" enctype="multipart/form-data">
+				{!! csrf_field() !!}
 				<div class ="outerbox">
 					<div class="box">
-						<label class = "header">Create ID</label><br>
+						<?php
+						if (session('xsize')){
+							echo"<br><br><div class='alert alert-danger'>
+								<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+								".session('xsize')."
+								</div>";
+						}
+						?>
+						@if ($type == 'student')
+							<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "student" size ="5" readonly></input> ID</label><br>
+						@else
+							<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employee" size ="7" readonly></input> ID</label><br>
+						@endif
+						
 							<label class = "inform">First Name:</label>
 							<input class = "inform" type="text" required></input><br>
 						
@@ -66,13 +72,17 @@
 							<label class = "inform">Suffix Name:</label>
 							<input class = "inform" type="text" placeholder="Leave blank if not applicable"></input><br>
 										
-							@if (Auth::user()->adminstatus == 'no')
+							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>
 							@else
 								<label class = "inform">Employee ID:</label>
 							@endif
 							
-							<input class = "inform" type="text" placeholder = "202011111" required></input><br>
+							<input class = "inform" name = "id" type="text" placeholder = "202011111" required></input><br>
+							
+							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800"></label><br>
+							
+							
 							<label class = "inform">Campus Unit:</label>
 							<select class = "inform">
 							<option> ----------</option>
@@ -82,10 +92,11 @@
 							<option> UP Los Baños</option>
 							<option> UP Manila</option>
 							<option> UP Mindanao</option>
+							<option> UP Open University</option>
 							<option> UP Visayas</option>
 							</select><br>
 						
-							@if (Auth::user()->adminstatus == 'no')
+							@if ($type == 'student')
 								<label class = "inform">Department/College:</label>
 							@else
 								<label class = "inform">Office:</label>

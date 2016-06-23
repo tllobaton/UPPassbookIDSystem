@@ -24,15 +24,21 @@ Route::get('/callback', 'SocialAuthController@callback');
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/Details', 'CreateIdController@showCreateIdDetails');
+Route::get('/Details/{type?}', 'CreateIdController@showCreateIdDetails');
 
 Route::get('/Contacts', 'CreateIdController@showCreateContacts');
 
 Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
 
+Route::get('/Landing', 'CreateIdController@showLandingPage');
+
+Route::post('/Branch', 'CreateIdController@createIdBranch');
+
 Route::get('/AdminView', 'AdminController@index');
 
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
+
+Route::post('/CreateId', 'CreateIdController@createId');
 Route::get('/UPV', function(){
 	return view('UPV');
 });

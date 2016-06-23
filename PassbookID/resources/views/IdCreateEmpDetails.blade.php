@@ -11,10 +11,8 @@
 			  box-sizing: border-box;
 			}
 			.box {
-				border-style:ridge;
-				border-color: maroon;
-				position: fixed;
-				top: 50%;
+				position: absolute;
+				top: 500px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
@@ -33,8 +31,12 @@
 				padding: 5px;
 				margin:0px;
 			}
-			.header {
-				font-size: 50px;
+			.header, .idtype{
+				font-size: 30px;
+			}
+			.idtype {
+				border: none;
+				
 			}
 		
 			
@@ -42,10 +44,10 @@
     </head>
     <body>
         <div class="container">
-            <form method = "get" action = "{{url('/Contacts')}}">
-				
+            <form method = "get" action = "{{url('/Contacts')}} >
+				{!! csrf_field() !!}
 				<div class="box">
-					<label class = "header">Create ID</label><br>
+					<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employeeL" size ="7" hidden readonly></input> ID</label><br>
 						<label class = "inform">GSIS No.:</label>
 						<input class = "inform" type="text" required></input><br>
 					

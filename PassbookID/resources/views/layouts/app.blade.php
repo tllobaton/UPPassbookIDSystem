@@ -50,6 +50,7 @@
 		
 		.nav{
 			background-color: #800000;
+			z-index: 1;
 		}
 		
 		.navbar{
@@ -71,8 +72,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-full navbar-inverse navbar-default navbar-static-top">
-		
+    <nav class="navbar navbar-full navbar-inverse navbar-default navbar-fixed-top">
         <div class="container">
             <div id = "bars" class="navbar-header">
 
@@ -108,8 +108,14 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+								@if (Auth::user()->adminstatus == 'yes')
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-sign-out"></i>View List of Users</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-sign-out"></i>Promote a User</a></li>
+								@endif
+								@if (Auth::user()->createstatus == 'yes')
+									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>View ID</a></li>
+									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Download ID</a></li>\
+								@endif
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

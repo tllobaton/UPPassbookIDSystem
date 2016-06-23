@@ -11,10 +11,8 @@
 			  box-sizing: border-box;
 			}
 			.box {
-				border-style:ridge;
-				border-color:maroon;
-				position: fixed;
-				top: 50%;
+				position: absolute;
+				top: 500px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
