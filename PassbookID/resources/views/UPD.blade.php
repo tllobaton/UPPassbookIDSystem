@@ -61,7 +61,7 @@
 				left:0px;
 				top: 0px;
 				margin-left:50px;
-				margin-top: 5px;
+				margin-top: 0px;
 				text-align: center;
 				
 			}
@@ -82,7 +82,12 @@
 				background-color: red;
 				margin-right: 5px;
 				margin-bottom: 5px;
-				
+			}
+			#barcode{
+				position: absolute;
+				bottom: 0px;
+				margin-bottom: 5px;
+				margin-left: 8%;
 			}
         </style>
     </head>
@@ -95,7 +100,7 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label>Hayley Nichole Williams</label><br>
+						<label>Hayley Nichole Williams</label>&nbsp<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
 						<label>2007-01230<br/>College of Music</label>
 					</div>
 					
@@ -103,9 +108,11 @@
 				<div class = "imgback">
 					<img src = "/img/sample_upd.jpg" id = "pic" alt = "1x1" width = "80" height = "120">
 				</div>
+				<div>
+					<img src="barcode/img/2007-01230" id="barcode" alt="barcode">
+				</div>
 			</div>
 		</div>
-		
     </body>
 </html>
 @endsection

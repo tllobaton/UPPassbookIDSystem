@@ -61,7 +61,7 @@
 			font-size: 20px;
 		}
 		
-		#UP{
+		#UPlogo{
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -85,7 +85,7 @@
                 </button>
 
                 <!-- Branding Image -->
-				<h1 class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UP">U.P.</span></h1>
+				<h1 class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
 				<a href = "#" class = "navbar-brand"></a>
             </div>
 
@@ -116,6 +116,7 @@
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>View ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Download ID</a></li>\
 								@endif
+
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
