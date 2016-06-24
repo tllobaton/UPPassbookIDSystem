@@ -41,11 +41,11 @@ Route::get('/Details/{type?}', 'CreateIdController@showCreateIdDetails');
 
 Route::get('/Contacts/{type?}', 'CreateIdController@showCreateContacts');
 
-Route::get('/ViewEmergency', 'ViewInfoController@showEmergencyDetails');		//first back_of_id format; contains person to contact
+Route::get('/ViewEmergency', 'CreateIdController@showEmergencyDetails');		//first back_of_id format; contains person to contact
 
-Route::get('/ViewEmergency1', 'ViewInfoController@showEmergencyDetails1');		//second format; contains person to contact as well as barcode
+Route::get('/ViewEmergency1', 'CreateIdController@showEmergencyDetails1');		//second format; contains person to contact as well as barcode
 
-Route::get('/ViewEmergency2', 'ViewInfoController@showEmergencyDetails2');		//third format for admin
+Route::get('/ViewEmergency2', 'CreateIdController@showEmergencyDetails2');		//third format for admin
 
 Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
 
@@ -53,6 +53,7 @@ Route::get('/Landing', 'CreateIdController@showLandingPage');
 
 Route::post('/Branch', 'CreateIdController@createIdBranch');
 
+Route::get('/ViewId', 'CreateIdController@viewId');
 Route::get('/AdminView', 'AdminController@index');
 
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
