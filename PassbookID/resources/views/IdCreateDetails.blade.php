@@ -61,16 +61,16 @@
 						@endif
 						
 							<label class = "inform">First Name:</label>
-							<input class = "inform" type="text" required></input><br>
+							<input class = "inform" type="text" name = "fname" required></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" required></input><br>
+							<input class = "inform" type="text" name = "mname"required></input><br>
 						
 							<label class = "inform">Last Name:</label>
-							<input class = "inform" type="text" required></input><br>
+							<input class = "inform" type="text" name = "lname"required></input><br>
 					
 							<label class = "inform">Suffix Name:</label>
-							<input class = "inform" type="text" placeholder="Leave blank if not applicable"></input><br>
+							<input class = "inform" type="text" name = "sname" placeholder="Jr., Sr., III, etc."></input><br>
 										
 							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>
@@ -84,7 +84,7 @@
 							
 							
 							<label class = "inform">Campus Unit:</label>
-							<select class = "inform">
+							<select class = "inform" name = "campus">
 							<option> ----------</option>
 							<option> UP Baguio</option>
 							<option> UP Cebu</option>
@@ -102,7 +102,7 @@
 								<label class = "inform">Office:</label>
 							@endif
 							
-							<select class = "inform">
+							<select class = "inform" name = "dept">
 							<option> ----------</option>
 							<option> College of Engineering</option>
 							<option> College of Kagwapuhan</option>

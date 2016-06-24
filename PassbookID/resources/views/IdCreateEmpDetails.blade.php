@@ -49,10 +49,10 @@
 				<div class="box">
 					<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employeeL" size ="7" hidden readonly></input> ID</label><br>
 						<label class = "inform">GSIS No.:</label>
-						<input class = "inform" type="text" required></input><br>
+						<input class = "inform" type="text" name = "gsis" required></input><br>
 					
 						<label class = "inform">Blood Type:</label>
-						<select class = "inform">
+						<select class = "inform" name = "blood">
 						<option> ----------</option>
 						<option> A</option>
 						<option> B</option>
@@ -60,10 +60,10 @@
 						<option> O</option>
 						</select><br>
 						<label class = "inform">TIN:</label>
-						<input class = "inform" type="text" required></input><br>
+						<input class = "inform" type="text" name = "tin" required></input><br>
 					
 						<label class = "inform">Employment Status:</label>
-						<input class = "inform" type="text" required></input><br>
+						<input class = "inform" type="text" name = "empstatus" required></input><br>
 				
 					<button type="submit">Next page</button>
 				</div>

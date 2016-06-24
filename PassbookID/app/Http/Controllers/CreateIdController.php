@@ -27,6 +27,16 @@ class CreateIdController extends Controller
    }
    
    public function processDetails(Request $request){
+	   DB::table('users')
+			->where('email', \Auth::user()->email)
+			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'idnum' => $request->id, 'campus' => $request->campus, 'dept' => $request->dept]);
+			
+		if (isset($request->sname)) {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['sname' => $request->sname]);
+		
+		}
 	   if ($request->file('photo')->getClientSize() < 1000000){
 			$filename = $request->id.".png";
 			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
