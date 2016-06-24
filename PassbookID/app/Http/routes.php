@@ -58,6 +58,8 @@ Route::get('/AdminView', 'AdminController@index');
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
 
 Route::post('/CreateId', 'CreateIdController@createId');
+
+Route::post('/PromoteUser', 'AdminController@createAdmin');
 Route::get('/UPV', function(){
 	return view('UPV');
 });
