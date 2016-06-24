@@ -36,7 +36,6 @@
 			}
 			.idtype {
 				border: none;
-				
 			}
 		
 			
@@ -47,7 +46,7 @@
             <form method = "post" action = "{{url('/Branch')}}">
 				{!! csrf_field() !!}
 				<div class="box">
-					<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employeeL" size ="7" hidden readonly></input> ID</label><br>
+					<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employee:" size ="7" hidden readonly></input> ID</label><br>
 						<label class = "inform">GSIS No.:</label>
 						<input class = "inform" type="text" name = "gsis" required></input><br>
 					

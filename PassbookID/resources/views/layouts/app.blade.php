@@ -23,8 +23,18 @@
 		#navbarlogo {
 			height: 70px;
 			width: 70px;
-			margin-right: 10px;
 		}
+		
+		#navbarlogo_xs{
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin-left: 5px;
+			margin-top: 5px;
+			height: 70px;
+			width: 70px;
+		}
+		
         .fa-btn {
             margin-right: 6px;
         }
@@ -33,7 +43,6 @@
 			background-color: #800000;
 			margin-left: auto;
 			margin-right: auto;
-			//height: 80px;
 		}
 		
 		.navbar-left {
@@ -45,7 +54,7 @@
 		}
 		
 		.navbar-toggle{
-			margin-top: 22px;
+			margin-top: 36px;
 		}
 		
 		.nav{
@@ -65,8 +74,8 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			margin-left: 88px;
-			margin-top: 30px;
+			margin-left: 85px;
+			margin-top: 20px;
 		}
 		
     </style>
@@ -85,7 +94,7 @@
                 </button>
 
                 <!-- Branding Image -->
-				<h1 class="navbar-left"><img id = "navbarlogo" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
+				<h1 class="navbar-left"><img class="hidden-xs" id = "navbarlogo" src = "/img/UPLogo.png"><img class="visible-xs" id = "navbarlogo_xs" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
 				<a href = "#" class = "navbar-brand"></a>
             </div>
 
@@ -109,6 +118,12 @@
 
                             <ul class="dropdown-menu" role="menu">
 								@if (Auth::user()->adminstatus == 'yes')
+									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-users"></i>View List of Users</a></li>
+									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User</a></li>
+								@endif
+								@if (Auth::user()->createstatus == 'yes')
+									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>View ID</a></li>
+									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Download ID</a></li>
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-sign-out"></i>Switch to Admin View</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-sign-out"></i>Promote a User to Admin</a></li>
 								@endif

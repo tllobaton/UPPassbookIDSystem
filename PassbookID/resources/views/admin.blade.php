@@ -6,7 +6,12 @@
 		<title>Administrator</title>
 		<style>
 			#content{
-				margin-top: 15%;
+				position: absolute;
+				top: 300px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				padding:20px;
+				text-align: center;
 			}
 		</style>
 	</head>
@@ -17,7 +22,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">List of Users</div>
 						<div class="panel-body table-responsive">
-							<table class="table table-hover table-condensed text-center">
+							<table class="tbl table table-hover table-condensed text-center">
 								 <tr>
 									<th class="text-center">Student Number</th>
 									<th class="text-center">Name</th>
