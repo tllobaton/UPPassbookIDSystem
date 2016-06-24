@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Session;
+use DB;
 class CreateIdController extends Controller
 {
    public function showCreateIdDetails($type = null) {
 	   return view('IdCreateDetails', ['type' => $type]);
    }
    
-   public function showCreateContacts() {
-	   return view('IdCreateEmergency');
+   public function showCreateContacts($type = null) {
+	   return view('IdCreateEmergency' , ['type' => $type]);
    }
    
    public function showCreateEmpDetails() {
@@ -39,10 +40,10 @@ class CreateIdController extends Controller
    public function createIdBranch(Request $request) {
 	   if ($request->type == 'student'){
 			$this->processDetails($request);
-			return redirect('/Contacts');
+			return redirect('/Contacts/student');
 	   }
 	   else if ($request->type == 'employeeL') {
-		   return redirect('/Contacts');
+		   return redirect('/Contacts/employee');
 	   }
 	   else {
 			$this->processDetails($request);
@@ -51,6 +52,21 @@ class CreateIdController extends Controller
    }
    
    public function createId(Request $request) {
+	   $status = DB::table('users')
+				-> where('email', \Auth::user()->email)
+				->first();
+		
+		if ($status->createstatus == "no" && $request->type == "student") {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['createstatus' => 'yes']);
+		}
+		
+		else if ($status->createstatusemp == "no" && $request->type == "employee") {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['createstatusemp' => 'yes']);
+		}
 	   return redirect('/UPD');
    }
 }

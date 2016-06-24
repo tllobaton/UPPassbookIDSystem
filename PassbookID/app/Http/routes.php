@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/Details/{type?}', 'CreateIdController@showCreateIdDetails');
 
-Route::get('/Contacts', 'CreateIdController@showCreateContacts');
+Route::get('/Contacts/{type?}', 'CreateIdController@showCreateContacts');
 
 Route::get('/ViewEmergency', 'ViewInfoController@showEmergencyDetails');		//first back_of_id format; contains person to contact
 
