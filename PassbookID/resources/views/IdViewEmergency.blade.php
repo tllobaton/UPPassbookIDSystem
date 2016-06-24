@@ -20,7 +20,7 @@
 				height: 205px;
 				width: 326px;
 				transform: translate(-50%, -50%);
-				top: 50%;
+				top: 250px;
 				left: 50%;
 			}
 			.header{
