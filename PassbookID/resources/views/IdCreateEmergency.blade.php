@@ -50,13 +50,13 @@
 					@endif
 					<label class = "header">Person to contact in case of emergency</label><br>
 					<label class = "inform">Name:</label>
-					<input class = "inform"type="text"></input><br><br>
+					<input class = "inform"type="text" name = "ename"></input><br><br>
 					
 					<label class = "inform">Contact number:</label>
-					<input class = "inform" type="text"></input><br><br>
+					<input class = "inform" type="text" name = "enum"></input><br><br>
 					
 					<label class = "inform">Address:</label>
-					<input class = "inform"type="text"></input><br><br>
+					<input class = "inform"type="text" name = "eaddress"></input><br><br>
 					
 					<button type="submit">Back</button>
 					<button type="submit">Create ID</button>
