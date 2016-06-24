@@ -44,7 +44,7 @@
     </head>
     <body>
         <div class="container">
-            <form method = "get" action = "{{url('/Contacts')}} >
+            <form method = "post" action = "{{url('/Branch')}}">
 				{!! csrf_field() !!}
 				<div class="box">
 					<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employeeL" size ="7" hidden readonly></input> ID</label><br>

@@ -43,6 +43,11 @@
             <form method = "post" action = {{url('/CreateId')}}>
 				{!! csrf_field() !!}
 				<div class="box">
+					@if ($type == 'student') 
+						<input class = "idtype" type = "text" name = "type" value = "student" size ="7" hidden readonly></input>
+					@else 
+						<input class = "idtype" type = "text" name = "type" value = "employee" size ="7" hidden readonly></input>
+					@endif
 					<label class = "header">Person to contact in case of emergency</label><br>
 					<label class = "inform">Name:</label>
 					<input class = "inform"type="text"></input><br><br>

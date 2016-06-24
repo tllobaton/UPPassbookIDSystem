@@ -89,12 +89,23 @@
 				margin-bottom: 5px;
 				margin-left: 8%;
 			}
+			button {
+				position:absolute;
+				background-color: maroon;
+				bottom: 0px;
+				right: 0px;
+				border-radius: 20px;
+				color: white;
+				margin-top: 10px;
+			}
         </style>
     </head>
     <body>
+		
 		<div class = "container">
 			<div class = "card">
 				<div class = "upper">
+				
 					<img src = "/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
 					<label class = "campus" id = "UP">University of the Philippines<br/>Diliman</label><br>
 				</div>
@@ -111,8 +122,11 @@
 				<div>
 					<img src="barcode/img/2007-01230" id="barcode" alt="barcode">
 				</div>
+				
 			</div>
+			<a href="/Landing"><button>Return Home</button></a>
 		</div>
+		
     </body>
 </html>
 @endsection
