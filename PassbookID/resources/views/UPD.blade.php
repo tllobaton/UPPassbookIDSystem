@@ -60,7 +60,7 @@
 				position:inherit;
 				left:0px;
 				top: 0px;
-				margin-left:50px;
+				right: 70px;
 				margin-top: 0px;
 				text-align: center;
 				
@@ -83,11 +83,11 @@
 				margin-right: 5px;
 				margin-bottom: 5px;
 			}
-			#barcode{
-				position: absolute;
+			.bcode {
+				position: inherit;
 				bottom: 0px;
+				right: 115px;
 				margin-bottom: 5px;
-				margin-left: 8%;
 			}
 			button {
 				position:absolute;
@@ -98,6 +98,7 @@
 				color: white;
 				margin-top: 10px;
 			}
+			
         </style>
     </head>
     <body>
@@ -111,18 +112,21 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label>Hayley Nichole Williams</label>&nbsp<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
-						<label>2007-01230<br/>College of Music</label>
+						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
+						<label>{{$user->idnum}}<br/>{{$user->dept}}</label>
+						
 					</div>
 					
 				</div>
 				<div class = "imgback">
-					<img src = "/img/sample_upd.jpg" id = "pic" alt = "1x1" width = "80" height = "120">
+					<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "80" height = "120">
 				</div>
 				<div>
-					<img src="barcode/img/2007-01230" id="barcode" alt="barcode">
+					
 				</div>
-				
+			<div class = "bcode">	
+				<img src=<?php echo "barcode/img/".$user->idnum?> id="barcode" alt="barcode">
+			</div>
 			</div>
 			<a href="/Landing"><button>Return Home</button></a>
 		</div>

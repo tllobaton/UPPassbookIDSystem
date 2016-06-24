@@ -41,10 +41,10 @@
     <body>
 		<div class = "container">
 			<div class = "card">
-				<label class="header"><a href="{{ url('/UPD') }}"><i class="fa fa-btn fa-arrow-left"></i></a>Person to contact in case of emergency</label><hr>
-				<label class="txt">Name: </label><label class="txt">Dr. Meow Cat</label><br>
-				<label class="txt">Contact Number: </label><label class="txt">09171784234</label><br>
-				<label class="txt">Address: </label><label class="txt" style="font-size: 10px;">Test Unit, Test Building, Test Street, Test Barangay, Test City, Cat CountryTest Unit, Test Building, Test Street, Test Barangay, Test City, Cat Country</label><br>
+				<label class="header"><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-arrow-left"></i></a>Person to contact in case of emergency</label><hr>
+				<label class="txt">Name: </label><label class="txt">{{$user->ename}}</label><br>
+				<label class="txt">Contact Number: </label><label class="txt">{{$user->enum}}</label><br>
+				<label class="txt">Address: </label><label class="txt" style="font-size: 10px;">{{$user->eaddress}}</label><br>
 			</div>
 		</div>
     </body>

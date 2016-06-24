@@ -2,6 +2,13 @@
 
 @section('content')
 <html>
+	<script>
+		function SelectElement(valueToSelect) {    
+			var element = document.getElementById('campus');
+			element.value = valueToSelect;
+		}
+
+	</script>
     <head>
         <title>Create ID</title>
         <style>
@@ -61,16 +68,16 @@
 						@endif
 						
 							<label class = "inform">First Name:</label>
-							<input class = "inform" type="text" name = "fname" required></input><br>
+							<input class = "inform" type="text" name = "fname" value = {{$user->fname}} required ></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" name = "mname"required></input><br>
+							<input class = "inform" type="text" name = "mname" value = {{$user->mname}} required></input><br>
 						
 							<label class = "inform">Last Name:</label>
-							<input class = "inform" type="text" name = "lname"required></input><br>
+							<input class = "inform" type="text" name = "lname" value = {{$user->lname}} required></input><br>
 					
 							<label class = "inform">Suffix Name:</label>
-							<input class = "inform" type="text" name = "sname" placeholder="Jr., Sr., III, etc."></input><br>
+							<input class = "inform" type="text" name = "sname" placeholder="Jr., Sr., III, etc." value = {{$user->sname}} ></input><br>
 										
 							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>
@@ -78,13 +85,13 @@
 								<label class = "inform">Employee ID:</label>
 							@endif
 							
-							<input class = "inform" name = "id" type="text" placeholder = "202011111" required></input><br>
+							<input class = "inform" name = "id" type="text" placeholder = "202011111" value = {{$user->idnum}}  required></input><br>
 							
 							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800"></label><br>
 							
 							
 							<label class = "inform">Campus Unit:</label>
-							<select class = "inform" name = "campus">
+							<select class = "inform" id = "#campus" name = "campus">
 							<option> ----------</option>
 							<option> UP Baguio</option>
 							<option> UP Cebu</option>
@@ -95,7 +102,7 @@
 							<option> UP Open University</option>
 							<option> UP Visayas</option>
 							</select><br>
-						
+			
 							@if ($type == 'student')
 								<label class = "inform">Department/College:</label>
 							@else
@@ -115,4 +122,5 @@
         </div>
     </body>
 </html>
+
 @endsection
