@@ -118,14 +118,12 @@
 
                             <ul class="dropdown-menu" role="menu">
 								@if (Auth::user()->adminstatus == 'yes')
-<<<<<<< HEAD
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-users"></i>View List of Users</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User</a></li>
 								@endif
 								@if (Auth::user()->createstatus == 'yes')
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>View ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Download ID</a></li>
-=======
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-sign-out"></i>Switch to Admin View</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-sign-out"></i>Promote a User to Admin</a></li>
 								@endif
@@ -136,7 +134,6 @@
 								@if (Auth::user()->createstatusemp == 'yes')
 									<li><a href="{{ url('/UPD') }}"><i class="fa fa-btn fa-sign-out"></i>View Employee ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Download Employee ID</a></li>
->>>>>>> ba191790d4b001fddafb3cadfb57758e14416098
 								@endif
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
