@@ -20,23 +20,40 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="panel panel-default">
-						<div class="panel-heading">List of Users</div>
+						<div class="panel-heading">List of Students</div>
 						<div class="panel-body table-responsive">
 							<table class="tbl table table-hover table-condensed text-center">
 								 <tr>
 									<th class="text-center">Student Number</th>
 									<th class="text-center">Name</th>
-									<th class="text-center">Employee ID</th>
-									<th class="text-center">Name</th>
 								 </tr>
 								 @foreach($users as $user)
-								 <tr>
-									<td>{{ $user->id }}</td>
-									<td>{{ $user->name }}</td>
-									<td>{{ $user->id }}</td>
-									<td>{{ $user->name }}</td>
-								 </tr>
+									@if($user->createstatusemp=="no")
+									 <tr>
+										<td>{{ $user->idnum }}</td>
+										<td>{{ $user->fname . " " . $user->mname . " " . $user->lname }}</td>
+									 </tr>
+									@endif
 								 @endforeach
+							</table>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">List of Employees</div>
+						<div class="panel-body table-responsive">
+							<table class="tbl table table-hover table-condensed text-center">
+								<tr>
+									<th class="text-center">Employee ID</th>
+									<th class="text-center">Name</th>
+								</tr>
+								@foreach($users as $user)
+									@if($user->createstatusemp=="yes")
+									<tr>
+										<td>{{ $user->idnum }}</td>
+										<td>{{ $user->fname . " " . $user->mname . " " . $user->lname }}</td>
+									</tr>
+									@endif
+								@endforeach
 							</table>
 						</div>
 					</div>

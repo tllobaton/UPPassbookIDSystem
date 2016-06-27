@@ -12,7 +12,7 @@ use DB;
 class AdminController extends Controller
 {
     public function index(){
-		$users = DB::select('SELECT id, name FROM users');
+		$users = DB::select('SELECT idnum, fname, mname, lname, createstatusemp FROM users');
 		return view('admin',['users'=>$users]);
     }
    
