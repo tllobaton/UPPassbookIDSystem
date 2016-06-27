@@ -31,7 +31,7 @@
 									@if($user->createstatusemp=="no")
 									 <tr>
 										<td>{{ $user->idnum }}</td>
-										<td>{{ $user->fname . " " . $user->mname . " " . $user->lname }}</td>
+										<td>{{ $user->name }}</td>
 									 </tr>
 									@endif
 								 @endforeach
@@ -50,7 +50,7 @@
 									@if($user->createstatusemp=="yes")
 									<tr>
 										<td>{{ $user->idnum }}</td>
-										<td>{{ $user->fname . " " . $user->mname . " " . $user->lname }}</td>
+										<td>{{ $user->name }}</td>
 									</tr>
 									@endif
 								@endforeach
