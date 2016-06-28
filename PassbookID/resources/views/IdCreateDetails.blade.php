@@ -69,6 +69,9 @@
 						createOption(dept, ou[i], ou[i]);
 					}
 					break;
+				default:
+					dept.options.length = 0;
+					break;
 			}
 			
 		}
