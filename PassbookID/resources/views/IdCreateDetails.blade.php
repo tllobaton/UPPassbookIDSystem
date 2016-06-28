@@ -2,12 +2,25 @@
 
 @section('content')
 <html>
-	<script>
-		function SelectElement(valueToSelect) {    
-			var element = document.getElementById('campus');
-			element.value = valueToSelect;
+	<script type = "text/javascript">
+		function ConfigureDepts(campus, dept) {
+			var diliman = ['College of Arts and Letters', 'College of Fine Arts', 'College of Human Kinetics', 'College of Mass Communication', 'College of Music', 'Asian Institute of Tourism', 'Virata School of Business', 'School of Economics', 'School of Labor and Industrial Relations', 'National College of Public Administration and Governance', 'School of Urban and Regional Planning', 'Technology Management Center', 'UPD Extension Program in Pampanga and Olongapo', 'Archaeological Studies Program', 'College of Architecture', 'College of Engineering', 'College of Home Economics', 'College of Science', 'School of Library and Information Studies', 'School of Statistics', 'Asian Center', 'College of Education', 'Institute of Islamic Studies', 'College of Law', 'College of Social Sciences and Philosophy', 'College of Social Work and Community Development'];
+		
+			switch (campus.value) {
+				case 'Diliman':
+					dept.options.length = 0;
+					for (i = 0; i < diliman.length; i++) {
+						createOption(dept, diliman[i], diliman[i]);
+					}
+			}
 		}
-
+		
+		function createOption(dept, text, value) {
+			var opt = document.createElement('option');
+			opt.value = value;
+			opt.text = text;
+			dept.options.add(opt);
+		}
 	</script>
     <head>
         <title>Create ID</title>
@@ -91,16 +104,16 @@
 							
 							
 							<label class = "inform">Campus Unit:</label>
-							<select class = "inform" id = "#campus" name = "campus">
+							<select class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this,document.getElementById('dept'))">
 							<option> ----------</option>
-							<option> UP Baguio</option>
-							<option> UP Cebu</option>
-							<option> UP Diliman</option>
-							<option> UP Los Baños</option>
-							<option> UP Manila</option>
-							<option> UP Mindanao</option>
-							<option> UP Open University</option>
-							<option> UP Visayas</option>
+							<option value = "Baguio"> UP Baguio</option>
+							<option value = "Cebu"> UP Cebu</option>
+							<option value = "Diliman"> UP Diliman</option>
+							<option value = "Los Baños"> UP Los Baños</option>
+							<option value = "Manila"> UP Manila</option>
+							<option value = "Mindanao"> UP Mindanao</option>
+							<option value = "Open University"> UP Open University</option>
+							<option value = "Visayas"> UP Visayas</option>
 							</select><br>
 			
 							@if ($type == 'student')
@@ -109,10 +122,7 @@
 								<label class = "inform">Office:</label>
 							@endif
 							
-							<select class = "inform" name = "dept">
-							<option> ----------</option>
-							<option> College of Engineering</option>
-							<option> College of Kagwapuhan</option>
+							<select class = "inform" name = "dept" id = "dept">
 							</select><br>
 					
 						<button type="submit">Next page</button>
