@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<!DOCTYPE html>
 <html>
 	<script type = "text/javascript">
 		function ConfigureDepts(campus, dept) {
@@ -159,7 +160,7 @@
 								<label class = "inform">Employee ID:</label>
 							@endif
 							
-							<input class = "inform" name = "id" type="text" placeholder = "202011111" value = {{$user->idnum}}  required></input><br>
+							<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "[0-9]{9}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
 							
 							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800" required></label><br>
 							
