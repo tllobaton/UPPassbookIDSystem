@@ -13,22 +13,23 @@
 				border: .5px;
 				border-radius: 10px;
 				border-style:solid;
-				height: 205px;
-				width: 326px;
+				height: 326px;
+				width: 225px;
 			}
 			.upper {
 				position:inherit;
 				text-align: right;
-				height: 92.5px;
-				width:325px;
+				height: 163px;
+				width: 225px;
+				border: solid 1px red;
 				border-top-left-radius: 10px;
 				border-top-right-radius: 10px;
 			}
 			.lower {
 				position:inherit;
-				height: 112.5px;
-				width:325px;
-				top: 92.5px;
+				height:163px;
+				width:225px;
+				top: 163px;
 				background-color: #800000;
 				border-bottom-left-radius: 10px;
 				border-bottom-right-radius: 10px;
@@ -42,23 +43,37 @@
 			}
 			#UP {
 				position:inherit;
-				margin-top:5px;
+				top: 50px;
+				left: 5px;
+				margin-top:7px;
+				text-align: center;
+				font-size: 8px;
 			}
+			
+			#UP2 {
+				position:inherit;
+				top: 60px;
+				left: 5px;
+				margin-top:7px;
+				text-align: center;
+				font-size: 9px;
+			}
+			
 			#CU {
 				position:inherit;
 				margin-top:-20px;
 			}
-			#logo {
+			#logo1 {
 				position:inherit;
-				left: 0px;
+				left: 50px;
 				margin-top:5px;
 				margin-left:5px;
 			}
 			.details{
 				position:inherit;
 				left:0px;
-				top: 0px;
-				right: 100px;
+				top: 20px;
+				margin-left:20px;
 				margin-top: 5px;
 				text-align: center;
 				color: white;
@@ -67,28 +82,44 @@
 			#pic {
 				position:inherit;
 				right: 0px;
-				bottom: 0px;
+				top: 85px;
+				left: 65px;
 				border: 2px solid #800000;
 				margin-right: 5px;
 				margin-bottom: 5px;
+				z-index: 10;
+			}
+			
+			.ident {
+				font-size: 7px;
+			}
+			
+			.detail {
+				font-size: 9px;
 			}
         </style>
     </head>
     <body>
 		<div class = "container">
+		
 			<div class = "card">
+			<img src = "/img/sample.png" id = "pic" alt = "1x1" width = "100" height = "100">
 				<div class = "upper">
-					<img src = "/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
-					<label class = "campus" id = "UP">UNIVERSITY OF THE PHILIPPINES<br/>VISAYAS</label><br>
+					<img src = "/img/UPLogo.png" id = "logo1" alt = "logo" width = "50" height = "50">
+					<label class = "campus" id = "UP">UNIVERSITY OF THE PHILIPPINES SYSTEM</label><br>
+					<label class = "campus" id = "UP2">UNIVERSITY OF THE PHILIPPINES VISAYAS</label>
 				</div>
+				
 				<div class = "lower">
 					<div class = "details">
-						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
-						<label>{{$user->idnum}}<br/>{{$user->dept}}</label>
-					</div>
-					
+						<label class = "ident">EMPLOYEE NO.</label><br>
+						<label class = "detail">10000000001</label><br>
+						<label class = "ident">NAME</label><br>
+						<label class = "detail">TAYLOR A. SWIFT</label><br>
+						<label class = "ident">UNIT/COLLEGE</label><br>
+						<label class = "detail">COLLEGE OF MUSIC - DEPARTMENT OF MUSIC</label>
+					</div>			
 				</div>
-				<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "120" height = "120">
 			</div>
 		</div>
 		

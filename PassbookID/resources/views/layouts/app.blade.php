@@ -129,6 +129,7 @@
 									<li><a href="{{ url('/UPD') }}"><i class="fa fa-btn fa-eye"></i>View Employee ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-download"></i>Download Employee ID</a></li>
 								@endif
+									<li><a href="{{ url('/Landing') }}"><i class="fa fa-btn fa-sign-out"></i>Home</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
