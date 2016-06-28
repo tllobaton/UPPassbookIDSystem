@@ -2,6 +2,7 @@
 
 @section('content')
 <html>
+<!DOCTYPE html>
     <head>
         <title>Create ID</title>
         <style>
@@ -53,7 +54,7 @@
 					<input class = "inform"type="text" name = "ename" required value = <?php echo '"'.$user->ename.'"'?>></input><br><br>
 					
 					<label class = "inform">Contact number:</label>
-					<input class = "inform" type="text" name = "enum" required value = {{$user->enum}}></input><br><br>
+					<input class = "inform" type="text" name = "enum" required pattern = "[0-9].{0,11}" value = {{$user->enum}}></input><br><br>
 					
 					<label class = "inform">Address:</label>
 					<input class = "inform"type="text" name = "eaddress" required value = <?php echo '"'.$user->eaddress.'"'?>></input><br><br>
