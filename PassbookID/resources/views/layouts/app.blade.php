@@ -117,6 +117,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+								<li><a href="{{ url('/Landing') }}"><i class="fa fa-btn fa-home"></i>Home</a></li>
 								@if (Auth::user()->adminstatus == 'yes')
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-exchange"></i>Switch to Admin View</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User to Admin</a></li>
@@ -129,7 +130,6 @@
 									<li><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-eye"></i>View Employee ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-download"></i>Download Employee ID</a></li>
 								@endif
-									<li><a href="{{ url('/Landing') }}"><i class="fa fa-btn fa-sign-out"></i>Home</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
