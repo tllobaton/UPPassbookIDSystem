@@ -140,5 +140,10 @@ class CreateIdController extends Controller
 	   else if($campus == "Visayas"){
 		   return view('UPV', ['user' => $user]);
 	   }
+	   else{
+		   $message = "You have not yet created a virtual ID.";
+		   echo "<script type='text/javascript'>alert('$message');</script>";
+		   return redirect("/Details");
+	   }
    }
 }
