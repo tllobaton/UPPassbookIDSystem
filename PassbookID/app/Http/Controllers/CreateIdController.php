@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Session;
 use DB;
-
+use Redirect;
 class CreateIdController extends Controller
 {
 	public function getLoggedInUser(){
@@ -45,6 +45,7 @@ class CreateIdController extends Controller
    }
    
    public function processDetails(Request $request){
+		
 		DB::table('users')
 			->where('email', \Auth::user()->email)
 			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'idnum' => $request->id, 'campus' => $request->campus, 'dept' => $request->dept]);
@@ -55,13 +56,20 @@ class CreateIdController extends Controller
 				->update(['sname' => $request->sname]);
 		
 		}
-		if ($request->file('photo')->getClientSize() < 1000000){
+
+		if ($request->campus == "none") {
+			Session::flash('xsize', 'Invalid campus!');	
+			
+			return Redirect::to('/Details/student');			
+		}
+		
+		if ($request->file('photo')->getClientSize() < 1){
 			$filename = $request->id.".jpg";
 			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
 		}
 		else {
 			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
-			return redirect('/Details/student');
+			return redirect()->back();
 		}
    }
    

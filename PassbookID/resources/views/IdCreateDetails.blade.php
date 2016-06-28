@@ -158,12 +158,12 @@
 							
 							<input class = "inform" name = "id" type="text" placeholder = "202011111" value = {{$user->idnum}}  required></input><br>
 							
-							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800"></label><br>
+							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800" required></label><br>
 							
 							
 							<label class = "inform">Campus Unit:</label>
-							<select class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this,document.getElementById('dept'))">
-							<option> ----------</option>
+							<select required class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this,document.getElementById('dept'))">
+							<option value = "none">Select campus</option>
 							<option value = "Baguio"> UP Baguio</option>
 							<option value = "Cebu"> UP Cebu</option>
 							<option value = "Diliman"> UP Diliman</option>
@@ -180,7 +180,8 @@
 								<label class = "inform">Office:</label>
 							@endif
 							
-							<select class = "inform" name = "dept" id = "dept">
+							<select required class = "inform" name = "dept" id = "dept">
+							<option>Select a campus</option>
 							</select><br>
 					
 						<button type="submit">Next page</button>
