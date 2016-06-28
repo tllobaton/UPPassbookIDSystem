@@ -60,17 +60,18 @@ class CreateIdController extends Controller
 		if ($request->campus == "none") {
 			Session::flash('xsize', 'Invalid campus!');	
 			
-			return Redirect::to('/Details/student');			
+			return 0;			
 		}
 		
-		if ($request->file('photo')->getClientSize() < 1){
+		if ($request->file('photo')->getClientSize() < 1000000){
 			$filename = $request->id.".jpg";
 			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
 		}
 		else {
 			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
-			return redirect()->back();
+			return 0;
 		}
+		return 1;
    }
    
    public function processContacts(Request $request){
@@ -81,7 +82,9 @@ class CreateIdController extends Controller
    
    public function createIdBranch(Request $request) {
 	   if ($request->type == 'student'){
-			$this->processDetails($request);
+			if($this->processDetails($request) == 0){
+				return redirect()->back();
+			}
 			return redirect('/Contacts/student');
 	   }
 	   else if ($request->type == 'employeeL') {
