@@ -121,16 +121,12 @@
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-exchange"></i>Switch to Admin View</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User to Admin</a></li>
 								@endif
-								@if (Auth::user()->createstatus == 'yes')
-									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-eye"></i>View ID</a></li>
-									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-download"></i>Download ID</a></li>
-								@endif
 								@if (Auth::user()->createstatus == 'yes' && Auth::user()->adminstatus == 'no')
-									<li><a href="{{ url('/UPD') }}"><i class="fa fa-btn fa-eye"></i>View Student ID</a></li>
+									<li><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-eye"></i>View Student ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-download"></i>Download Student ID</a></li>
 								@endif
 								@if (Auth::user()->createstatusemp == 'yes')
-									<li><a href="{{ url('/UPD') }}"><i class="fa fa-btn fa-eye"></i>View Employee ID</a></li>
+									<li><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-eye"></i>View Employee ID</a></li>
 									<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-download"></i>Download Employee ID</a></li>
 								@endif
 									<li><a href="{{ url('/Landing') }}"><i class="fa fa-btn fa-sign-out"></i>Home</a></li>
