@@ -105,28 +105,28 @@ class CreateIdController extends Controller
    public function viewId() {
 	   $user = $this->getLoggedInUser();
 	   $campus = $user->campus;
-	   if($campus == "UP Baguio"){
+	   if($campus == "Baguio"){
 		   return view("UPB", ['user' => $user]);
 	   }
-	   else if($campus == "UP Cebu"){
+	   else if($campus == "Cebu"){
 		   
 	   }
-	   else if($campus == "UP Diliman"){
+	   else if($campus == "Diliman"){
 		   return view('UPD', ['user' => $user]);
 	   }
-	   else if($campus == "UP Los Baños"){
+	   else if($campus == "Los Baños"){
 		   return view('UPLB', ['user' => $user]);
 	   }
-	   else if($campus == "UP Manila"){
+	   else if($campus == "Manila"){
 		   return view('UPM', ['user' => $user]);
 	   }
-	   else if($campus == "UP Mindanao"){
+	   else if($campus == "Mindanao"){
 		   
 	   }
-	   else if($campus == "UP Open University"){
+	   else if($campus == "Open University"){
 		   return view('UPOU', ['user' => $user]);
 	   }
-	   else if($campus == "UP Visayas"){
+	   else if($campus == "Visayas"){
 		   return view('UPV', ['user' => $user]);
 	   }
    }
