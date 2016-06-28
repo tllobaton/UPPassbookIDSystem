@@ -2,8 +2,9 @@
 
 @section('content')
 <html>
+	
     <head>
-        <title>UP Visayas</title>
+        <title>UP Diliman</title>
         <style>
 			.card {
 				position:absolute;
@@ -104,7 +105,8 @@
     <body>
 		
 		<div class = "container">
-			<div class = "card">
+			<div id="editor"></div>
+			<div class = "card" id = "card">
 				<div class = "upper">
 				
 					<img src = "/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
@@ -128,9 +130,7 @@
 				<img src=<?php echo "barcode/img/".$user->idnum?> id="barcode" alt="barcode">
 			</div>
 			</div>
-			<a href="/Landing"><button>Return Home</button></a>
 		</div>
-		
     </body>
 </html>
 @endsection
