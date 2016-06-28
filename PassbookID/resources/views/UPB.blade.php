@@ -60,8 +60,9 @@
 				position:inherit;
 				left:0px;
 				top: 0px;
-				margin-left:35px;
+				right: 120px;
 				margin-top: 5px;
+				text-align: center;
 				
 			}
 			#pic {
@@ -83,13 +84,12 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label style="margin-left: 15%;">TAYLOR A. SWIFT</label><br>
-						<label style="font-size: 12px">Student#: </label>
-						<label style="text-align: right">2007-01230</label><br/>
-						<label style="margin-left: 2%; text-align: center;">COLLEGE OF MUSIC</label>
+						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
+						<label>{{$user->idnum}}</label><br/>
+						<label>{{$user->dept}}</label>
 					</div>
 				</div>
-				<img src = "/img/sample.png" id = "pic" alt = "1x1" width = "120" height = "120">
+				<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "120" height = "120">
 			</div>
 		</div>
 		

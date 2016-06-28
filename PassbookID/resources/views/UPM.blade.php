@@ -59,7 +59,7 @@
 				position:inherit;
 				left:0px;
 				top: 0px;
-				margin-left:50px;
+				right: 120px;
 				margin-top: 5px;
 				text-align: center;
 			}
@@ -82,9 +82,9 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label>TAYLOR A. SWIFT</label><br>
-						<label>2007-01230</label><br/>
-						<label>COLLEGE OF MUSIC</label>
+						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
+						<label>{{$user->idnum}}</label><br/>
+						<label>{{$user->dept}}</label>
 					</div>
 				</div>
 				<img src = "/img/sample.png" id = "pic" alt = "1x1" width = "120" height = "120">

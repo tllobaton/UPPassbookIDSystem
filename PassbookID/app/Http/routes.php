@@ -31,7 +31,9 @@ Route::get(
             ->response('png');
     }
 );
-
+Route::get('/UPVemp', function(){
+	return view('UPVemp');
+});
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@callback');
 
@@ -82,5 +84,7 @@ Route::get('/UPOU', function(){
 Route::get('/UPOU_admin', function(){
 	return view('UPOU_admin');
 });
+
+
 
 });
