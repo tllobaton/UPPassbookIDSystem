@@ -155,9 +155,9 @@ class CreateIdController extends Controller
 		   return view('UPV', ['user' => $user]);
 	   }
 	   else{
-		   return redirect("/Details");
 		   $message = "You have not yet created a virtual ID.";
 		   echo "<script type='text/javascript'>alert('$message');</script>";
+		   return view("/Landing");
 	   }
    }
 }
