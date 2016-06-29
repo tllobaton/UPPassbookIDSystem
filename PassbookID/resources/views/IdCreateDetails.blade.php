@@ -162,7 +162,7 @@
 								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" size = "2"></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" size = "10"><br>
 							@else
 								<label class = "inform">Employee ID:</label>
-								<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{4}[\-]\d{5}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
+								<input class = "inform" name = "id" type="text" placeholder = "2020-11111" pattern = "\d{4}[\-]\d{5}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
 							@endif
 							
 							

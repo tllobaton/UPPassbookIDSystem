@@ -12,7 +12,7 @@
 			}
 			.box {
 				position: absolute;
-				top: 250px;
+				top: 450px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
@@ -49,8 +49,15 @@
 				{!! csrf_field() !!}
 				<div class="box">
 					<label class = "header">Promote to Admin</label><br>
-					<label class = "inform">User Email:</label>
-					<input class = "inform" type = "text" id="email" name="email"></input><br><br>
+					<input onclick="document.getElementById('email').disabled = false; document.getElementById('username').disabled = true; document.getElementById('idnum').disabled = true; document.getElementById('username').value=''; document.getElementById('idnum').value='';" type="radio" name="type"><label class="inform">Search by user email:</label><br>
+					<input disabled="disabled" class = "inform" type = "text" id = "email" name = "email" placeholder = "fmlast@up.edu.ph" pattern = "[a-z0-9._%+-]+@up.edu.ph" title = "Enter the UP Mail address"></input><br><br>
+					<hr>
+					<input onclick="document.getElementById('username').disabled = false; document.getElementById('email').disabled = true; document.getElementById('idnum').disabled = true; document.getElementById('email').value=''; document.getElementById('idnum').value='';" type="radio" name="type"><label class="inform">Search by Name:</label><br>
+					<input disabled="disabled" class = "inform" type = "text" id = "username" name = "username" placeholder = "Enter Full Name"></input><br><br>
+					<hr>
+					<input onclick="document.getElementById('idnum').disabled = false; document.getElementById('username').disabled = true; document.getElementById('email').disabled = true; document.getElementById('username').value=''; document.getElementById('email').value='';" type="radio" name="type"><label class="inform">Search by Student Number/Employee ID:</label><br>
+					<input disabled="disabled" class = "inform" type = "text" id = "idnum" name = "idnum" placeholder = "2020-11111" pattern = "\d{4}[\-]\d{5}"></input><br><br>
+					<hr>
 					<button type="submit">Promote</button>
 					<div class="flash-message">
 						@foreach (['danger', 'warning', 'success', 'info'] as $msg)
