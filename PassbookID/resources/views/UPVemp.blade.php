@@ -113,11 +113,11 @@
 				<div class = "lower">
 					<div class = "details">
 						<label class = "ident">EMPLOYEE NO.</label><br>
-						<label class = "detail">10000000001</label><br>
+						<label class = "detail">{{$user->idnum}}</label><br>
 						<label class = "ident">NAME</label><br>
-						<label class = "detail">TAYLOR A. SWIFT</label><br>
+						<label class = "detail">{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
 						<label class = "ident">UNIT/COLLEGE</label><br>
-						<label class = "detail">COLLEGE OF MUSIC - DEPARTMENT OF MUSIC</label>
+						<label class = "detail">{{$user->dept}}</label>
 					</div>			
 				</div>
 			</div>

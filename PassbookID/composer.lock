@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2d396caa2e327ab49533dddaa0f55575",
-    "content-hash": "94b0964c322f4a27111e11f196420f34",
+    "hash": "2801c2d1f1120824f3d427490cf1c79f",
+    "content-hash": "2c48d0656dba45e5ea2d04a9e98a4482",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2267,6 +2267,54 @@
                 "dump"
             ],
             "time": "2016-05-24 10:03:10"
+        },
+        {
+            "name": "thenextweb/passgenerator",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thenextweb/passgenerator.git",
+                "reference": "27d5995e97c0cba4b61f07f21e9220598b8ab2d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thenextweb/passgenerator/zipball/27d5995e97c0cba4b61f07f21e9220598b8ab2d6",
+                "reference": "27d5995e97c0cba4b61f07f21e9220598b8ab2d6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.1",
+                "phpspec/phpspec": "~2.1",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thenextweb\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "The Next Web BV",
+                    "email": "support@thenextweb.com"
+                }
+            ],
+            "description": "A Laravel package to create Apple Wallet (old Passbook) compatible tickets.",
+            "keywords": [
+                "apple",
+                "laravel",
+                "passbook",
+                "php"
+            ],
+            "time": "2016-03-14 14:25:02"
         },
         {
             "name": "vlucas/phpdotenv",

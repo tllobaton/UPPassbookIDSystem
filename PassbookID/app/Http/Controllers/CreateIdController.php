@@ -50,7 +50,6 @@ class CreateIdController extends Controller
 			->where('email', \Auth::user()->email)
 			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
 		
-		
 		if (isset($request->sname)) {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
@@ -62,23 +61,19 @@ class CreateIdController extends Controller
 				->where('email', \Auth::user()->email)
 				->update(['idnum' => $request->id]);
 		}
-		
 		else {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sn_year' => $request->sn_year, 'sn_num' => $request->sn_num]);
 		}
 		
-		
-
 		if ($request->campus == "none") {
-			Session::flash('xsize', 'Invalid campus!');	
-			
+			Session::flash('xsize', 'Invalid campus!');		
 			return 0;			
 		}
 		
 		if ($request->file('photo')->getClientSize() < 1000000){
-			$filename = $request->id.".jpg";
+			$filename = $request->sn_year.$request->sn_num.".jpg";
 			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
 		}
 		else {
@@ -94,6 +89,11 @@ class CreateIdController extends Controller
 			->update(['ename' => $request->ename, 'enum' => $request->enum, 'eaddress' => $request->eaddress]);
    }
    
+   public function processEmpDetails(Request $request) {
+		DB::table('users')
+			->where('email', \Auth::user()->email)
+			->update(['gsis' => $request->gsis, 'blood' => $request->blood, 'tin' => $request->tin, 'empstatus' => $request->empstatus]);
+   }
    public function createIdBranch(Request $request) {
 	   if ($request->type == 'student'){
 			if($this->processDetails($request) == 0){
@@ -102,6 +102,7 @@ class CreateIdController extends Controller
 			return redirect('/Contacts/student');
 	   }
 	   else if ($request->type == 'employeeL') {
+		   $this->processEmpDetails($request);
 		   return redirect('/Contacts/employee');
 	   }
 	   else {
@@ -111,6 +112,7 @@ class CreateIdController extends Controller
    }
    
    public function createId(Request $request) {
+	
 		$this->processContacts($request);
 		$currUser = $this->getLoggedInUser();
 		if ($currUser->createstatus == "no" && $request->type == "student") {
@@ -124,6 +126,7 @@ class CreateIdController extends Controller
 				->where('email', $currUser->email)
 				->update(['createstatusemp' => 'yes']);
 		}
+		   
 	   return redirect("/ViewId");
    }
    
@@ -159,5 +162,7 @@ class CreateIdController extends Controller
 		   echo "<script type='text/javascript'>alert('$message');</script>";
 		   return redirect("/Details");
 	   }
+	   
+	   
    }
 }

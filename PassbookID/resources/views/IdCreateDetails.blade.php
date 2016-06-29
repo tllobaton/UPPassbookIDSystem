@@ -149,7 +149,7 @@
 							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required ></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" name = "mname" value = {{$user->mname}} required></input><br>
+							<input class = "inform" type="text" name = "mname" required value = {{$user->mname}}></input><br>
 						
 							<label class = "inform">Last Name:</label>
 							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required></input><br>
@@ -159,10 +159,10 @@
 										
 							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>
-								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" size = "2"></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" size = "10"><br>
+								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" size = "2" required value = {{$user->sn_year}}></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" size = "10" required value = {{$user->sn_num}}><br>
 							@else
 								<label class = "inform">Employee ID:</label>
-								<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{4}[\-]\d{5}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
+								<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{9}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
 							@endif
 							
 							

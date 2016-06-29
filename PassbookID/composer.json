@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravel/socialite": "^2.0",
-        "picoprime/barcodegen": "@dev"
+        "picoprime/barcodegen": "@dev",
+        "thenextweb/passgenerator": "^0.1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
