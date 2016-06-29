@@ -48,14 +48,28 @@ class CreateIdController extends Controller
 		
 		DB::table('users')
 			->where('email', \Auth::user()->email)
-			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'idnum' => $request->id, 'campus' => $request->campus, 'dept' => $request->dept]);
-			
+			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
+		
+		
 		if (isset($request->sname)) {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sname' => $request->sname]);
-		
 		}
+		
+		if (isset($request->idnum)) {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['idnum' => $request->id]);
+		}
+		
+		else {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['sn_year' => $request->sn_year, 'sn_num' => $request->sn_num]);
+		}
+		
+		
 
 		if ($request->campus == "none") {
 			Session::flash('xsize', 'Invalid campus!');	

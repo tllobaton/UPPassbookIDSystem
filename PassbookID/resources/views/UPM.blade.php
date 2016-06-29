@@ -83,7 +83,7 @@
 				<div class = "lower">
 					<div class = "details">
 						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
-						<label>{{$user->idnum}}</label><br/>
+						<label>{{$user->sn_year}}-{{$user->sn_num}}</label><br/>
 						<label>{{$user->dept}}</label>
 					</div>
 				</div>
