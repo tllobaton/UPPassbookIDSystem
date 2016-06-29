@@ -120,6 +120,9 @@
 			.idtype {
 				border: none;
 			}
+			#sn_year, #sn_num {
+				width: 100px;
+			}
         </style>
     </head>
     <body>
@@ -156,11 +159,13 @@
 										
 							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>
+								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" size = "2"></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" size = "10"><br>
 							@else
 								<label class = "inform">Employee ID:</label>
+								<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{4}[\-]\d{5}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
 							@endif
 							
-							<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{4}[\-]\d{5}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
+							
 							
 							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800" required></label><br>
 							
