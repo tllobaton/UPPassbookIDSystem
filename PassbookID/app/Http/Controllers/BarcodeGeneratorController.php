@@ -52,8 +52,8 @@ class BarcodeController extends Controller
      */
     public function barcodeAsPng(
         $text = '',
-        $size = 40,
-        $scale = 2,
+        $size = 50,
+        $scale = 1,
         $orientation = 'horizontal',
         $codeType = 'code39'
     ) {

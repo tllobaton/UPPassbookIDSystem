@@ -52,7 +52,7 @@
 				<label class="txt">Contact Number: </label><label class="txt" >09171784234</label><br>
 				<label class="txt">Address: </label><label class="txt" style="font-size: 10px;"><?php echo $user->eaddress?></label><br>
 				<div>
-					<img src=<?php echo "barcode/img/".$user->idnum?> id="barcode" alt="barcode">
+					<img src=<?php echo "barcode/img/".$user->idnum/*$user->sn_year.$user->sn_num*/?> id="barcode" alt="barcode">
 				</div>
 			</div>
 		</div>
