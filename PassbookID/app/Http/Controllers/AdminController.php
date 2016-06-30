@@ -77,4 +77,8 @@ class AdminController extends Controller
 		return view('AdminCreate');
 	}
 	
+	public function showIdExpire() {
+		$campuses = DB::select('SELECT cname FROM campus');
+		return view('AdminExpire', ['campuses' => $campuses]);
+	}
 }

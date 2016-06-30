@@ -121,6 +121,7 @@
 								@if (Auth::user()->adminstatus == 'yes')
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-exchange"></i>Switch to Admin View</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User to Admin</a></li>
+									<li><a href="{{ url('/AdminExpire') }}"><i class="fa fa-btn fa-exchange"></i>Set ID Expiration Date</a></li>
 								@endif
 								@if (Auth::user()->createstatus == 'yes' && Auth::user()->adminstatus == 'no')
 									<li><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-eye"></i>View Student ID</a></li>

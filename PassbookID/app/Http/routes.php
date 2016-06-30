@@ -60,6 +60,8 @@ Route::get('/AdminView', 'AdminController@index');
 
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
 
+Route::get('/AdminExpire', 'AdminController@showIdExpire');
+
 Route::post('/CreateId', 'CreateIdController@createId');
 
 Route::post('/PromoteUser', 'AdminController@createAdmin');

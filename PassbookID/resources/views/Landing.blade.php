@@ -22,7 +22,14 @@
 		color: white;
 		margin-top: 10px;
 	}
-
+	table, th, td {
+		border: 1px solid black;
+	}
+	
+	th, td {
+		text-align: center;
+		width: 200px;
+	}
 
 </style>
 <div class = "container">
@@ -34,6 +41,20 @@
 		@else(Auth::user()->createstatusemp == 'no')
 			<a href="/Details/student"><button>Create ID</button></a>
 		@endif
+		<br><br>
+		<table>
+			<tr>
+				<th>Campus</th>
+				<th>Number of students using app</th>
+				<th>Total number of students</th>
+				<th>Number of employees using app</th>
+				<th>Total number of employees</th>
+			</tr>
+			@foreach ($campuses as $campus)
+			<tr>
+				<td>{{$campus->cname}}</td>
+			</tr>
+			@endforeach
 	</div>
 </div>
 @endsection

@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html>
 	<script type = "text/javascript">
-		function test(arrayy) {
+		function test() {
 			var obj = <?php echo json_encode($array); ?>;
-			alert(obj['Baguio'][0].dname);
 		}
 		function ConfigureDepts(campus, dept) {
 			var diliman = ['College of Arts and Letters', 'College of Fine Arts', 'College of Human Kinetics', 'College of Mass Communication', 'College of Music', 'Asian Institute of Tourism', 'Virata School of Business', 'School of Economics', 'School of Labor and Industrial Relations', 'National College of Public Administration and Governance', 'School of Urban and Regional Planning', 'Technology Management Center', 'UPD Extension Program in Pampanga and Olongapo', 'Archaeological Studies Program', 'College of Architecture', 'College of Engineering', 'College of Home Economics', 'College of Science', 'School of Library and Information Studies', 'School of Statistics', 'Asian Center', 'College of Education', 'Institute of Islamic Studies', 'College of Law', 'College of Social Sciences and Philosophy', 'College of Social Work and Community Development'];
@@ -17,9 +16,6 @@
 			var visayas = ['College of Fisheries and Ocean Sciences', 'College of Arts and Sciences', 'College of Management', 'School of Technology', 'UPV Tacloban College'];
 			var mindanao = ['College of Humanities and Social Sciences', 'College of Science and Mathematics'];
 			var ou = ['Faculty of Education', 'Faculty of Information and Communication Studies', 'Faculty of Management and Development Studies'];
-			
-			
-			
 			
 			switch (campus.value) {
 				case 'Diliman':
@@ -139,8 +135,8 @@
         </style>
     </head>
     <body>
-	
         <div class="container">
+			<?php dd(json_encode($array)); ?>;
             <form method = "post" action = "{{url('/Branch')}}" enctype="multipart/form-data">
 				{!! csrf_field() !!}
 				<div class ="outerbox">
@@ -179,15 +175,22 @@
 								<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{9}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
 							@endif
 							
+							
+							
 							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800" required></label><br>
 							
 							
 							<label class = "inform">Campus Unit:</label>
 							<select required class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this,document.getElementById('dept'))">
 							<option value = "none">Select campus</option>
-							@foreach ($campuses as $campus)
-							<option value = {{$campus->cname}}> {{$campus->cname}}</option>
-							@endforeach
+							<option value = "Baguio"> UP Baguio</option>
+							<option value = "Cebu"> UP Cebu</option>
+							<option value = "Diliman"> UP Diliman</option>
+							<option value = "Los Baños"> UP Los Baños</option>
+							<option value = "Manila"> UP Manila</option>
+							<option value = "Mindanao"> UP Mindanao</option>
+							<option value = "Open University"> UP Open University</option>
+							<option value = "Visayas"> UP Visayas</option>
 							</select><br>
 			
 							@if ($type == 'student')

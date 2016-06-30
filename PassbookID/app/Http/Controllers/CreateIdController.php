@@ -15,7 +15,18 @@ class CreateIdController extends Controller
 		return \Auth::user();
 	}
    public function showCreateIdDetails($type = null) {
-	   return view('IdCreateDetails', ['type' => $type, 'user' => $this->getLoggedInUser()]);
+	   $campuses = DB::table('campus')
+			->get();
+		
+		foreach ($campuses as $campus) {
+			$array[$campus->cname] = DB::table('campus_dept')
+				->select('dname')
+				->where('cname', $campus->cname)
+				->get();
+		}
+	   
+				
+	   return view('IdCreateDetails', ['type' => $type, 'user' => $this->getLoggedInUser(), 'array' => $array, 'campuses' => $campuses]);
    }
    
    public function showCreateContacts($type = null) {
@@ -27,7 +38,8 @@ class CreateIdController extends Controller
    }
    
    public function showLandingPage() {
-	   return view('Landing');
+	   $campuses = DB::select('SELECT cname FROM campus');
+	   return view('Landing', ['campuses' => $campuses]);
    }
    
    public function showEmergencyDetails() {

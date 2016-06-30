@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Socialite;
 use Session;
 use App\SocialAccountService;
+use DB;
 class SocialAuthController extends Controller
 {
     public function redirect()
@@ -22,12 +23,12 @@ class SocialAuthController extends Controller
 
 		if ($user != NULL) {
 			auth()->login($user);
-			
-			return redirect()->to('/Landing');
+			return redirect('/Landing');
 		}
 		else {
 			Session::flash('xdomain', 'Please use @up.edu.ph.');
-			return redirect("/Landing");
+			
+			return redirect("/login");
 		}
     }
 }
