@@ -28,10 +28,11 @@
 <div class = "container">
 	<div class = "box">	
 		<h1>Welcome!</h1>
-		<a href="/Details/student"><button>Create ID as student</button></a>
-		<a href="/Details/employee"><button>Create ID as employee</button></a>
-		@if (Auth::user()->adminstatus == 'yes')
-			<a href="/AdminView"><button>Switch to admin view</button></a>
+		@if (Auth::user()->createstatusemp == 'yes')
+			<a href="/Details/student"><button>Create Student ID</button></a>
+			<a href="/Details/employee"><button>Create Employee ID</button></a>
+		@else(Auth::user()->createstatusemp == 'no')
+			<a href="/Details/student"><button>Create ID</button></a>
 		@endif
 	</div>
 </div>
