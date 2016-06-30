@@ -127,7 +127,8 @@
 					
 				</div>
 			<div class = "bcode">	
-				<img src=<?php echo "barcode/img/".$user->idnum?> id="barcode" alt="barcode">
+				
+				<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
 			</div>
 			</div>
 		</div>
