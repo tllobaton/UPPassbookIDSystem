@@ -29,10 +29,28 @@ class AdminController extends Controller
 				->where('email', '=', $email)
 				->first();
 			if(!is_null($db_email)){
-				DB::table('users')
-					->where('email', $email)
-					->update(array('adminstatus' => 'yes'));
-					$request->session()->flash('alert-success', 'The selected user has been promoted to an Administrator.');
+				$db_stud = DB::table('users')
+					->where('email', '=', $email)
+					->value('createstatus');
+				if($db_stud=='no'){
+					$db_admin = DB::table('users')
+						->where('email', '=', $email)
+						->value('adminstatus');
+					if($db_admin=='no'){
+						DB::table('users')
+							->where('email', $email)
+							->update(array('adminstatus' => 'yes'));
+							$request->session()->flash('alert-success', 'The selected user has been promoted to an Administrator.');
+					}
+					else{
+						$message = "The selected user is already an Administrator.";
+						echo "<script type='text/javascript'>alert('$message');</script>";
+					}
+				}
+				else{
+					$message = "The user must have an employee status, and must not be a student.";
+					echo "<script type='text/javascript'>alert('$message');</script>";
+				}
 			}
 			else{
 			    $message = "The user with the email " . $email . " does not exist.";
@@ -44,11 +62,28 @@ class AdminController extends Controller
 				->where('name', '=', $name)
 				->first();
 			if(!is_null($db_name)){
-				DB::table('users')
-					->where('name', $name)
-					->update(array('adminstatus' => 'yes'));
-					$request->session()->flash('alert-success', 'The selected user has been promoted to an Administrator.');
-
+				$db_stud = DB::table('users')
+					->where('name', '=', $name)
+					->value('createstatus');
+				if($db_stud=="no"){
+					$db_admin = DB::table('users')
+						->where('name', '=', $name)
+						->value('adminstatus');
+					if($db_admin=='no'){
+						DB::table('users')
+							->where('name', $name)
+							->update(array('adminstatus' => 'yes'));
+							$request->session()->flash('alert-success', 'The selected user has been promoted to an Administrator.');
+					}
+					else{
+						$message = "The selected user is already an Administrator.";
+						echo "<script type='text/javascript'>alert('$message');</script>";
+					}
+				}
+				else{
+					$message = "The user must have an employee status, and must not be a student.";
+					echo "<script type='text/javascript'>alert('$message');</script>";
+				}
 			}
 			else{
 			    $message = "The user with the name " . $name . " does not exist.";
@@ -60,10 +95,28 @@ class AdminController extends Controller
 				->where('idnum', '=', $idnum)
 				->first();
 			if(!is_null($db_id)){
-				DB::table('users')
-					->where('idnum', $idnum)
-					->update(array('adminstatus' => 'yes'));
-					$request->session()->flash('alert-success', 'The selected user has been promoted to an Administrator.');
+				$db_stud = DB::table('users')
+					->where('idnum', '=', $idnum)
+					->value('createstatus');
+				if($db_stud=="no"){
+					$db_admin = DB::table('users')
+						->where('idnum', '=', $idnum)
+						->value('adminstatus');
+					if($db_admin=='no'){
+						DB::table('users')
+							->where('idnum', $idnum)
+							->update(array('adminstatus' => 'yes'));
+							$request->session()->flash('alert-success', 'The selected user has been promoted to an Administrator.');
+					}
+					else{
+						$message = "The selected user is already an Administrator.";
+						echo "<script type='text/javascript'>alert('$message');</script>";
+					}
+				}
+				else{
+					$message = "The user must have an employee status, and must not be a student.";
+					echo "<script type='text/javascript'>alert('$message');</script>";
+				}
 			}
 			else{
 			    $message = "The user with the Student Number/Employee ID " . $idnum . " does not exist or has not created an ID.";

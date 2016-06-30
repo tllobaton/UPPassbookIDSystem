@@ -28,11 +28,13 @@
 <div class = "container">
 	<div class = "box">	
 		<h1>Welcome!</h1>
-		@if (Auth::user()->createstatusemp == 'yes')
+		@if (Auth::user()->createstatusemp == 'yes' && Auth::user()->adminstatus == 'no')
 			<a href="/Details/student"><button>Create Student ID</button></a>
 			<a href="/Details/employee"><button>Create Employee ID</button></a>
-		@else(Auth::user()->createstatusemp == 'no')
-			<a href="/Details/student"><button>Create ID</button></a>
+		@elseif(Auth::user()->createstatusemp == 'yes' && Auth::user()->adminstatus == 'yes')
+			<a href="/Details/employee"><button>Create Employee ID</button></a>
+		@else
+			<a href="/Details/student"><button>Create Student ID</button></a>
 		@endif
 	</div>
 </div>
