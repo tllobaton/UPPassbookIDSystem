@@ -52,7 +52,6 @@
 				<label class="txt">Contact Number: </label><label class="txt" >{{$user->enum}}</label><br>
 				<label class="txt">Address: </label><label class="txt" style="font-size: 10px;"><?php echo $user->eaddress?></label><br>
 				<div>
-					<?php echo $user->sn_year."-".$user->sn_num);?>
 					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
 				</div>
 			</div>

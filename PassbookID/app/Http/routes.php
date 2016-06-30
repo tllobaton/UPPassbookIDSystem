@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::get(
     'barcode/img/{text}/{size?}/{scale?}/{codeType?}/{orientation?}',
     
-    function ($text, $size = 35, $scale = 1.15, $codeType = 'code39', $orientation = 'horizontal') {
+    function ($text, $size = 50, $scale = 1, $codeType = 'code39', $orientation = 'horizontal') {
         
         $barcode = new \PicoPrime\BarcodeGen\BarcodeGenerator();
 
