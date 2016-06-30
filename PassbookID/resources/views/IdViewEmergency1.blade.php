@@ -49,10 +49,11 @@
 			<div class = "card">
 				<label class="header"><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-arrow-left"></i></a>Person to contact in case of emergency</label><hr>
 				<label class="txt">Name:</label><label class="txt"><?php echo $user->ename?></label><br>
-				<label class="txt">Contact Number: </label><label class="txt" >09171784234</label><br>
+				<label class="txt">Contact Number: </label><label class="txt" >{{$user->enum}}</label><br>
 				<label class="txt">Address: </label><label class="txt" style="font-size: 10px;"><?php echo $user->eaddress?></label><br>
 				<div>
-					<img src=<?php echo "barcode/img/".$user->idnum?> id="barcode" alt="barcode">
+					<?php echo $user->sn_year."-".$user->sn_num);?>
+					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
 				</div>
 			</div>
 		</div>
