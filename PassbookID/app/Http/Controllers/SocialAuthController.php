@@ -19,15 +19,14 @@ class SocialAuthController extends Controller
 
     public function callback(SocialAccountService $service)
     {
-        $user = $service->createOrGetUser(Socialite::driver('google')->user());
+        $user = $service->createOrGetUser(Socialite::driver('google')->user());	// Get user from google database
 
-		if ($user != NULL) {
+		if ($user != NULL) {													// If user exists and has correct domain, log-in and redirect to landing							
 			auth()->login($user);
 			return redirect('/Landing');
 		}
 		else {
-			Session::flash('xdomain', 'Please use @up.edu.ph.');
-			
+			Session::flash('xdomain', 'Please use @up.edu.ph.');				// Otherwise, return to login page with error message
 			return redirect("/login");
 		}
     }

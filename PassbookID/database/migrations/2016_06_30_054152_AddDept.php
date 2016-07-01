@@ -13,11 +13,13 @@ class AddDept extends Migration
     public function up()
     {
        Schema::create('dept', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			$table->increments('id');
-			$table->string('dname');
+			$table->string('dname')->unique();
 		});
 		
 		Schema::create('campus_dept', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('cname');
 			$table->string('dname');
@@ -25,7 +27,7 @@ class AddDept extends Migration
 		
 		Schema::table('campus_dept', function($table){
 			$table->foreign('cname')->references('cname')->on('campus')->onDelete('cascade')->onUpdate('cascade');
-			$table->foreign('dname')->references('dname')->on('deot')->onDelete('cascade')->onUpdate('cascade');	
+			$table->foreign('dname')->references('dname')->on('dept')->onDelete('cascade')->onUpdate('cascade');	
 		});
     }
 

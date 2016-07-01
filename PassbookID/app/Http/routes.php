@@ -14,7 +14,7 @@
 Route::auth();
 Route::get('/', function () {
 	if (Auth::check()){
-		return Redirect::to('/Details');
+		return Redirect::to('/Landing');
 	}
 	return redirect('/login');
 });
@@ -61,6 +61,10 @@ Route::get('/AdminView', 'AdminController@index');
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
 
 Route::get('/AdminExpire', 'AdminController@showIdExpire');
+Route::post('/AdminExpire', 'AdminController@setIdExpire');
+
+Route::get('/AdminCampDept', 'AdminController@showCampDept');
+Route::post('/AdminCampDept', 'AdminController@addCampDeptBranch');
 
 Route::post('/CreateId', 'CreateIdController@createId');
 

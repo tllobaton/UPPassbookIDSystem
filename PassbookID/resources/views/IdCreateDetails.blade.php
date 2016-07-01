@@ -4,84 +4,12 @@
 <!DOCTYPE html>
 <html>
 	<script type = "text/javascript">
-		function test(arrayy) {
-			var obj = <?php echo json_encode($array); ?>;
-			alert(obj['Baguio'][0].dname);
-		}
-		function ConfigureDepts(campus, dept) {
-			var diliman = ['College of Arts and Letters', 'College of Fine Arts', 'College of Human Kinetics', 'College of Mass Communication', 'College of Music', 'Asian Institute of Tourism', 'Virata School of Business', 'School of Economics', 'School of Labor and Industrial Relations', 'National College of Public Administration and Governance', 'School of Urban and Regional Planning', 'Technology Management Center', 'UPD Extension Program in Pampanga and Olongapo', 'Archaeological Studies Program', 'College of Architecture', 'College of Engineering', 'College of Home Economics', 'College of Science', 'School of Library and Information Studies', 'School of Statistics', 'Asian Center', 'College of Education', 'Institute of Islamic Studies', 'College of Law', 'College of Social Sciences and Philosophy', 'College of Social Work and Community Development'];
-			var baguio = ['College of Science', 'College of Arts and Communication', 'College of Social Sciences', 'Institute of Management'];
-			var manila = ['College of Allied Medical Professions', 'College of Arts and Sciences', 'College of Dentistry', 'College of Medicine', 'College of Nursing', 'College of Pharmacy', 'College of Public Health', 'National Teacher Training Center for the Health Professions', 'School of Health Sciences'];
-			var lb = ['College of Agriculture', 'College of Arts and Sciences', 'College of Development Communication', 'College of Engineering and Agro-industrial Technology', 'Economics and Management', 'College of Environmental Science and Management', 'College of Forestry and Natural Resources', 'College of Human Ecology', 'College of Public Affairs and Development', 'College of Veterinary Medicine'];
-			var cebu = ['Arts and Humanities', 'Business Management', 'Sciences', 'Social Sciences'];
-			var visayas = ['College of Fisheries and Ocean Sciences', 'College of Arts and Sciences', 'College of Management', 'School of Technology', 'UPV Tacloban College'];
-			var mindanao = ['College of Humanities and Social Sciences', 'College of Science and Mathematics'];
-			var ou = ['Faculty of Education', 'Faculty of Information and Communication Studies', 'Faculty of Management and Development Studies'];
-			
-			
-			
-			
-			switch (campus.value) {
-				case 'Diliman':
-					dept.options.length = 0;
-					for (i = 0; i < diliman.length; i++) {
-						createOption(dept, diliman[i], diliman[i]);
-					}
-					break;
-					
-				case 'Baguio':
-					dept.options.length = 0;
-					for (i = 0; i < baguio.length; i++) {
-						createOption(dept, baguio[i], baguio[i]);
-					}
-					break;
-					
-				case 'Manila':
-					dept.options.length = 0;
-					for (i = 0; i < manila.length; i++) {
-						createOption(dept, manila[i], manila[i]);
-					}
-					break;
-					
-				case 'Los Baños':
-					dept.options.length = 0;
-					for (i = 0; i < lb.length; i++) {
-						createOption(dept, lb[i], lb[i]);
-					}
-					break;
-					
-				case 'Cebu':
-					dept.options.length = 0;
-					for (i = 0; i < cebu.length; i++) {
-						createOption(dept, cebu[i], cebu[i]);
-					}
-					break;
-					
-				case 'Visayas':
-					dept.options.length = 0;
-					for (i = 0; i < visayas.length; i++) {
-						createOption(dept, visayas[i], visayas[i]);
-					}
-					break;
-					
-				case 'Mindanao':
-					dept.options.length = 0;
-					for (i = 0; i < mindanao.length; i++) {
-						createOption(dept, mindanao[i], mindanao[i]);
-					}
-					break;
-					
-				case 'Open University':
-					dept.options.length = 0;
-					for (i = 0; i < ou.length; i++) {
-						createOption(dept, ou[i], ou[i]);
-					}
-					break;
-				default:
-					dept.options.length = 0;
-					break;
-			}
-			
+		function ConfigureDepts(campus, dept) {			
+			var depts = <?php echo json_encode($array); ?>;
+			dept.options.length = 0;
+			for (i = 0; i < depts[campus.value].length; i++) {
+				createOption(dept, depts[campus.value][i].dname, depts[campus.value][i].dname)
+			}	
 		}
 		
 		function createOption(dept, text, value) {
@@ -131,11 +59,6 @@
 				width: 100px;
 			}
 			
-			#test {
-				position: absolute;
-				bottom: 0px;
-				right: 0px;
-			}
         </style>
     </head>
     <body>
@@ -183,17 +106,19 @@
 							
 							
 							<label class = "inform">Campus Unit:</label>
-							<select required class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this,document.getElementById('dept'))">
+
+							<select required class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this ,document.getElementById('dept'))">
 							<option value = "none">Select campus</option>
 							@foreach ($campuses as $campus)
-							<option value = {{$campus->cname}}> {{$campus->cname}}</option>
+							
+							<option value = '{{$campus->cname}}'> {{$campus->cname}}</option>
 							@endforeach
 							</select><br>
 			
 							@if ($type == 'student')
-								<label class = "inform">Department/College:</label>
+								<label class = "inform">Department/College: </label>
 							@else
-								<label class = "inform">Office:</label>
+								<label class = "inform">Office: </label>
 							@endif
 							
 							<select required class = "inform" name = "dept" id = "dept">
@@ -206,7 +131,6 @@
 			</form>
 			
         </div>
-		<button id = "test" onclick="test()">TEST</button>
     </body>
 </html>
 

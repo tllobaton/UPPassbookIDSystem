@@ -8,6 +8,9 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Session;
 use DB;
+use App\Department;
+use App\Campus;
+use App\CampusDepartment;
 
 class AdminController extends Controller
 {
@@ -129,5 +132,52 @@ class AdminController extends Controller
 	public function showIdExpire() {
 		$campuses = DB::select('SELECT cname FROM campus');
 		return view('AdminExpire', ['campuses' => $campuses]);
+	}
+	
+	public function setIdExpire(Request $request) {
+		DB::table('campus')
+			->where('cname', $request->campus)
+			->update(['expire' => $request->expdate]);
+		Session::flash('success', 'The expiry date set');
+		return redirect('/AdminExpire');
+	}
+	
+	public function showCampDept() {
+		$campuses = DB::select('SELECT cname FROM campus');
+		return view('AdminCampDept', ['campuses' => $campuses]);
+	}
+	
+	public function addCampDeptBranch(Request $request) {
+		$input = $request->all();
+		
+		
+		if($input['action'] == "addCampus") {
+			if (!(DB::table('campus')->where('cname', $input['campus'])->first())) {
+				$campus = new Campus;
+				$campus->cname = $input['campus'];
+				$campus->save();	
+				Session::flash('success', 'The campus has been added!');
+			}
+			else {
+				Session::flash('fail', 'Campus already exists');
+			}
+		}
+		
+		else {
+			if (!(DB::table('dept')->where('dname', $input['dept'])->first())) {
+				$dept = new Department;
+				$dept->dname = $input['dept'];
+				$dept->save();
+			}
+			
+			$campdept = new CampusDepartment;
+			$campdept->cname = $input['campusdept'];
+			$campdept->dname = $input['dept'];
+			$campdept->save();
+			
+			Session::flash('success', 'The department has been added!');
+		}
+		
+		return redirect('/AdminCampDept');
 	}
 }
