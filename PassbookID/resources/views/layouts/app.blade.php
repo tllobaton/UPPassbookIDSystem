@@ -95,7 +95,7 @@
 
                 <!-- Branding Image -->
 				<h1 class="navbar-left"><img class="hidden-xs" id = "navbarlogo" src = "/img/UPLogo.png"><img class="visible-xs" id = "navbarlogo_xs" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
-				<a href = "#" class = "navbar-brand"></a>
+				<!--<a href = "#" class = "navbar-brand"></a>-->
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">

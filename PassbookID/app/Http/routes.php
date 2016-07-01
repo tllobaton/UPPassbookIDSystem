@@ -65,6 +65,8 @@ Route::get('/AdminExpire', 'AdminController@showIdExpire');
 Route::post('/CreateId', 'CreateIdController@createId');
 
 Route::post('/PromoteUser', 'AdminController@createAdmin');
+
+Route::post('/SearchUser', 'AdminController@search');
 Route::get('/UPV', function(){
 	return view('UPV');
 });
