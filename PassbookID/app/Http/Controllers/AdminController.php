@@ -138,6 +138,14 @@ class AdminController extends Controller
 		return view('AdminExpire', ['campuses' => $campuses]);
 	}
 	
+	public function setIdExpire(Request $request) {
+		DB::table('campus')
+			->where('cname', $request->campus)
+			->update(['expire' => $request->expdate]);
+		Session::flash('success', 'The expiry date set');
+		return redirect('/AdminExpire');
+	}
+	
 	public function showCampDept() {
 		$campuses = DB::select('SELECT cname FROM campus');
 		return view('AdminCampDept', ['campuses' => $campuses]);

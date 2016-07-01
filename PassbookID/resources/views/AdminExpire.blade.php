@@ -26,15 +26,23 @@
             <form method="post" action="{{url('/AdminExpire')}}">
 				{!! csrf_field() !!}
 				<div class="box">
+					<?php
+					if (session('success')){
+						echo"<br><br><div class='alert alert-success'>
+							<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+							".session('success')."
+							</div>";
+					}
+					?>
 					<label>Set ID expire date</label><br>
 					<label>Campus: </label>
-					<select required>
+					<select name = "campus" required>
 					@foreach ($campuses as $campus)
 						<option>{{$campus->cname}}</option>
 					@endforeach
 					</select><br><br>
 					<label>Expiration Date: </label>
-					<input type = "date"></input><br><br>
+					<input type = "date" name = "expdate"></input><br><br>
 					<button type = "submit">Set</button>
 				</div>
 			</form>
