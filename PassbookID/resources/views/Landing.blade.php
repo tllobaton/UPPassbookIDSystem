@@ -35,6 +35,7 @@
 <div class = "container">
 	<div class = "box">	
 		<h1>Welcome!</h1>
+		<!--	Uncheck na lang after natin makuha ung csv files
 		@if (Auth::user()->createstatusemp == 'yes' && Auth::user()->adminstatus == 'no')
 			<a href="/Details/student"><button>Create Student ID</button></a>
 			<a href="/Details/employee"><button>Create Employee ID</button></a>
@@ -43,6 +44,10 @@
 		@else
 			<a href="/Details/student"><button>Create Student ID</button></a>
 		@endif
+		-->
+		<a href="/Details/student"><button>Create Student ID</button></a>
+		<a href="/Details/employee"><button>Create Employee ID</button></a>
+		
 		<br><br>
 		<table>
 			<tr>

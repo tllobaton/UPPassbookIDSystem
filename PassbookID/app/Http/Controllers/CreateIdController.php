@@ -11,9 +11,11 @@ use DB;
 use Redirect;
 class CreateIdController extends Controller
 {
+	// Get logged in user
 	public function getLoggedInUser(){
 		return \Auth::user();
 	}
+	
    public function showCreateIdDetails($type = null) {
 	   $campuses = DB::table('campus')
 			->get();
@@ -26,7 +28,7 @@ class CreateIdController extends Controller
 		}
 	   
 				
-	   return view('IdCreateDetails', ['type' => $type, 'user' => $this->getLoggedInUser(), 'array' => $array, 'campuses' => $campuses]);
+	   return view('IdCreateDetails', ['type' => $type, 'user' => $this->getLoggedInUser(), 'array' => $array, 'campuses' => $campuses]);	// $type determines if student or empployee
    }
    
    public function showCreateContacts($type = null) {
@@ -58,16 +60,19 @@ class CreateIdController extends Controller
    
    public function processDetails(Request $request){
 		
+		// add details to database
 		DB::table('users')
 			->where('email', \Auth::user()->email)
 			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
 		
+		// check if user has suffix name (IV, Sr., Jr.)
 		if (isset($request->sname)) {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sname' => $request->sname]);
 		}
 		
+		// check if user set idnum (employee id number) or sn_year/sn_num(student id number)
 		if (isset($request->idnum)) {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
@@ -79,11 +84,13 @@ class CreateIdController extends Controller
 				->update(['sn_year' => $request->sn_year, 'sn_num' => $request->sn_num]);
 		}
 		
+		// check if valid campus is chosen
 		if ($request->campus == "none") {
 			Session::flash('xsize', 'Invalid campus!');		
 			return 0;			
 		}
 		
+		// check if photo is less than 10MB
 		if ($request->file('photo')->getClientSize() < 1000000){
 			$filename = $request->sn_year.$request->sn_num.".jpg";
 			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
@@ -107,32 +114,41 @@ class CreateIdController extends Controller
 			->update(['gsis' => $request->gsis, 'blood' => $request->blood, 'tin' => $request->tin, 'empstatus' => $request->empstatus]);
    }
    public function createIdBranch(Request $request) {
+	   
+	   // if user is creating student id, go to emergency contact details
 	   if ($request->type == 'student'){
 			if($this->processDetails($request) == 0){
 				return redirect()->back();
 			}
 			return redirect('/Contacts/student');
 	   }
+	   // if user came from employee details, go to emergency contact details
 	   else if ($request->type == 'employeeL') {
 		   $this->processEmpDetails($request);
 		   return redirect('/Contacts/employee');
 	   }
+	   
+	   // if user is creating employee id, go to employee details
 	   else {
-			$this->processDetails($request);
+			if($this->processDetails($request) == 0){
+				return redirect()->back();
+			}
 			return redirect('/EmpDetails');
 	   }
    }
    
    public function createId(Request $request) {
-	
+		// process emergency contact detials
 		$this->processContacts($request);
 		$currUser = $this->getLoggedInUser();
+		
+		// this means student has already created ID
 		if ($currUser->createstatus == "no" && $request->type == "student") {
 			DB::table('users')
 				->where('email', $currUser->email)
 				->update(['createstatus' => 'yes']);
 		}
-		
+		// this means employee has already created ID
 		else if ($currUser->createstatusemp == "no" && $request->type == "employee") {
 			DB::table('users')
 				->where('email', $currUser->email)
@@ -145,6 +161,8 @@ class CreateIdController extends Controller
    public function viewId() {
 	   $user = $this->getLoggedInUser();
 	   $campus = $user->campus;
+	   
+	   // check campus of user, return respective ID layout
 	   if($campus == "Baguio"){
 		   return view("UPB", ['user' => $user]);
 	   }

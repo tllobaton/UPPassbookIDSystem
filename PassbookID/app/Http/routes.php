@@ -14,7 +14,7 @@
 Route::auth();
 Route::get('/', function () {
 	if (Auth::check()){
-		return Redirect::to('/Details');
+		return Redirect::to('/Landing');
 	}
 	return redirect('/login');
 });
