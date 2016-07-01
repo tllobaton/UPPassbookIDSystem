@@ -62,6 +62,9 @@ Route::get('/AdminCreate', 'AdminController@showPromoteView');
 
 Route::get('/AdminExpire', 'AdminController@showIdExpire');
 
+Route::get('/AdminCampDept', 'AdminController@showCampDept');
+Route::post('/AdminCampDept', 'AdminController@addCampDeptBranch');
+
 Route::post('/CreateId', 'CreateIdController@createId');
 
 Route::post('/PromoteUser', 'AdminController@createAdmin');
