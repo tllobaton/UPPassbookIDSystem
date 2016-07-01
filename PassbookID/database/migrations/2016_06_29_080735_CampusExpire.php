@@ -13,8 +13,9 @@ class CampusExpire extends Migration
     public function up()
     {
         Schema::create('campus', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			$table->increments('id');
-			$table->string('cname');
+			$table->string('cname')->unique();
 			$table->date('expire')->nullable()->default(null);
 		});
     }
