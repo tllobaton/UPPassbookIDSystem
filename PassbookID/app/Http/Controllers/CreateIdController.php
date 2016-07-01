@@ -160,7 +160,7 @@ class CreateIdController extends Controller
 	   else if($campus == "Manila"){
 		   return view('UPM', ['user' => $user]);
 	   }
-	   else if($campus == "Mindanao"){
+	   else if($campus == "Mindanao "){
 		   
 	   }
 	   else if($campus == "Open University"){
