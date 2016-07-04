@@ -87,7 +87,7 @@
 						<label>{{$user->dept}}</label>
 					</div>
 				</div>
-				<img src = "/img/sample.png" id = "pic" alt = "1x1" width = "120" height = "120">
+				<img src = <?php echo "/img/".$user->sn_year.$user->sn_num.".jpg"?> id = "pic" alt = "1x1" width = "120" height = "120">
 			</div>
 		</div>
 		

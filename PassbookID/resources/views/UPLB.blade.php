@@ -102,7 +102,7 @@
 					
 				</div>
 				<div class = "imgback">
-					<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "80" height = "120">
+					<img src = <?php echo "/img/".$user->sn_year.$user->sn_num.".jpg"?> id = "pic" alt = "1x1" width = "80" height = "120">
 				</div>
 			</div>
 		</div>
