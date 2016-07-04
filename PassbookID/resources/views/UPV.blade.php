@@ -69,8 +69,15 @@
 				right: 0px;
 				bottom: 0px;
 				border: 2px solid #800000;
-				margin-right: 5px;
-				margin-bottom: 5px;
+				margin-right: 20px;
+				margin-bottom: 20px;
+			}
+			.info{
+				position: absolute;
+				right: 0px;
+				bottom: 0px;
+				margin-right: 1px;
+				margin-bottom: 3px;
 			}
         </style>
     </head>
@@ -83,12 +90,13 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
+						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
 						<label>{{$user->sn_year}}-{{$user->sn_num}}<br/>{{$user->dept}}</label>
 					</div>
 					
 				</div>
 				<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "120" height = "120">
+				<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 			</div>
 		</div>
 		

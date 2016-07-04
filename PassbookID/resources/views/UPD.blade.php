@@ -99,6 +99,13 @@
 				color: white;
 				margin-top: 10px;
 			}
+			.info{
+				position: absolute;
+				right: 0px;
+				bottom: 0px;
+				margin-right: 1px;
+				margin-bottom: 3px;
+			}
 			
         </style>
     </head>
@@ -114,7 +121,7 @@
 				</div>
 				<div class = "lower">
 					<div class = "details">
-						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label>&nbsp<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a><br>
+						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
 						<label>{{$user->sn_year}}-{{$user->sn_num}}<br/>{{$user->dept}}</label>
 						
 					</div>
@@ -126,10 +133,10 @@
 				<div>
 					
 				</div>
-			<div class = "bcode">	
-				
-				<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
-			</div>
+				<div class = "bcode">	
+					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
+				</div>
+				<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 			</div>
 		</div>
     </body>
