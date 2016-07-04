@@ -123,6 +123,7 @@
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User to Admin</a></li>
 									<li><a href="{{ url('/AdminCampDept') }}"><i class="fa fa-btn fa-university"></i>Add Campus/Department</a></li>
 									<li><a href="{{ url('/AdminExpire') }}"><i class="fa fa-btn fa-clock-o"></i>Set ID Expiration Date</a></li>
+									<li><a href="{{ url('/AdminAddUsers') }}"><i class="fa fa-btn fa-clock-o"></i>Import CSV file</a></li>
 								@endif
 								<li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
