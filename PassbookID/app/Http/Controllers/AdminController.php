@@ -15,7 +15,7 @@ use App\CampusDepartment;
 class AdminController extends Controller
 {
     public function index(){
-		$users = DB::select('SELECT idnum, sn_year, sn_num, name, createstatus, createstatusemp FROM users');
+		$users = DB::select('SELECT empnum, sn_year, sn_num, name, isenrolled, isemployed FROM users');
 		return view('admin',['users'=>$users]);
     }
    
@@ -47,15 +47,15 @@ class AdminController extends Controller
 				if(!is_null($db_name)){
 					$db_stud = DB::table('users')
 						->where('name', '=', $row)
-						->value('createstatus');
+						->value('isenrolled');
 					if($db_stud=='no'){
 						$db_admin = DB::table('users')
 							->where('name', '=', $row)
-							->value('adminstatus');
+							->value('isadmin');
 						if($db_admin=='no'){
 							DB::table('users')
 								->where('name', $row)
-								->update(array('adminstatus' => 'yes'));
+								->update(array('isadmin' => 'yes'));
 								$msg = "The selected user has been promoted to an Administrator.";
 								return view('AdminCreate', ['msg'=>$msg]);
 						}

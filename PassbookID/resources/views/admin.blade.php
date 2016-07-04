@@ -28,7 +28,7 @@
 									<th class="text-center">Name</th>
 								 </tr>
 								 @foreach($users as $user)
-									@if($user->createstatus=="yes")
+									@if($user->isenrolled=="yes")
 									 <tr>
 										<td>{{ $user->sn_year }}-{{$user->sn_num}}</td>
 										<td>{{ $user->name }}</td>
@@ -47,9 +47,9 @@
 									<th class="text-center">Name</th>
 								</tr>
 								@foreach($users as $user)
-									@if($user->createstatusemp=="yes")
+									@if($user->isemployed=="yes")
 									<tr>
-										<td>{{ $user->idnum }}</td>
+										<td>{{ $user->empnum }}</td>
 										<td>{{ $user->name }}</td>
 									</tr>
 									@endif
