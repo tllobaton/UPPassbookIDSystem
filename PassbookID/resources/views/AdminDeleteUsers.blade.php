@@ -48,19 +48,13 @@
 			th{
 				text-align: center;
 			}
-			/*.flash-message{
-				position: absolute;
-				font-size: 48px;
-				bottom: 0;
-				left: 0;
-			}*/
         </style>
     </head>
     <body>
         <div class="container">
 			<div class="box">
-				<label class = "header">Promote to Admin</label><br>
-				<form method="post" action="{{url('/SearchUser')}}">
+				<label class = "header">Delete Users</label><br>
+				<form method="post" action="{{url('/SearchUser1')}}">
 					{!! csrf_field() !!}
 					<input class = "inform" type = "text" id = "searchinput" name = "searchinput" placeholder = "Name or email address"  title = "Input UP Mail address or Name" required></input><br>
 					<button class="btn btn-primary" type="submit">Search</button>
@@ -73,7 +67,7 @@
 						<div class="panel-heading">User List</div>
 						<div class="panel-body table-responsive">
 							<table class="tbl table table-hover table-condensed text-center">
-								<form method="post" action="{{url('/PromoteUser')}}">
+								<form method="post" action="{{url('/DeleteUser')}}">
 								{!! csrf_field() !!}
 									<tr>
 										<th>Name</th>
@@ -89,12 +83,12 @@
 											{{ $result->email }}
 										</td>
 										<td>
-											<input type="checkbox" name="promote[]" id="{{ $result->name }}" value="{{ $result->name }}">
+											<input type="checkbox" name="delete[]" id="{{ $result->name }}" value="{{ $result->name }}">
 										</td>
 									</tr>
 									@endforeach
 									<tr>
-										<td colspan="3"><button class="btn btn-primary" type="submit">Promote Selected User/s</button></td>
+										<td colspan="3"><button class="btn btn-primary" type="submit">Delete Selected User/s</button></td>
 									</tr>
 								</form>
 							</table>

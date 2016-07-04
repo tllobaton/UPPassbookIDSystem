@@ -69,11 +69,15 @@ Route::post('/AdminCampDept', 'AdminController@addCampDeptBranch');
 Route::get('/AdminAddUsers', 'AdminController@showAddUsers');
 Route::post('/AdminAddUsers', 'AdminController@AddUsers');
 
+Route::get('/AdminDeleteUsers', 'AdminController@showDeleteUsers');
+Route::post('/DeleteUser', 'AdminController@deleteUser');
+Route::post('/SearchUser1', 'AdminController@search1');
+
 Route::post('/CreateId', 'CreateIdController@createId');
 
 Route::post('/PromoteUser', 'AdminController@createAdmin');
-
 Route::post('/SearchUser', 'AdminController@search');
+
 Route::get('/UPV', function(){
 	return view('UPV');
 });
