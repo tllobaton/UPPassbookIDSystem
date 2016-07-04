@@ -17,10 +17,17 @@ class UserDetails extends Migration
 			$table->string("mname")->nullable()->default(null);
 			$table->string("lname")->nullable()->default(null);
 			$table->string("sname")->nullable()->default(null);
-			$table->string("idnum")->nullable()->default(null);
+			
+			$table->enum('isenrolled', array('yes', 'no'))->default('no');
+			$table->enum('isemployed', array('yes', 'no'))->default('no');
+			$table->enum('isadmin', array('yes', 'no'))->default('no');
+			
+			$table->string("sn_year")->nullable()->default(null);
+			$table->string("sn_num")->nullable()->default(null);
 			$table->string("campus")->nullable()->default(null);
 			$table->string("dept")->nullable()->default(null);
-			
+
+			$table->string("empnum")->nullable()->default(null);			
 			$table->string("gsis")->nullable()->default(null);
 			$table->string("blood")->nullable()->default(null);
 			$table->string("tin")->nullable()->default(null);

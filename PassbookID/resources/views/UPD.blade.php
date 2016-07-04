@@ -128,7 +128,7 @@
 					
 				</div>
 				<div class = "imgback">
-					<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "80" height = "120">
+					<img src = <?php echo "/img/".$user->sn_year.$user->sn_num.".jpg"?> id = "pic" alt = "1x1" width = "80" height = "120">
 				</div>
 				<div>
 					
@@ -137,6 +137,7 @@
 					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
 				</div>
 				<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a>
+
 			</div>
 		</div>
     </body>

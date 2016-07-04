@@ -95,7 +95,7 @@
 					</div>
 					
 				</div>
-				<img src = <?php echo "/img/".$user->idnum.".jpg"?> id = "pic" alt = "1x1" width = "120" height = "120">
+				<img src = <?php echo "/img/".$user->sn_year.$user->sn_num.".jpg"?> id = "pic" alt = "1x1" width = "120" height = "120">
 				<a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 			</div>
 		</div>

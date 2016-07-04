@@ -73,10 +73,10 @@ class CreateIdController extends Controller
 		}
 		
 		// check if user set idnum (employee id number) or sn_year/sn_num(student id number)
-		if (isset($request->idnum)) {
+		if (isset($request->empnum)) {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
-				->update(['idnum' => $request->id]);
+				->update(['empnum' => $request->empnum]);
 		}
 		else {
 			DB::table('users')
@@ -92,7 +92,12 @@ class CreateIdController extends Controller
 		
 		// check if photo is less than 10MB
 		if ($request->file('photo')->getClientSize() < 1000000){
-			$filename = $request->sn_year.$request->sn_num.".jpg";
+			if ($request->type == 'student') {
+				$filename = $request->sn_year.$request->sn_num.".jpg";
+			}
+			else {
+				$filename = $request->empnum.".jpg";
+			}
 			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
 		}
 		else {
@@ -140,21 +145,7 @@ class CreateIdController extends Controller
    public function createId(Request $request) {
 		// process emergency contact detials
 		$this->processContacts($request);
-		$currUser = $this->getLoggedInUser();
-		
-		// this means student has already created ID
-		if ($currUser->createstatus == "no" && $request->type == "student") {
-			DB::table('users')
-				->where('email', $currUser->email)
-				->update(['createstatus' => 'yes']);
-		}
-		// this means employee has already created ID
-		else if ($currUser->createstatusemp == "no" && $request->type == "employee") {
-			DB::table('users')
-				->where('email', $currUser->email)
-				->update(['createstatusemp' => 'yes']);
-		}
-		   
+		$currUser = $this->getLoggedInUser();		   
 	   return redirect("/ViewId");
    }
    

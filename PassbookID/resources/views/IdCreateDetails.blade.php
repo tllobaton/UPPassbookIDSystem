@@ -99,7 +99,7 @@
 								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" size = "2" required value = {{$user->sn_year}}></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" size = "10" required value = {{$user->sn_num}}><br>
 							@else
 								<label class = "inform">Employee ID:</label>
-								<input class = "inform" name = "id" type="text" placeholder = "202011111" pattern = "\d{9}" title = "Enter your student number" required value = {{$user->idnum}}></input><br>
+								<input class = "inform" name = "empnum" type="text" placeholder = "202011111" pattern = "\d{9}" title = "Enter your student number" required value = {{$user->empnum}}></input><br>
 							@endif
 							
 							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800" required></label><br>
