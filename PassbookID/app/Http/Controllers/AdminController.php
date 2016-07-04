@@ -57,7 +57,7 @@ class AdminController extends Controller
 							DB::table('users')
 								->where('name', $row)
 								->update(array('isadmin' => 'yes'));
-								$msg = "The selected user has been promoted to an Administrator.";
+								$msg = "The selected user/s has/have been granted Administrator status.";
 								return view('AdminCreate', ['msg'=>$msg]);
 						}
 						else{
@@ -200,7 +200,49 @@ class AdminController extends Controller
 		unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
 		
 		return redirect('/AdminAddUsers');
-		
-		
 	}
+	
+	public function showDeleteUsers() {
+		return view('AdminDeleteUsers');
+	}
+	
+	public function search1(Request $request){
+		$inp = $request['searchinput'];
+		
+		if($inp!="" || $inp!=null){
+			$results = DB::select("SELECT name, email FROM users WHERE (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (name LIKE '%$inp%' OR email LIKE '%$inp%')");
+			return view('AdminDeleteUsers',['results'=>$results]);
+		}
+		else{
+			$message = "No results found.";
+			return view('AdminDeleteUsers', ['message'=>$message]);
+		}
+	}
+	
+	public function deleteUser(Request $request){
+		$checked = Input::get('delete');
+		if(is_array($checked)){
+			foreach($checked as $row){
+				$db_name = DB::table('users')
+					->where('name', '=', $row)
+					->first();
+				if(!is_null($db_name)){
+					DB::table('users')
+						->where('name', $row)
+						->delete();
+						$msg = "The selected user/s has/have been deleted.";
+						return view('AdminDeleteUsers', ['msg'=>$msg]);
+				}
+				else{
+					$message = "The user with the email " . $email . " does not exist.";
+					return view('AdminDeleteUsers', ['message'=>$message]);
+				}
+			}
+		}
+		else{
+			$message = "Please select at least one record from the list of users.";
+			return view('AdminDeleteUsers', ['message'=>$message]);
+		}
+	}
+	
 }
