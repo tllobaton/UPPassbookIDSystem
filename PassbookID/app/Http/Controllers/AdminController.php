@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Session;
 use DB;
+use App\User;
 use App\Department;
 use App\Campus;
 use App\CampusDepartment;
@@ -131,5 +132,75 @@ class AdminController extends Controller
 		}
 		
 		return redirect('/AdminCampDept');
+	}
+	
+	public function showAddUsers() {
+		return view('AdminAddUsers');
+	}
+	
+	public function addUsers(Request $request) {
+		$request->file('filetoopen')->move("C:\wamp64\www\PassbookID\PassbookID\public", "UploadedUsers.csv");
+		$file = fopen("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv", "r");
+		$linenumber = 1;
+		$uploadArray = fgetcsv($file);
+		
+		
+		while ($uploadArray != false){
+			if (sizeof($uploadArray) != 6) {
+				Session::flash('fail', 'Invalid format at line ' .$linenumber);
+				fclose($file);
+				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				return redirect("/AdminAddUsers");
+			}
+			
+			if (DB::table('users')->where('email', $uploadArray[0])->first()) {
+				Session::flash('fail', 'User already in database at line ' .$linenumber);
+				fclose($file);
+				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				return redirect("/AdminAddUsers");
+			}
+			
+			if (($uploadArray[4] != "yes") AND ($uploadArray[5] != "yes")) {
+				Session::flash('fail', 'User must be enrolled or employed at line ' .$linenumber);
+				fclose($file);
+				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				return redirect("/AdminAddUsers");
+			}
+			
+			if ($uploadArray[0] == "") {
+				Session::flash('fail', 'User must have email at line ' .$linenumber);
+				fclose($file);
+				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				return redirect("/AdminAddUsers");
+			}
+			
+			$user = new User;
+			$user->email = $uploadArray[0];
+			
+			$user->lname = $uploadArray[1];
+			$user->fname = $uploadArray[2];
+			$user->mname = $uploadArray[3];
+			
+			if ($uploadArray[4] == "yes") {
+				$user->isenrolled = $uploadArray[4];
+			}
+			
+			if ($uploadArray[5] == "yes") {
+				$user->isemployed = $uploadArray[5];
+			}
+			
+			$user->name = $uploadArray[2]." ".$uploadArray[1];
+			$user->save();
+			$uploadArray = fgetcsv($file);
+			$linenumber = $linenumber + 1;
+		}
+		
+		Session::flash('success', 'Successfully imported file');
+		fclose($file);
+		unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+		
+		return redirect('/AdminAddUsers');
+		
+		
 	}
 }
