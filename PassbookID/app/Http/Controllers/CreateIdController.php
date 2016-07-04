@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Input;
 use Session;
 use DB;
 use Redirect;
+use App\User;
+use App\Campus;
+
 class CreateIdController extends Controller
 {
 	// Get logged in user
@@ -41,6 +44,16 @@ class CreateIdController extends Controller
    
    public function showLandingPage() {
 	   $campuses = DB::select('SELECT cname FROM campus');
+	   
+	   foreach ($campuses as $campus) {
+		   Campus::where('cname', $campus->cname)->update(['studentuse' => User::where('campus', $campus->cname)->where('createdsid', "yes")->count()]);
+		   Campus::where('cname', $campus->cname)->update(['totalstudents' => User::where('campus', $campus->cname)->where('isenrolled', 'yes')->count()]);
+		   
+		   Campus::where('cname', $campus->cname)->update(['empuse' => User::where('campus', $campus->cname)->where('createdeid', "yes")->count()]);
+		   Campus::where('cname', $campus->cname)->update(['totalemps' => User::where('campus', $campus->cname)->where('isemployed', 'yes')->count()]);
+	   }
+	   
+	   $campuses = Campus::all();
 	   return view('Landing', ['campuses' => $campuses]);
    }
    
