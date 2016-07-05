@@ -47,6 +47,7 @@
 			<a href="/Details/employee"><button>Edit Employee ID</button></a>
 		@endif
 		<br><br>
+<<<<<<< HEAD
 			<table>
 				<tr>
 					<th>Campus</th>
@@ -65,6 +66,25 @@
 				</tr>
 				@endforeach
 			</table>
+=======
+		<table>
+			<tr>
+				<th>Campus</th>
+				<th>Number of students using app</th>
+				<th>Total number of students</th>
+				<th>Number of employees using app</th>
+				<th>Total number of employees</th>
+			</tr>
+			@foreach ($campuses as $campus)
+			<tr>
+				<td>{{$campus->cname}}</td>
+				<td>{{$campus->studentuse}} <?php if($campus->totalstudents != 0) { echo "(".$campus->studentuse*100/$campus->totalstudents."%)";}?></td>
+				<td>{{$campus->totalstudents}}</td>
+				<td>{{$campus->empuse}} <?php if($campus->totalemps != 0) { echo "(".$campus->empuse*100/$campus->totalemps."%)";}?></td>
+				<td>{{$campus->totalemps}}</td>
+			</tr>
+			@endforeach
+>>>>>>> b00a4197efb0878b733e055955525cf616ad05b3
 	</div>
 </div>
 @endsection
