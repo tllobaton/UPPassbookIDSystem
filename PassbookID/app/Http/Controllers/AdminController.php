@@ -28,7 +28,7 @@ class AdminController extends Controller
 		$inp = $request['searchinput'];
 		
 		if($inp!="" || $inp!=null){
-			$results = DB::select("SELECT name, email FROM users WHERE (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (name LIKE '%$inp%' OR email LIKE '%$inp%')");
+			$results = DB::select("SELECT name, email FROM users WHERE (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (isadmin = 'no') AND (isemployed = 'yes')");
 			return view('AdminCreate',['results'=>$results]);
 		}
 		else{
@@ -46,10 +46,10 @@ class AdminController extends Controller
 					->where('name', '=', $row)
 					->first();
 				if(!is_null($db_name)){
-					$db_stud = DB::table('users')
+					$db_emp = DB::table('users')
 						->where('name', '=', $row)
-						->value('isenrolled');
-					if($db_stud=='no'){
+						->value('isemployed');
+					if($db_emp=='yes'){
 						$db_admin = DB::table('users')
 							->where('name', '=', $row)
 							->value('isadmin');
@@ -66,7 +66,7 @@ class AdminController extends Controller
 						}
 					}
 					else{
-						$message = "The user must have an employee status, and must not be a student.";
+						$message = "The user must have an employee status.";
 						return view('AdminCreate', ['message'=>$message]);
 					}
 				}

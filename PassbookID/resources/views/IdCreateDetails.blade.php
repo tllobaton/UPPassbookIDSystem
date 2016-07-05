@@ -18,6 +18,11 @@
 			opt.text = text;
 			dept.options.add(opt);
 		}
+		
+		function CampusDeptLoad(campus, dept, db_dept) {
+			ConfigureDepts(campus, dept);
+			dept.value = db_dept;
+		}
 	</script>
     <head>
         <title>Create ID</title>
@@ -61,7 +66,7 @@
 			
         </style>
     </head>
-    <body>
+    <body onload="CampusDeptLoad(document.getElementById('campus') ,document.getElementById('dept'), document.getElementById('chosendept').value )">
 	
         <div class="container">
             <form method = "post" action = "{{url('/Branch')}}" enctype="multipart/form-data">
@@ -96,7 +101,7 @@
 										
 							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>
-								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" size = "2" required value = {{$user->sn_year}}></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" size = "10" required value = {{$user->sn_num}}><br>
+								<input class = "inform" id = "sn_year" name = "sn_year" type = "text" placeholder = "2013" pattern = "\d{4}"  title = "4 digit year" required value = {{$user->sn_year}}></input><input class = "inform" id = "sn_num" name = "sn_num" type = "text" placeholder = "65734" pattern = "\d{5}" title = "5 digit number" required value = {{$user->sn_num}}><br>
 							@else
 								<label class = "inform">Employee ID:</label>
 								<input class = "inform" name = "empnum" type="text" placeholder = "202011111" pattern = "\d{9}" title = "Enter your student number" required value = {{$user->empnum}}></input><br>
@@ -104,14 +109,17 @@
 							
 							<label class = "inform">Photo:<input class = "inform" name = "photo" type="file" accept="image/*" size = "800" required></label><br>
 							
-							
+							<input type = "text" id = "chosendept" value = '{{$user->dept}}' hidden readonly></input>
 							<label class = "inform">Campus Unit:</label>
-
+			
 							<select required class = "inform" id = "campus" name = "campus" onchange="ConfigureDepts(this ,document.getElementById('dept'))">
 							<option value = "none">Select campus</option>
 							@foreach ($campuses as $campus)
-							
-							<option value = '{{$campus->cname}}'> {{$campus->cname}}</option>
+								@if ($campus->cname == $user->campus)
+									<option selected value = '{{$campus->cname}}'> {{$campus->cname}}</option>
+								@else
+									<option value = '{{$campus->cname}}'> {{$campus->cname}}</option>
+								@endif
 							@endforeach
 							</select><br>
 			

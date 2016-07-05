@@ -107,6 +107,12 @@
 				margin-bottom: 3px;
 			}
 			
+			i {
+				position: absolute;
+				bottom: 0px;
+				right: 0px;
+				z-index: 10;
+			}
         </style>
     </head>
     <body>
@@ -119,6 +125,7 @@
 					<img src = "/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
 					<label class = "campus" id = "UP">University of the Philippines<br/>Diliman</label><br>
 				</div>
+				
 				<div class = "lower">
 					<div class = "details">
 						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
@@ -128,16 +135,19 @@
 					
 				</div>
 				<div class = "imgback">
+					
 					<img src = <?php echo "/img/".$user->sn_year.$user->sn_num.".jpg"?> id = "pic" alt = "1x1" width = "80" height = "120">
+					
 				</div>
+				
 				<div>
 					
 				</div>
 				<div class = "bcode">	
 					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
 				</div>
-				<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a>
-
+				
+			<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 			</div>
 		</div>
     </body>

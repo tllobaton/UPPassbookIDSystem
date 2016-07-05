@@ -78,10 +78,16 @@ class CreateIdController extends Controller {
 			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
 		
 		// check if user has suffix name (IV, Sr., Jr.)
-		if (isset($request->sname)) {
+		if ($request->sname != "") {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sname' => $request->sname]);
+		}
+		
+		else {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['sname' => null]);
 		}
 		
 		// check if user set idnum (employee id number) or sn_year/sn_num(student id number)
