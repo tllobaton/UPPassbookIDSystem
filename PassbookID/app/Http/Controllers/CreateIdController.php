@@ -12,8 +12,7 @@ use Redirect;
 use App\User;
 use App\Campus;
 
-class CreateIdController extends Controller
-{
+class CreateIdController extends Controller {
 	// Get logged in user
 	public function getLoggedInUser(){
 		return \Auth::user();
@@ -158,6 +157,15 @@ class CreateIdController extends Controller
    public function createId(Request $request) {
 		// process emergency contact detials
 		$this->processContacts($request);
+		
+		if ($request->type == 'student') {
+			User::where('email', $this->getLoggedInUser()->email)->update(['createdsid' => 'yes']);
+		}
+		
+		else {
+			User::where('email', $this->getLoggedInUser()->email)->update(['createdeid' => 'yes']);
+		}
+		
 		$currUser = $this->getLoggedInUser();		   
 	   return redirect("/ViewId");
    }
