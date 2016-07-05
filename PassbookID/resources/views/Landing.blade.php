@@ -36,11 +36,15 @@
 	<div class = "box">	
 		<h1>Welcome!</h1>
 		
-		@if (Auth::user()->isenrolled == 'yes')
+		@if (Auth::user()->isenrolled == 'yes' && Auth::user()->createdsid == 'no')
 			<a href="/Details/student"><button>Create Student ID</button></a>
+		@elseif(Auth::user()->isenrolled == 'yes' && Auth::user()->createdsid == 'yes')
+			<a href="/Details/student"><button>Edit Student ID</button></a>
 		@endif
-		@if (Auth::user()->isemployed == 'yes')
+		@if (Auth::user()->isemployed == 'yes' && Auth::user()->createdeid == 'no')
 			<a href="/Details/employee"><button>Create Employee ID</button></a>
+		@elseif(Auth::user()->isemployed == 'yes' && Auth::user()->createdeid == 'yes')
+			<a href="/Details/employee"><button>Edit Employee ID</button></a>
 		@endif
 		<br><br>
 		<table>
