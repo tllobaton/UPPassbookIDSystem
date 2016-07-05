@@ -48,6 +48,12 @@
 			th{
 				text-align: center;
 			}
+			
+			.panel{
+				position: absolute;
+				top: 400px;
+			}
+			
 			/*.flash-message{
 				position: absolute;
 				font-size: 48px;
@@ -60,7 +66,7 @@
         <div class="container">
 			<div class="box">
 				<label class = "header">Promote to Admin</label><br>
-				<form method="post" action="{{url('/SearchUser')}}">
+				<form method="get" action="{{url('/SearchUser')}}">
 					{!! csrf_field() !!}
 					<input class = "inform" type = "text" id = "searchinput" name = "searchinput" placeholder = "Name or email address"  title = "Input UP Mail address or Name" required></input><br>
 					<button class="btn btn-primary" type="submit">Search</button>
@@ -98,6 +104,7 @@
 									</tr>
 								</form>
 							</table>
+							{!! $results->appends(['searchinput' => Input::get('searchinput')])->render() !!}
 						</div>
 					</div>
 					@endif 

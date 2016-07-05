@@ -7,7 +7,8 @@
 		<style>
 			#content{
 				position: absolute;
-				top: 300px;
+				top: 0;
+				margin-top: 500px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
@@ -17,6 +18,7 @@
 	</head>
 	<body>
 		<div class="container" id="content">
+			<h1>View Users</h1>
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="panel panel-default">

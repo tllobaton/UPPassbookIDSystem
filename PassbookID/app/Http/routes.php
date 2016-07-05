@@ -76,7 +76,7 @@ Route::post('/SearchUser1', 'AdminController@search1');
 Route::post('/CreateId', 'CreateIdController@createId');
 
 Route::post('/PromoteUser', 'AdminController@createAdmin');
-Route::post('/SearchUser', 'AdminController@search');
+Route::get('/SearchUser', 'AdminController@search');
 
 Route::get('/UPV', function(){
 	return view('UPV');

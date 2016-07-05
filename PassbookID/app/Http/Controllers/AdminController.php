@@ -16,7 +16,10 @@ use App\CampusDepartment;
 class AdminController extends Controller
 {
     public function index(){
-		$users = DB::select('SELECT empnum, sn_year, sn_num, name, isenrolled, isemployed FROM users');
+		$users = DB::table('users')
+		->select('empnum', 'sn_year', 'sn_num', 'name', 'isenrolled', 'isemployed')
+		->get();
+		//->paginate(3);
 		return view('admin',['users'=>$users]);
     }
    
@@ -26,9 +29,16 @@ class AdminController extends Controller
 	
 	public function search(Request $request){
 		$inp = $request['searchinput'];
+		$inp = '%'.$inp.'%';
 		
 		if($inp!="" || $inp!=null){
-			$results = DB::select("SELECT name, email FROM users WHERE (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (name LIKE '%$inp%' OR email LIKE '%$inp%')");
+			$results = DB::table('users')
+				->select('name', 'email')
+				->where('name', 'LIKE', $inp)
+				->orWhere('email', 'LIKE', $inp)
+				->where('name', 'LIKE', $inp)
+				->orWhere('email', 'LIKE', $inp)
+				->paginate(5);
 			return view('AdminCreate',['results'=>$results]);
 		}
 		else{
@@ -208,10 +218,17 @@ class AdminController extends Controller
 	
 	public function search1(Request $request){
 		$inp = $request['searchinput'];
+		$inp = '%'.$inp.'%';
 		
 		if($inp!="" || $inp!=null){
-			$results = DB::select("SELECT name, email FROM users WHERE (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (name LIKE '%$inp%' OR email LIKE '%$inp%')");
-			return view('AdminDeleteUsers',['results'=>$results]);
+			$results = DB::table('users')
+				->select('name', 'email')
+				->where('name', 'LIKE', $inp)
+				->orWhere('email', 'LIKE', $inp)
+				->where('name', 'LIKE', $inp)
+				->orWhere('email', 'LIKE', $inp)
+				->paginate(5);
+			return view('AdminCreate',['results'=>$results]);
 		}
 		else{
 			$message = "No results found.";

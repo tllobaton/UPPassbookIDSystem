@@ -42,6 +42,10 @@
 				text-align: center;
 				width: 150%;	
 			}
+			.panel{
+				position: absolute;
+				top: 400px;
+			}
 			.panel-heading{
 				font-size: 16px;
 			}
@@ -92,6 +96,7 @@
 									</tr>
 								</form>
 							</table>
+							{!! $results->appends(['searchinput' => Input::get('searchinput')])->render() !!}
 						</div>
 					</div>
 					@endif 

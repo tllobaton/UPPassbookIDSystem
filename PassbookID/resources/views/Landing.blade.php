@@ -8,8 +8,8 @@
 		horizontal-align: middle;
 		text-align: center;
 		transform: translate(-50%, -50%);
-		top: 50%;
 		left: 50%;
+		top: 375px;
 	}
 	h1 {
 		text-align: center;
@@ -47,23 +47,24 @@
 			<a href="/Details/employee"><button>Edit Employee ID</button></a>
 		@endif
 		<br><br>
-		<table>
-			<tr>
-				<th>Campus</th>
-				<th>Number of students using app</th>
-				<th>Total number of students</th>
-				<th>Number of employees using app</th>
-				<th>Total number of employees</th>
-			</tr>
-			@foreach ($campuses as $campus)
-			<tr>
-				<td>{{$campus->cname}}</td>
-				<td>{{$campus->studentuse}}</td>
-				<td>{{$campus->totalstudents}}</td>
-				<td>{{$campus->empuse}}</td>
-				<td>{{$campus->totalemps}}</td>
-			</tr>
-			@endforeach
+			<table>
+				<tr>
+					<th>Campus</th>
+					<th>Number of students using app</th>
+					<th>Total number of students</th>
+					<th>Number of employees using app</th>
+					<th>Total number of employees</th>
+				</tr>
+				@foreach ($campuses as $campus)
+				<tr>
+					<td>{{$campus->cname}}</td>
+					<td>{{$campus->studentuse}}</td>
+					<td>{{$campus->totalstudents}}</td>
+					<td>{{$campus->empuse}}</td>
+					<td>{{$campus->totalemps}}</td>
+				</tr>
+				@endforeach
+			</table>
 	</div>
 </div>
 @endsection
