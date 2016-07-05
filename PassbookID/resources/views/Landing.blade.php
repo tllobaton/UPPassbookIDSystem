@@ -58,9 +58,9 @@
 			@foreach ($campuses as $campus)
 			<tr>
 				<td>{{$campus->cname}}</td>
-				<td>{{$campus->studentuse}}</td>
+				<td>{{$campus->studentuse}} <?php if($campus->totalstudents != 0) { echo "(".$campus->studentuse*100/$campus->totalstudents."%)";}?></td>
 				<td>{{$campus->totalstudents}}</td>
-				<td>{{$campus->empuse}}</td>
+				<td>{{$campus->empuse}} <?php if($campus->totalemps != 0) { echo "(".$campus->empuse*100/$campus->totalemps."%)";}?></td>
 				<td>{{$campus->totalemps}}</td>
 			</tr>
 			@endforeach
