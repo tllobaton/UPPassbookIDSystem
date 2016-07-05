@@ -54,6 +54,10 @@
 			@foreach ($campuses as $campus)
 			<tr>
 				<td>{{$campus->cname}}</td>
+				<td>{{$campus->studentuse}}</td>
+				<td>{{$campus->totalstudents}}</td>
+				<td>{{$campus->empuse}}</td>
+				<td>{{$campus->totalemps}}</td>
 			</tr>
 			@endforeach
 	</div>
