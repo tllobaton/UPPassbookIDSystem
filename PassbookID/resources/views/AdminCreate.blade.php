@@ -100,7 +100,7 @@
 									</tr>
 									@endforeach
 									<tr>
-										<td colspan="3"><button class="btn btn-primary" type="submit">Promote Selected User/s</button></td>
+										<td colspan="3"><button class="btn btn-primary" type="submit">Promote User/s</button></td>
 									</tr>
 								</form>
 							</table>

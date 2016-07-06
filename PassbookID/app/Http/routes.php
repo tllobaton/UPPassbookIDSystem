@@ -56,7 +56,10 @@ Route::get('/Landing', 'CreateIdController@showLandingPage');
 Route::post('/Branch', 'CreateIdController@createIdBranch');
 
 Route::get('/ViewId', 'CreateIdController@viewId');
+
 Route::get('/AdminView', 'AdminController@index');
+Route::get('/AdminViewStud', 'AdminController@s_index');
+Route::get('/AdminViewEmp', 'AdminController@e_index');
 
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
 

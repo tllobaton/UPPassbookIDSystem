@@ -57,12 +57,17 @@
 			margin-top: 36px;
 		}
 		
-		.nav{
+		/*STYLE FOR ALL BUTTONS*/
+		.btn{
 			background-color: #800000;
-			z-index: 1;
+			text-align: center;
+			border-radius: 0px;
+			color: white;
+			margin: 5px;
+			width: 150px;
 		}
-		
-		.navbar{
+		.btn-primary:hover{
+			background-color: #700000 !important;
 		}
 		
 		.dropdown-toggle {

@@ -50,7 +50,7 @@
 					<label>Add Users</label><br><br>
 					<label>Select CSV file. </br>File format must be: email,lastname,firstname,middleinitial,isnerolled,isemployed</br>In case of error, program adds all users to the database up to the line of error</label><br><br>
 					<input type = "file" name = "filetoopen" required><br>
-					<button type = "submit">Upload</button>
+					<button type = "submit" class="btn btn-primary">Upload</button>
 				</div>
 			</form>
 		</div>

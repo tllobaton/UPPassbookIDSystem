@@ -37,36 +37,16 @@
 		<h1>Welcome!</h1>
 		
 		@if (Auth::user()->isenrolled == 'yes' && Auth::user()->createdsid == 'no')
-			<a href="/Details/student"><button>Create Student ID</button></a>
+			<a href="/Details/student"><button class="btn btn-primary">Create Student ID</button></a>
 		@elseif(Auth::user()->isenrolled == 'yes' && Auth::user()->createdsid == 'yes')
-			<a href="/Details/student"><button>Edit Student ID</button></a>
+			<a href="/Details/student"><button class="btn btn-primary">Edit Student ID</button></a>
 		@endif
 		@if (Auth::user()->isemployed == 'yes' && Auth::user()->createdeid == 'no')
-			<a href="/Details/employee"><button>Create Employee ID</button></a>
+			<a href="/Details/employee"><button class="btn btn-primary">Create Employee ID</button></a>
 		@elseif(Auth::user()->isemployed == 'yes' && Auth::user()->createdeid == 'yes')
-			<a href="/Details/employee"><button>Edit Employee ID</button></a>
+			<a href="/Details/employee"><button class="btn btn-primary">Edit Employee ID</button></a>
 		@endif
 		<br><br>
-<<<<<<< HEAD
-			<table>
-				<tr>
-					<th>Campus</th>
-					<th>Number of students using app</th>
-					<th>Total number of students</th>
-					<th>Number of employees using app</th>
-					<th>Total number of employees</th>
-				</tr>
-				@foreach ($campuses as $campus)
-				<tr>
-					<td>{{$campus->cname}}</td>
-					<td>{{$campus->studentuse}}</td>
-					<td>{{$campus->totalstudents}}</td>
-					<td>{{$campus->empuse}}</td>
-					<td>{{$campus->totalemps}}</td>
-				</tr>
-				@endforeach
-			</table>
-=======
 		<table>
 			<tr>
 				<th>Campus</th>
@@ -84,7 +64,6 @@
 				<td>{{$campus->totalemps}}</td>
 			</tr>
 			@endforeach
->>>>>>> b00a4197efb0878b733e055955525cf616ad05b3
 	</div>
 </div>
 @endsection

@@ -15,13 +15,26 @@ use App\CampusDepartment;
 
 class AdminController extends Controller
 {
-    public function index(){
-		$users = DB::table('users')
-		->select('empnum', 'sn_year', 'sn_num', 'name', 'isenrolled', 'isemployed')
-		->get();
-		//->paginate(3);
-		return view('admin',['users'=>$users]);
+	
+	public function index(){
+		return view('admin');
+	}
+	
+    public function s_index(){
+		$s_users = DB::table('users')
+		->select('sn_year', 'sn_num', 'name', 'isenrolled')
+		->where('isenrolled', '=', 'yes')
+		->paginate(10);
+		return view('admin',['s_users'=>$s_users]);
     }
+	
+	public function e_index(){
+		$e_users = DB::table('users')
+		->select('empnum', 'name', 'isemployed')
+		->where('isemployed', '=', 'yes')
+		->paginate(10);
+		return view('admin', ['e_users'=>$e_users]);
+	}
    
 	public function showPromoteView(){
 		return view('AdminCreate');
@@ -32,7 +45,6 @@ class AdminController extends Controller
 		$inp = '%'.$inp.'%';
 		
 		if($inp!="" || $inp!=null){
-<<<<<<< HEAD
 			$results = DB::table('users')
 				->select('name', 'email')
 				->where('name', 'LIKE', $inp)
@@ -40,10 +52,7 @@ class AdminController extends Controller
 				->where('name', 'LIKE', $inp)
 				->orWhere('email', 'LIKE', $inp)
 				->paginate(5);
-=======
-			$results = DB::select("SELECT name, email FROM users WHERE (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (name LIKE '%$inp%' OR email LIKE '%$inp%') AND (isadmin = 'no') AND (isemployed = 'yes')");
->>>>>>> b00a4197efb0878b733e055955525cf616ad05b3
-			return view('AdminCreate',['results'=>$results]);
+				return view('AdminCreate',['results'=>$results]);
 		}
 		else{
 			$message = "No results found.";

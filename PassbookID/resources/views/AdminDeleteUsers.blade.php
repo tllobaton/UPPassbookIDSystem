@@ -92,7 +92,7 @@
 									</tr>
 									@endforeach
 									<tr>
-										<td colspan="3"><button class="btn btn-primary" type="submit" onClick = "return confirm('Are you sure you want to delete the users?')">Delete Selected User/s</button></td>
+										<td colspan="3"><button class="btn btn-primary" type="submit" onClick = "return confirm('Are you sure you want to delete the users?')">Delete User/s</button></td>
 									</tr>
 								</form>
 							</table>

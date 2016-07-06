@@ -43,7 +43,7 @@
 				?>
 					<label>Add Campus</label><br>
 					<label>Campus Name: </label><input type = "text" name = "campus"></input><br><br>
-					<button type = "submit" name = "action" value = "addCampus">Add Campus</button><br><br><br>
+					<button type = "submit" name = "action" value = "addCampus" class="btn btn-primary">Add Campus</button><br><br><br>
 					<label>Add Department</label><br>
 					<label>Campus: </label>
 					<select name = "campusdept">
@@ -52,7 +52,7 @@
 					@endforeach
 					</select><br><br>
 					<label>Department Name:</label><input type = "text" name = "dept"></input><br><br>
-					<button type = "submit" name = "action" value = "addDept">Add Department</button>
+					<button type = "submit" name = "action" value = "addDept" class="btn btn-primary">Add Department</button>
 				</div>
 			</form>
 		</div>
