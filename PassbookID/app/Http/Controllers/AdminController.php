@@ -24,6 +24,7 @@ class AdminController extends Controller
 		$s_users = DB::table('users')
 		->select('sn_year', 'sn_num', 'name', 'isenrolled')
 		->where('isenrolled', '=', 'yes')
+		->orderBy('lname', 'asc')
 		->paginate(10);
 		return view('admin',['s_users'=>$s_users]);
     }
@@ -32,6 +33,7 @@ class AdminController extends Controller
 		$e_users = DB::table('users')
 		->select('empnum', 'name', 'isemployed')
 		->where('isemployed', '=', 'yes')
+		->orderBy('lname', 'asc')
 		->paginate(10);
 		return view('admin', ['e_users'=>$e_users]);
 	}
@@ -51,6 +53,7 @@ class AdminController extends Controller
 				->orWhere('email', 'LIKE', $inp)
 				->where('name', 'LIKE', $inp)
 				->orWhere('email', 'LIKE', $inp)
+				->orderBy('lname', 'asc')
 				->paginate(5);
 				return view('AdminCreate',['results'=>$results]);
 		}
@@ -240,6 +243,7 @@ class AdminController extends Controller
 				->orWhere('email', 'LIKE', $inp)
 				->where('name', 'LIKE', $inp)
 				->orWhere('email', 'LIKE', $inp)
+				->orderBy('lname', 'asc')
 				->paginate(5);
 			return view('AdminCreate',['results'=>$results]);
 		}
