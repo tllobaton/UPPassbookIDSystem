@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use App\Http\Requests;
 
@@ -14,7 +15,7 @@ class PassbookIdController extends Controller
 
 		//...
 
-		$pass_identifier = 'somekindofid';  // This, if set, it would allow for retrieval later on of the created Pass
+		$pass_identifier = 'meowmeowmeoxxzczxw';  // This, if set, it would allow for retrieval later on of the created Pass
 
 		$pass = new PassGenerator($pass_identifier);
 
@@ -121,11 +122,20 @@ class PassbookIdController extends Controller
 		// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
 
 		// Add assets to the PKPass package
-		$pass->addAsset(base_path('resources/assets/wallet/background.png'));
-		$pass->addAsset(base_path('resources/assets/wallet/thumbnail.png'));
-		$pass->addAsset(base_path('resources/assets/wallet/icon.png'));
-		$pass->addAsset(base_path('resources/assets/wallet/logo.png'));
+		$pass->addAsset(base_path('resources\assets\wallet\background.png'));
+		$pass->addAsset(base_path('resources\assets\wallet\thumbnail.png'));
+		$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
+		$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
 
 		$pkpass = $pass->create();
+		
+		return new Response($pkpass, 200, [
+			'Content-Transfer-Encoding' => 'binary',
+			'Content-Description' => 'File Transfer',
+			'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+			'Content-length' => strlen($pkpass),
+			'Content-Type' => PassGenerator::getPassMimeType(),
+			'Pragma' => 'no-cache',
+		]);
 	}
 }
