@@ -160,7 +160,7 @@ return [
 
 		Laravel\Socialite\SocialiteServiceProvider::class,
 		PicoPrime\BarcodeGen\BarcodeGenServiceProvider::class,
-
+		Thenextweb\PassGeneratorServiceProvider::class,
 
     ],
 
