@@ -81,6 +81,8 @@ Route::post('/CreateId', 'CreateIdController@createId');
 Route::post('/PromoteUser', 'AdminController@createAdmin');
 Route::get('/SearchUser', 'AdminController@search');
 
+Route::any('/MakePass', 'PassbookIdController@makePass');
+
 Route::get('/UPV', function(){
 	return view('UPV');
 });
