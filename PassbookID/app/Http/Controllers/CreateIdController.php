@@ -122,7 +122,7 @@ class CreateIdController extends Controller {
 			else {
 				$dirname = $request->empnum;
 			}
-			$request->file('photo')->move('C:\wamp64\www\PassbookID\PassbookID\resources\assets\wallet\\'.$dirname, 'thumbnail.png');
+			$request->file('photo')->move('C:\wamp64\www\PassbookID\PassbookID\public\wallet\\'.$dirname, 'thumbnail.png');
 		}
 		else {
 			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
@@ -227,8 +227,6 @@ class CreateIdController extends Controller {
 		if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
             Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
         }
-		
-		PassGenerator::PKAddPassButton();
 		
 		$pass = new PassGenerator($pass_identifier);
 
