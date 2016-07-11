@@ -188,7 +188,7 @@ class CreateIdController extends Controller {
 	 
 	   
 	   // check campus of user, return respective ID layout
-	   if($campus == "Baguio"){
+	   /*if($campus == "Baguio"){
 		   return view("UPB", ['user' => $user]);
 	   }
 	   else if($campus == "Cebu"){
@@ -216,7 +216,15 @@ class CreateIdController extends Controller {
 		   $message = "You have not yet created a virtual ID.";
 		   echo "<script type='text/javascript'>alert('$message');</script>";
 		   return view("/Landing");
-	   } 
+	   } */
+	   if(isset($campus)){
+			return view('ID', ['user' => $user]);
+	   }
+	   else{
+		   $message = "You have not yet created a virtual ID.";
+		   echo "<script type='text/javascript'>alert('$message');</script>";
+		   return view("/Landing");
+	   }
    }
    
    public function makePass() {

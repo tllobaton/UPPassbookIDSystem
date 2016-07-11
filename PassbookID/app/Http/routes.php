@@ -86,6 +86,7 @@ Route::any('/MakePass2', 'PassbookIdController@makePass');
 
 Route::any('/MakePass', 'CreateIdController@makePass');
 Route::any('/RemovePass', 'PassbookIdController@removePass');
+
 Route::get('/UPV', function(){
 	return view('UPV');
 });
