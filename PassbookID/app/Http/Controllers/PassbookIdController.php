@@ -8,24 +8,23 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 
 use Thenextweb\PassGenerator;
+
+use Storage;
+
 class PassbookIdController extends Controller
 {
     public function makePass() {
-		
-
-		//...
-
-		$pass_identifier = 'meowmeowmeoxxzczxw';  // This, if set, it would allow for retrieval later on of the created Pass
+		$pass_identifier = 'mingsming';  // This, if set, it would allow for retrieval later on of the created Pass
 
 		$pass = new PassGenerator($pass_identifier);
 
 		$pass_definition = [
 			"description"       => "description",
 			"formatVersion"     => 1,
-			"organizationName"  => "organization",
+			"organizationName"  => "University of the Philippines",
 			"passTypeIdentifier"=> "pass.com.example.appname",
 			"serialNumber"      => "123456",
-			"teamIdentifier"    => "teamid",
+			"teamIdentifier"    => "A7FDKGVVEB",
 			"foregroundColor"   => "rgb(99, 99, 99)",
 			"backgroundColor"   => "rgb(212, 212, 212)",
 			"barcode" => [
@@ -34,60 +33,26 @@ class PassbookIdController extends Controller
 				"altText"   => "altextfortheQR",
 				"messageEncoding"=> "utf-8",
 			],
-			"boardingPass" => [
+			"generic" => [
 				"headerFields" => [
 					[
-						"key" => "destinationDate",
-						"label" => "Trip to: BCN-SANTS",
-						"value" => "15/09/2015"
+						"key" => "UP",
+						"label" => "University of the Philippines",
+						"value" => "Diliman",
+						
 					]
 				],
 				"primaryFields" => [
 					[
-						"key" => "boardingTime",
-						"label" => "MURCIA",
-						"value" => "13:54",
-						"changeMessage" => "Boarding time has changed to %@"
-					],
-					[
-						"key" => "destination",
-						"label" => "BCN-SANTS",
-						"value" => "21:09"
+						"key" => "name",
+						"label" => "Troi Vinceasdddddddddddddddnt Elijah L. Lobaton",
+						"value" => "2013-49426",
 					]
-
 				],
 				"secondaryFields" => [
 					[
-						"key" => "passenger",
-						"label" => "Passenger",
-						"value" => "J.DOE"
-					],
-					[
-						"key" => "bookingref",
-						"label" => "Booking Reference",
-						"value" => "4ZK6FG"
-					]
-				],
-				"auxiliaryFields" => [
-					[
-						"key" => "train",
-						"label" => "Train TALGO",
-						"value" => "00264"
-					],
-					[
-						"key" => "car",
-						"label" => "Car",
-						"value" => "009"
-					],
-					[
-						"key" => "seat",
-						"label" => "Seat",
-						"value" => "04A"
-					],
-					[
-						"key" => "classfront",
-						"label" => "Class",
-						"value" => "Tourist"
+						"key" => "college",
+						"value" => "College of Engineering"
 					]
 				],
 				"backFields" => [
@@ -122,7 +87,7 @@ class PassbookIdController extends Controller
 		// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
 
 		// Add assets to the PKPass package
-		$pass->addAsset(base_path('resources\assets\wallet\background.png'));
+		//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
 		$pass->addAsset(base_path('resources\assets\wallet\thumbnail.png'));
 		$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
 		$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
@@ -138,4 +103,13 @@ class PassbookIdController extends Controller
 			'Pragma' => 'no-cache',
 		]);
 	}
+	
+	public function removePass() {
+		if (Storage::disk('passgenerator')->has('mingsming.pkpass')) {	
+            Storage::disk('passgenerator')->delete('mingsming.pkpass');
+        }
+		return redirect("/Landing");
+	}
+	
+	
 }

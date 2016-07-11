@@ -51,7 +51,7 @@ Route::get('/ViewEmergency2', 'CreateIdController@showEmergencyDetails2');		//th
 
 Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
 
-Route::get('/Landing', 'CreateIdController@showLandingPage');
+Route::any('/Landing', 'CreateIdController@showLandingPage');
 
 Route::post('/Branch', 'CreateIdController@createIdBranch');
 
@@ -81,8 +81,11 @@ Route::post('/CreateId', 'CreateIdController@createId');
 Route::post('/PromoteUser', 'AdminController@createAdmin');
 Route::get('/SearchUser', 'AdminController@search');
 
-Route::any('/MakePass', 'PassbookIdController@makePass');
 
+Route::any('/MakePass2', 'PassbookIdController@makePass');
+
+Route::any('/MakePass', 'CreateIdController@makePass');
+Route::any('/RemovePass', 'PassbookIdController@removePass');
 Route::get('/UPV', function(){
 	return view('UPV');
 });
