@@ -113,6 +113,12 @@
 				right: 0px;
 				z-index: 10;
 			}
+			
+			#dl {
+				position:absolute;
+				bottom:0px;
+				right: 0px;
+			}
         </style>
     </head>
     <body>
@@ -149,6 +155,7 @@
 				
 			<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 			</div>
+			<a href="/MakePass"><button class="btn btn-primary" id = "dl">Download ID</button></a>
 		</div>
     </body>
 </html>

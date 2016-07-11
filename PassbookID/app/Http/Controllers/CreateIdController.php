@@ -12,6 +12,12 @@ use Redirect;
 use App\User;
 use App\Campus;
 
+use Illuminate\Http\Response;
+
+use Thenextweb\PassGenerator;
+
+use Storage;
+
 class CreateIdController extends Controller {
 	// Get logged in user
 	public function getLoggedInUser(){
@@ -111,12 +117,12 @@ class CreateIdController extends Controller {
 		// check if photo is less than 10MB
 		if ($request->file('photo')->getClientSize() < 1000000){
 			if ($request->type == 'student') {
-				$filename = $request->sn_year.$request->sn_num.".jpg";
+				$dirname = $request->sn_year.$request->sn_num;
 			}
 			else {
-				$filename = $request->empnum.".jpg";
+				$dirname = $request->empnum;
 			}
-			$request->file('photo')->move("C:\wamp64\www\PassbookID\PassbookID\public\img", $filename);
+			$request->file('photo')->move('C:\wamp64\www\PassbookID\PassbookID\resources\assets\wallet\\'.$dirname, 'thumbnail.png');
 		}
 		else {
 			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
@@ -209,8 +215,107 @@ class CreateIdController extends Controller {
 		   $message = "You have not yet created a virtual ID.";
 		   echo "<script type='text/javascript'>alert('$message');</script>";
 		   return view("/Landing");
-	   }
-	   
-	   
+	   } 
    }
+   
+   public function makePass() {
+		
+		$user = $this->getLoggedInUser();
+		$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
+
+		
+		if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
+            Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
+        }
+		
+		
+		$pass = new PassGenerator($pass_identifier);
+
+		$pass_definition = [
+			"description"       => "UP ID",
+			"formatVersion"     => 1,
+			"organizationName"  => "University of the Philippines",
+			"passTypeIdentifier"=> "pass.com.example.appname",
+			"serialNumber"      => "123456",
+			"teamIdentifier"    => "A7FDKGVVEB",
+			"foregroundColor"   => "rgb(99, 99, 99)",
+			"backgroundColor"   => "rgb(212, 212, 212)",
+			"barcode" => [
+				"message"   => $user->sn_year."-".$user->sn_num,
+				"format"    => "PKBarcodeFormatCode128",
+				"messageEncoding"=> "utf-8"
+			],
+			"generic" => [
+				"headerFields" => [
+					[
+						"key" => "UP",
+						"label" => "University of the Philippines",
+						"value" => $user->campus,
+						"textAlignment" => "PKTextAlignmentCenter"
+					]
+				],
+				"primaryFields" => [
+					[
+						"key" => "name",
+						"label" => $user->fname." ".$user->mname.". ".$user->lname,
+						"value" => $user->sn_year."-".$user->sn_num
+					]
+				],
+				"secondaryFields" => [
+					[
+						"key" => "college",
+						"value" => $user->dept
+					]
+				],
+				"backFields" => [
+					[
+						"key" => "label",
+						"value" => "Person to contact in case of emergency"
+					],[
+						"key" => "ename",
+						"label" => "Name: ",
+						"value" => $user->ename
+					], [
+						"key" => "enum",
+						"label" => "Number: ",
+						"value" => $user->ename
+					], [
+						"key" => "eadd",
+						"label" => "Address: ",
+						"value" => $user->eaddress
+					]
+				],
+			],
+		];
+
+		$pass->setPassDefinition($pass_definition);
+
+		// Definitions can also be set from a JSON string
+		// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
+
+		// Add assets to the PKPass package
+		//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
+		
+		$pass->addAsset(base_path('resources\assets\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+		$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
+		$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
+
+		$pkpass = $pass->create();
+		
+		return new Response($pkpass, 200, [
+			'Content-Transfer-Encoding' => 'binary',
+			'Content-Description' => 'File Transfer',
+			'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+			'Content-length' => strlen($pkpass),
+			'Content-Type' => PassGenerator::getPassMimeType(),
+			'Pragma' => 'no-cache',
+		]);
+	}
+	
+	public function removePass() {
+		if (Storage::disk('passgenerator')->has('mingsming.pkpass')) {	
+            Storage::disk('passgenerator')->delete('mingsming.pkpass');
+        }
+		return redirect("/Landing");
+	}
 }
