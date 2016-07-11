@@ -228,6 +228,7 @@ class CreateIdController extends Controller {
             Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
         }
 		
+		PassGenerator::PKAddPassButton();
 		
 		$pass = new PassGenerator($pass_identifier);
 
@@ -235,25 +236,18 @@ class CreateIdController extends Controller {
 			"description"       => "UP ID",
 			"formatVersion"     => 1,
 			"organizationName"  => "University of the Philippines",
-			"passTypeIdentifier"=> "pass.com.example.appname",
+			"passTypeIdentifier"=> "ph.edu.up.PassID",
 			"serialNumber"      => "123456",
 			"teamIdentifier"    => "A7FDKGVVEB",
 			"foregroundColor"   => "rgb(99, 99, 99)",
 			"backgroundColor"   => "rgb(212, 212, 212)",
+			"logoText" => "University of the Philippines ".$user->campus,
 			"barcode" => [
 				"message"   => $user->sn_year."-".$user->sn_num,
 				"format"    => "PKBarcodeFormatCode128",
 				"messageEncoding"=> "utf-8"
 			],
 			"generic" => [
-				"headerFields" => [
-					[
-						"key" => "UP",
-						"label" => "University of the Philippines",
-						"value" => $user->campus,
-						"textAlignment" => "PKTextAlignmentCenter"
-					]
-				],
 				"primaryFields" => [
 					[
 						"key" => "name",
