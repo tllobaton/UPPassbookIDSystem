@@ -22,7 +22,7 @@ class AdminController extends Controller
 	
     public function s_index(){
 		$s_users = DB::table('users')
-		->select('sn_year', 'sn_num', 'name', 'isenrolled')
+		->select('sn_year', 'sn_num', 'name', 'isenrolled', 'active')
 		->where('isenrolled', '=', 'yes')
 		->orderBy('lname', 'asc')
 		->paginate(10);
@@ -31,7 +31,7 @@ class AdminController extends Controller
 	
 	public function e_index(){
 		$e_users = DB::table('users')
-		->select('empnum', 'name', 'isemployed')
+		->select('empnum', 'name', 'isemployed', 'active')
 		->where('isemployed', '=', 'yes')
 		->orderBy('lname', 'asc')
 		->paginate(10);
@@ -245,7 +245,7 @@ class AdminController extends Controller
 				->orWhere('email', 'LIKE', $inp)
 				->orderBy('lname', 'asc')
 				->paginate(5);
-			return view('AdminCreate',['results'=>$results]);
+			return view('AdminDeleteUsers',['results'=>$results]);
 		}
 		else{
 			$message = "No results found.";
@@ -253,22 +253,22 @@ class AdminController extends Controller
 		}
 	}
 	
-	public function deleteUser(Request $request){
+	public function deactivateUser(Request $request){
 		$checked = Input::get('delete');
 		if(is_array($checked)){
 			foreach($checked as $row){
-				$db_name = DB::table('users')
+				$db_active = DB::table('users')
 					->where('name', '=', $row)
-					->first();
-				if(!is_null($db_name)){
+					->value('active');
+				if($db_active == 'yes'){
 					DB::table('users')
 						->where('name', $row)
-						->delete();
-						$msg = "The selected user/s has/have been deleted.";
+						->update(array('active' => 'no'));
+						$msg = "The selected user account/s has/have been deactivated.";
 						return view('AdminDeleteUsers', ['msg'=>$msg]);
 				}
 				else{
-					$message = "The user with the email " . $email . " does not exist.";
+					$message = "The user is already deactivated.";
 					return view('AdminDeleteUsers', ['message'=>$message]);
 				}
 			}

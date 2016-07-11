@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Session;
 use Laravel\Socialite\Contracts\User as ProviderUser;
 
 class SocialAccountService
@@ -13,7 +14,12 @@ class SocialAccountService
             ->first();	
 		
         if ($account) {													// If email is in database already, return the user
-            return $account;
+			$status = $account->active;
+			if ($status == "yes")
+				return $account;
+			else{
+				return $status;
+			}
         }	
 		
 		else {															// If email does not exist,

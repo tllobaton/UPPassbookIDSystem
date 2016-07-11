@@ -31,12 +31,18 @@
 										 <tr>
 											<th class="text-center">Student Number</th>
 											<th class="text-center">Name</th>
+											<th class="text-center">Account Status</th>
 										 </tr>
 										 @foreach($s_users as $s_user)
 											@if($s_user->isenrolled=="yes")
 											 <tr>
 												<td>{{ $s_user->sn_year }}-{{$s_user->sn_num}}</td>
 												<td>{{ $s_user->name }}</td>
+												@if($s_user->active=="yes")
+													<td style="color: #00EE00">Active</td>
+												@else
+													<td style="color: #FF0000">Deactivated</td>
+												@endif
 											 </tr>
 											@endif
 										 @endforeach
@@ -53,12 +59,18 @@
 										<tr>
 											<th class="text-center">Employee ID</th>
 											<th class="text-center">Name</th>
+											<th class="text-center">Account Status</th>
 										</tr>
 										@foreach($e_users as $e_user)
 											@if($e_user->isemployed=="yes")
 											<tr>
 												<td>{{ $e_user->empnum }}</td>
 												<td>{{ $e_user->name }}</td>
+												@if($e_user->active=="yes")
+													<td style="color: #00EE00">Active</td>
+												@else
+													<td style="color: #FF0000">Deactivated</td>
+												@endif
 											</tr>
 											@endif
 										@endforeach

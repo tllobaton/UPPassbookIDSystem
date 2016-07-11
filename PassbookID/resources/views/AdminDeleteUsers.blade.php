@@ -57,8 +57,8 @@
     <body>
         <div class="container">
 			<div class="box">
-				<label class = "header">Delete Users</label><br>
-				<form method="post" action="{{url('/SearchUser1')}}">
+				<label class = "header">Deactivate Users</label><br>
+				<form method="get" action="{{url('/SearchUser1')}}">
 					{!! csrf_field() !!}
 					<input class = "inform" type = "text" id = "searchinput" name = "searchinput" placeholder = "Name or email address"  title = "Input UP Mail address or Name" required></input><br>
 					<button class="btn btn-primary" type="submit">Search</button>
@@ -71,7 +71,7 @@
 						<div class="panel-heading">User List</div>
 						<div class="panel-body table-responsive">
 							<table class="tbl table table-hover table-condensed text-center">
-								<form method="post" action="{{url('/DeleteUser')}}">
+								<form method="post" action="{{url('/DeactivateUser')}}">
 								{!! csrf_field() !!}
 									<tr>
 										<th>Name</th>
@@ -92,7 +92,7 @@
 									</tr>
 									@endforeach
 									<tr>
-										<td colspan="3"><button class="btn btn-primary" type="submit" onClick = "return confirm('Are you sure you want to delete the users?')">Delete User/s</button></td>
+										<td colspan="3"><button class="btn btn-primary" type="submit" onClick = "return confirm('Are you sure you want to disable the user account/s?')">Deactivate User/s</button></td>
 									</tr>
 								</form>
 							</table>

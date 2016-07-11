@@ -73,8 +73,8 @@ Route::get('/AdminAddUsers', 'AdminController@showAddUsers');
 Route::post('/AdminAddUsers', 'AdminController@AddUsers');
 
 Route::get('/AdminDeleteUsers', 'AdminController@showDeleteUsers');
-Route::post('/DeleteUser', 'AdminController@deleteUser');
-Route::post('/SearchUser1', 'AdminController@search1');
+Route::post('/DeactivateUser', 'AdminController@deactivateUser');
+Route::get('/SearchUser1', 'AdminController@search1');
 
 Route::post('/CreateId', 'CreateIdController@createId');
 

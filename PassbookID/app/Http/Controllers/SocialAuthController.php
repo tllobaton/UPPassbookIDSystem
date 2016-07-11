@@ -22,8 +22,14 @@ class SocialAuthController extends Controller
         $user = $service->createOrGetUser(Socialite::driver('google')->user());	// Get user from google database
 
 		if ($user != NULL) {													// If user exists and has correct domain, log-in and redirect to landing							
-			auth()->login($user);
-			return redirect('/Landing');
+			if($user == "no"){
+				Session::flash('xdomain', 'Your account has been deactivated.');
+				return redirect("/login");
+			}
+			else{
+				auth()->login($user);
+				return redirect('/Landing');
+			}
 		}
 		else {
 			Session::flash('xdomain', 'Please use @up.edu.ph.');				// Otherwise, return to login page with error message

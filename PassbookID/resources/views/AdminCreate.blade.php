@@ -40,7 +40,7 @@
 				left: 50%;
 				transform: translate(-50%, -50%);
 				text-align: center;
-				width: 150%;	
+				width: 150%;
 			}
 			.panel-heading{
 				font-size: 16px;
