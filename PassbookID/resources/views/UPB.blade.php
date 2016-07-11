@@ -102,15 +102,11 @@
 						<label>{{$user->dept}}</label>
 					</div>
 				</div>
-<<<<<<< HEAD
 				@if($user->isemployed=='yes')
 					<img src = <?php echo 'wallet//'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "120" height = "120">
 				@else
 					<img src = <?php echo 'wallet//'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "120" height = "120">
 				@endif
-=======
-				<img src = <?php echo "wallet\\".$user->sn_year.$user->sn_num.'\thumbnail.png'?> id = "pic" alt = "1x1" width = "120" height = "120">
->>>>>>> a1ec3686d082d511196f7571a4cba45f6d9e957a
 				<span class="info"><a href="{{ url('/ViewEmergency1') }}"><i class="fa fa-btn fa-info-circle"></i></a></span>
 			</div>
 			<a href="/MakePass"><button class="btn btn-primary" id = "dl">Download ID</button></a>
