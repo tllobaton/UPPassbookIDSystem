@@ -122,7 +122,11 @@ class CreateIdController extends Controller {
 			else {
 				$dirname = $request->empnum;
 			}
+<<<<<<< HEAD
 			$request->file('photo')->move('C:\wamp64\www\PassbookID\PassbookID\public\wallet\\'.$dirname, 'thumbnail.png');
+=======
+			$request->file('photo')->move('wallet\\'.$dirname, 'thumbnail.png');
+>>>>>>> a1ec3686d082d511196f7571a4cba45f6d9e957a
 		}
 		else {
 			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
@@ -185,6 +189,7 @@ class CreateIdController extends Controller {
    public function viewId() {
 	   $user = $this->getLoggedInUser();
 	   $campus = $user->campus;
+	 
 	   
 	   // check campus of user, return respective ID layout
 	   if($campus == "Baguio"){
@@ -288,7 +293,7 @@ class CreateIdController extends Controller {
 		// Add assets to the PKPass package
 		//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
 		
-		$pass->addAsset(base_path('resources\assets\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+		$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
 		$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
 		$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
 
