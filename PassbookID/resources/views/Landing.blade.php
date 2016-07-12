@@ -52,8 +52,7 @@
 		@elseif(Auth::user()->isemployed == 'yes' && Auth::user()->createdeid == 'yes')
 			<a href="/Details/employee"><button class="btn btn-primary">Edit Employee ID</button></a>
 		@endif
-			<a href="/MakePass2"><button class="btn btn-primary">TEST MAKE PASS</button></a>
-			<a href="/RemovePass"><button class="btn btn-primary">TEST REMOVE PASS</button></a>
+			<a href="/Include"><button class="btn btn-primary">TEST INCLUDE</button></a>
 		<br><br>
 		<table>
 			<tr>

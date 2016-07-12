@@ -55,7 +55,7 @@ Route::any('/Landing', 'CreateIdController@showLandingPage');
 
 Route::post('/Branch', 'CreateIdController@createIdBranch');
 
-Route::get('/ViewId', 'CreateIdController@viewId');
+Route::get('/ViewId/{type?}', 'CreateIdController@viewId');
 
 Route::get('/AdminView', 'AdminController@index');
 Route::get('/AdminViewStud', 'AdminController@s_index');
@@ -82,10 +82,10 @@ Route::post('/PromoteUser', 'AdminController@createAdmin');
 Route::get('/SearchUser', 'AdminController@search');
 
 
-Route::any('/MakePass2', 'PassbookIdController@makePass');
+Route::any('/Include', 'CreateIdController@test');
 
-Route::any('/MakePass', 'CreateIdController@makePass');
-Route::any('/RemovePass', 'PassbookIdController@removePass');
+Route::any('/MakePass/{type?}', 'CreateIdController@makePass');
+
 
 Route::get('/UPV', function(){
 	return view('UPV');
