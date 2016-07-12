@@ -254,7 +254,7 @@ class CreateIdController extends Controller {
 					"format"    => "PKBarcodeFormatCode128",
 					"messageEncoding"=> "utf-8"
 				],
-				"generic" => [
+				"eventTicket" => [
 					"primaryFields" => [
 						[
 							"key" => "name",
@@ -308,7 +308,7 @@ class CreateIdController extends Controller {
 			// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
 
 			// Add assets to the PKPass package
-			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
+			//$pass->addAsset(base_path('barcode/img/".$user->sn_year."-".$user->sn_num'));
 			
 			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
@@ -407,7 +407,7 @@ class CreateIdController extends Controller {
 			// Add assets to the PKPass package
 			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
 			
-			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+			$pass->addAsset(base_path('public\wallet\\'.$user->empnum.'\thumbnail.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
 

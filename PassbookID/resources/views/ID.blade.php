@@ -115,10 +115,10 @@
 						<label>{{$user->dept}}</label>
 					</div>
 				</div>
-				@if($user->isemployed=='yes')
-					<img src = <?php echo 'wallet//'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "120" height = "120">
+				@if($type == 'employee')
+					<img src = <?php echo '/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "120" height = "120">
 				@else
-					<img src = <?php echo 'wallet//'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<img src = <?php echo '/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
 				@endif
 				<div class = "bcode">	
 					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
