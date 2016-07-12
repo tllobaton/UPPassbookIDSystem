@@ -45,7 +45,8 @@ class CreateIdController extends Controller {
    }
    
    public function showCreateEmpDetails() {
-	   return view('IdCreateEmpDetails' , ['user' => $this->getLoggedInUser()]);
+	   $blood = ['A', 'B', 'AB', 'O'];
+	   return view('IdCreateEmpDetails' , ['user' => $this->getLoggedInUser(), 'bloodtype' => $blood]);
    }
    
    public function showLandingPage() {
@@ -163,6 +164,7 @@ class CreateIdController extends Controller {
 			if($this->processDetails($request) == 0){
 				return redirect()->back();
 			}
+			
 			return redirect('/EmpDetails');
 	   }
    }
@@ -254,7 +256,7 @@ class CreateIdController extends Controller {
 					"format"    => "PKBarcodeFormatCode128",
 					"messageEncoding"=> "utf-8"
 				],
-				"eventTicket" => [
+				"generic" => [
 					"primaryFields" => [
 						[
 							"key" => "name",

@@ -48,22 +48,34 @@
 				<div class="box">
 					<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employeeL" size ="7" hidden readonly></input> ID</label><br>
 						<label class = "inform">GSIS No.:</label>
-						<input class = "inform" type="text" name = "gsis" required value = {{$user->gsis}}></input><br>
+						<input class = "inform" type="text" name = "gsis" pattern = "\d{11}" title = "GSIS # is 11 digits" required value = {{$user->gsis}}></input><br>
 					
 						<label class = "inform">Blood Type:</label>
 						<select class = "inform" name = "blood" value="none">
-						<option> ----------</option>
-						<option> A</option>
-						<option> B</option>
-						<option> AB</option>
-						<option> O</option>
+						@foreach ($bloodtype as $blood)
+							@if ($blood == $user->blood)
+								<option selected value = '{{$blood}}'> {{$blood}}</option>
+							@else
+								<option value = '{{$blood}}'> {{$blood}}</option>
+							@endif
+						@endforeach
 						</select><br>
 						<label class = "inform">TIN:</label>
-						<input class = "inform" type="text" name = "tin" required value = {{$user->tin}}></input><br>
+						<input class = "inform" type="text" name = "tin" pattern = "\d{12}" title = "TIN # is 12 digits" required value = {{$user->tin}}></input><br>
 					
 						<label class = "inform">Employment Status:</label>
-						<input class = "inform" type="text" name = "empstatus" required value = {{$user->empstatus}}></input><br>
-				
+						<select class = "inform" name = "empstatus" value="none">
+						@if ($user->empstatus == "permanent")
+							<option selected value = "permanent"> Permanent </option>
+							<option value = 'temporary'> Temporary</option>
+						@elseif (($user->empstatus == "temporary"))
+							<option value = "permanent"> Permanent </option>
+							<option selected value = 'temporary'> Temporary</option>
+						@else 
+							<option value = "permanent"> Permanent </option>
+							<option value = 'temporary'> Temporary</option>
+						@endif
+						</select><br>
 					<button type="submit">Next page</button>
 				</div>
 			</form>
