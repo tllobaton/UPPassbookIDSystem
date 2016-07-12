@@ -82,9 +82,21 @@
 						}
 						?>
 						@if ($type == 'student')
-							<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "student" size ="5" readonly></input> ID</label><br>
+							<label class = "header">
+							@if($user->createdsid=='no')
+								Create
+							@else
+								Edit
+							@endif
+							<input class = "idtype" type = "text" name = "type" value = "student" size ="5" readonly></input> ID</label><br>
 						@else
-							<label class = "header">Create <input class = "idtype" type = "text" name = "type" value = "employee" size ="7" readonly></input> ID</label><br>
+							<label class = "header">
+							@if($user->createdeid=='no')
+								Create
+							@else
+								Edit
+							@endif
+							<input class = "idtype" type = "text" name = "type" value = "employee" size ="7" readonly></input> ID</label><br>
 						@endif
 						
 							<label class = "inform">First Name:</label>

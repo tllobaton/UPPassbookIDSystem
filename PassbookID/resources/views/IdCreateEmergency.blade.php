@@ -60,7 +60,13 @@
 					<input class = "inform"type="text" name = "eaddress" required value = <?php echo '"'.$user->eaddress.'"'?>></input><br><br>
 					
 					<button type="submit">Back</button>
-					<button type="submit">Create ID</button>
+					<button type="submit">
+					@if($user->createdsid=='no' || $user->createdeid=='no')
+						Create ID
+					@else
+						Confirm Changes
+					@endif
+					</button>
 
 				</div>
 			</form>
