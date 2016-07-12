@@ -51,7 +51,7 @@
 						<input class = "inform" type="text" name = "gsis" required value = {{$user->gsis}}></input><br>
 					
 						<label class = "inform">Blood Type:</label>
-						<select class = "inform" name = "blood">
+						<select class = "inform" name = "blood" value="none">
 						<option> ----------</option>
 						<option> A</option>
 						<option> B</option>

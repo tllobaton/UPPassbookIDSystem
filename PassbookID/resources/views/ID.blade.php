@@ -72,12 +72,6 @@
 				margin-right: 30px;
 				margin-bottom: 30px;
 			}
-			.info{
-				position: absolute;
-				right: 3px;
-				bottom: 3px;
-			}
-			
 			#dl {
 				position:absolute;
 				bottom:0px;
@@ -97,6 +91,9 @@
 			}
 			.fa-info-circle{
 				font-size: 1.75em;
+				position: absolute;
+				right: 3px;
+				bottom: 3px;
 			}
         </style>
     </head>
@@ -111,19 +108,30 @@
 				<div class = "lower">
 					<div class = "details">
 						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
-						<label style="font-size:26px">{{$user->sn_year}}-{{$user->sn_num}}</label><br>
-						<label>{{$user->dept}}</label>
+						<label style="font-size:26px">
+							@if($type=='employee')
+								{{$user->empnum}}
+							@else
+								{{$user->sn_year}}-{{$user->sn_num}}
+							@endif
+						</label><br>
+						<div style="font-size: 12px; width: 200px;"><label>{{$user->dept}}</label></div>
 					</div>
 				</div>
-				@if($type == 'employee')
-					<img src = <?php echo '/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "120" height = "120">
+
+				@if($type=='employee')
+					<img src = <?php echo '/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<div class = "bcode">
+						<img src=<?php echo "/barcode/img/".$user->empnum?> alt="barcode">
+					</div>
+					<a href="{{ url('/ViewEmergency/employee') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@else
 					<img src = <?php echo '/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<div class = "bcode">
+						<img src=<?php echo "/barcode/img/".$user->sn_year."-".$user->sn_num?> alt="barcode">
+					</div>
+					<a href="{{ url('/ViewEmergency/student') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@endif
-				<div class = "bcode">	
-					<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> id="barcode" alt="barcode">
-				</div>
-				<span class="info"><a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a></span>
 			</div>
 			<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Download ID</button></a>
 		</div>

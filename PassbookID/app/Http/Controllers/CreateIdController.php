@@ -63,9 +63,9 @@ class CreateIdController extends Controller {
 	   return view('Landing', ['campuses' => $campuses]);
    }
    
-   public function showEmergencyDetails() {
+   public function showEmergencyDetails($type = null) {
 	   $user = $this->getLoggedInUser();
-	   return view('IdViewEmergency', ['user' => $user]);
+	   return view('IdViewEmergency', ['type' => $type, 'user' => $user]);
    }
    
    public function showEmergencyDetails1() {
