@@ -118,6 +118,7 @@
 						<div style="font-size: 12px; width: 200px;"><label>{{$user->dept}}</label></div>
 					</div>
 				</div>
+
 				@if($type=='employee')
 					<img src = <?php echo '/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
 					<div class = "bcode">
