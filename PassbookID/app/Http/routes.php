@@ -55,7 +55,7 @@ Route::any('/Landing', 'CreateIdController@showLandingPage');
 
 Route::post('/Branch', 'CreateIdController@createIdBranch');
 
-Route::get('/ViewId', 'CreateIdController@viewId');
+Route::get('/ViewId/{type?}', 'CreateIdController@viewId');
 
 Route::get('/AdminView', 'AdminController@index');
 Route::get('/AdminViewStud', 'AdminController@s_index');
@@ -84,7 +84,7 @@ Route::get('/SearchUser', 'AdminController@search');
 
 Route::any('/Include', 'CreateIdController@test');
 
-Route::any('/MakePass', 'CreateIdController@makePass');
+Route::any('/MakePass/{type?}', 'CreateIdController@makePass');
 
 
 Route::get('/UPV', function(){

@@ -125,7 +125,7 @@
 				</div>
 				<span class="info"><a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a></span>
 			</div>
-			<a href="/MakePass"><button class="btn btn-primary" id = "dl">Download ID</button></a>
+			<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Download ID</button></a>
 		</div>
 		
     </body>

@@ -180,14 +180,13 @@ class CreateIdController extends Controller {
 		}
 		
 		$currUser = $this->getLoggedInUser();		   
-	   return redirect("/ViewId");
+	   return redirect("/ViewId/".$request->type);
    }
    
-   public function viewId() {
+   public function viewId($type = null) {
 	   $user = $this->getLoggedInUser();
 	   $campus = $user->campus;
 	 
-	   
 	   // check campus of user, return respective ID layout
 	   /*if($campus == "Baguio"){
 		   return view("UPB", ['user' => $user]);
@@ -219,7 +218,7 @@ class CreateIdController extends Controller {
 		   return view("/Landing");
 	   } */
 	   if(isset($campus)){
-			return view('ID', ['user' => $user]);
+			return view('ID', ['user' => $user, 'type' => $type]);
 	   }
 	   else{
 		   $message = "You have not yet created a virtual ID.";
@@ -228,90 +227,201 @@ class CreateIdController extends Controller {
 	   }
    }
    
-   public function makePass() {
+   public function makePass($type = null) {
 		
 		$user = $this->getLoggedInUser();
-		$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
+		if ($type == "student"){
+			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
+			
+			if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
+				Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
+			}
+			
+			$pass = new PassGenerator($pass_identifier);
 
-		
-		if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
-            Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
-        }
-		
-		$pass = new PassGenerator($pass_identifier);
-
-		$pass_definition = [
-			"description"       => "UP ID",
-			"formatVersion"     => 1,
-			"organizationName"  => "University of the Philippines",
-			"passTypeIdentifier"=> "ph.edu.up.PassID",
-			"serialNumber"      => "123456",
-			"teamIdentifier"    => "A7FDKGVVEB",
-			"foregroundColor"   => "rgb(99, 99, 99)",
-			"backgroundColor"   => "rgb(212, 212, 212)",
-			"logoText" => "University of the Philippines ".$user->campus,
-			"barcode" => [
-				"message"   => $user->sn_year."-".$user->sn_num,
-				"format"    => "PKBarcodeFormatCode128",
-				"messageEncoding"=> "utf-8"
-			],
-			"generic" => [
-				"primaryFields" => [
-					[
-						"key" => "name",
-						"label" => $user->fname." ".$user->mname.". ".$user->lname,
-						"value" => $user->sn_year."-".$user->sn_num
-					]
+			$pass_definition = [
+				"description"       => "UP ID",
+				"formatVersion"     => 1,
+				"organizationName"  => "University of the Philippines",
+				"passTypeIdentifier"=> "ph.edu.up.PassID",
+				"serialNumber"      => "123456",
+				"teamIdentifier"    => "A7FDKGVVEB",
+				"foregroundColor"   => "rgb(99, 99, 99)",
+				"backgroundColor"   => "rgb(212, 212, 212)",
+				"logoText" => "University of the Philippines ".$user->campus,
+				"barcode" => [
+					"message"   => $user->sn_year."-".$user->sn_num,
+					"format"    => "PKBarcodeFormatCode128",
+					"messageEncoding"=> "utf-8"
 				],
-				"secondaryFields" => [
-					[
-						"key" => "college",
-						"value" => $user->dept
-					]
+				"generic" => [
+					"primaryFields" => [
+						[
+							"key" => "name",
+							"label" => "Name:",
+							"value" => $user->fname." ".$user->mname.". ".$user->lname,
+						]
+					],
+					"secondaryFields" => [
+						[
+							"key" => "snNo",
+							"label" => "Student #:",
+							"value" => $user->sn_year."-".$user->sn_num
+						],
+						[
+							"key" => "type",
+							"label" => "Student",
+							"textAlignment" => "PKTextAlignmentRight"
+						]
+					],
+					"auxiliaryFields" => [
+						[
+							"key" => "unit",
+							"label" => "Unit/College:",
+							"value" => $user->dept
+						]
+					],
+					"backFields" => [
+						[
+							"key" => "label",
+							"value" => "Person to contact in case of emergency"
+						],[
+							"key" => "ename",
+							"label" => "Name: ",
+							"value" => $user->ename
+						], [
+							"key" => "enum",
+							"label" => "Number: ",
+							"value" => $user->ename
+						], [
+							"key" => "eadd",
+							"label" => "Address: ",
+							"value" => $user->eaddress
+						]
+					],
 				],
-				"backFields" => [
-					[
-						"key" => "label",
-						"value" => "Person to contact in case of emergency"
-					],[
-						"key" => "ename",
-						"label" => "Name: ",
-						"value" => $user->ename
-					], [
-						"key" => "enum",
-						"label" => "Number: ",
-						"value" => $user->ename
-					], [
-						"key" => "eadd",
-						"label" => "Address: ",
-						"value" => $user->eaddress
-					]
+			];
+
+			$pass->setPassDefinition($pass_definition);
+
+			// Definitions can also be set from a JSON string
+			// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
+
+			// Add assets to the PKPass package
+			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
+			
+			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
+			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
+
+			$pkpass = $pass->create();
+			
+			return new Response($pkpass, 200, [
+				'Content-Transfer-Encoding' => 'binary',
+				'Content-Description' => 'File Transfer',
+				'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+				'Content-length' => strlen($pkpass),
+				'Content-Type' => PassGenerator::getPassMimeType(),
+				'Pragma' => 'no-cache',
+			]);
+		}
+		// for employee ids
+		else {
+			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
+			
+			if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
+				Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
+			}
+			
+			$pass = new PassGenerator($pass_identifier);
+
+			$pass_definition = [
+				"description"       => "UP ID",
+				"formatVersion"     => 1,
+				"organizationName"  => "University of the Philippines",
+				"passTypeIdentifier"=> "ph.edu.up.PassID",
+				"serialNumber"      => "123456",
+				"teamIdentifier"    => "A7FDKGVVEB",
+				"foregroundColor"   => "rgb(0, 0, 0)",
+				"backgroundColor"   => "rgb(255, 255, 255)",
+				"logoText" => "University of the Philippines ".$user->campus,
+				"barcode" => [
+					"message"   => $user->empnum,
+					"format"    => "PKBarcodeFormatCode128",
+					"messageEncoding"=> "utf-8"
 				],
-			],
-		];
+				"generic" => [
+					"primaryFields" => [
+						[
+							"key" => "name",
+							"label" => "Employee Name:",
+							"value" => $user->fname." ".$user->mname.". ".$user->lname
+						],
 
-		$pass->setPassDefinition($pass_definition);
+					],
+					"secondaryFields" => [
+						[
+							"key" => "empNo",
+							"label" => "Employee No.:",
+							"value" => $user->empnum
+						],
+						[
+							"key" => "type",
+							"label" => "Faculty",
+							"textAlignment" => "PKTextAlignmentRight"
+						]
+					],
+					"auxiliaryFields" => [
+						[
+							"key" => "unit",
+							"label" => "Unit/College:",
+							"value" => $user->dept
+						]
+					],
+					"backFields" => [
+						[
+							"key" => "label",
+							"value" => "Person to contact in case of emergency"
+						],[
+							"key" => "ename",
+							"label" => "Name: ",
+							"value" => $user->ename
+						], [
+							"key" => "enum",
+							"label" => "Number: ",
+							"value" => $user->ename
+						], [
+							"key" => "eadd",
+							"label" => "Address: ",
+							"value" => $user->eaddress
+						]
+					],
+				],
+			];
 
-		// Definitions can also be set from a JSON string
-		// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
+			$pass->setPassDefinition($pass_definition);
 
-		// Add assets to the PKPass package
-		//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
-		
-		$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
-		$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
-		$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
+			// Definitions can also be set from a JSON string
+			// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
 
-		$pkpass = $pass->create();
-		
-		return new Response($pkpass, 200, [
-			'Content-Transfer-Encoding' => 'binary',
-			'Content-Description' => 'File Transfer',
-			'Content-Disposition' => 'attachment; filename="pass.pkpass"',
-			'Content-length' => strlen($pkpass),
-			'Content-Type' => PassGenerator::getPassMimeType(),
-			'Pragma' => 'no-cache',
-		]);
+			// Add assets to the PKPass package
+			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
+			
+			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
+			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
+
+			$pkpass = $pass->create();
+			
+			return new Response($pkpass, 200, [
+				'Content-Transfer-Encoding' => 'binary',
+				'Content-Description' => 'File Transfer',
+				'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+				'Content-length' => strlen($pkpass),
+				'Content-Type' => PassGenerator::getPassMimeType(),
+				'Pragma' => 'no-cache',
+			]);
+		}
 	}
 	
 	public function test() {
