@@ -55,9 +55,9 @@
     <body>
 		<div class = "container">
 			<div class = "card">
-			<!-- GSIS No., Blood Type, TIN, Employment Status, Name, Contact Number, Address -->
-				<label class="header"><a href="{{ url('/ViewId') }}"><i class="fa fa-btn fa-arrow-left"></i></a> 
-				@if($user->isemployed=='yes')
+				<label class="header">
+				@if($type=='employee')
+					<a href="{{ url('/ViewId/employee') }}"><i class="fa fa-btn fa-arrow-left"></i></a>
 						Employee Details
 					</label><hr class="hr1">
 					<label class="txt">GSIS No: </label><label class="txtdetails">{{$user->gsis}}</label>
@@ -66,10 +66,11 @@
 					<label class="txt">Employment Status: </label><label class="txtdetails">{{$user->empstatus}}</label><br><hr>
 					<label class="txt">Contact in case of emergency: </label><label class="txtdetails">{{$user->ename}}</label><br><hr>
 				@else
+					<a href="{{ url('/ViewId/student') }}"><i class="fa fa-btn fa-arrow-left"></i></a>
 						Person to contact in case of emergency
 					</label><hr class="hr1">
+					<label class="txt">Name: </label><label class="txtdetails">{{$user->ename}}</label><br><hr>
 				@endif
-				<label class="txt">Name: </label><label class="txtdetails">{{$user->ename}}</label><br><hr>
 				<label class="txt">Contact Number: </label><label class="txtdetails">{{$user->enum}}</label><br><hr>
 				<label class="txt">Address: </label><label class="txtdetails">{{$user->eaddress}}</label><br>
 			</div>

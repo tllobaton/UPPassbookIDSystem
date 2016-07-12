@@ -63,9 +63,9 @@ class CreateIdController extends Controller {
 	   return view('Landing', ['campuses' => $campuses]);
    }
    
-   public function showEmergencyDetails() {
+   public function showEmergencyDetails($type = null) {
 	   $user = $this->getLoggedInUser();
-	   return view('IdViewEmergency', ['user' => $user]);
+	   return view('IdViewEmergency', ['type' => $type, 'user' => $user]);
    }
    
    public function showEmergencyDetails1() {
@@ -407,7 +407,7 @@ class CreateIdController extends Controller {
 			// Add assets to the PKPass package
 			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
 			
-			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+			$pass->addAsset(base_path('public\wallet\\'.$user->empnum.'\thumbnail.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
 

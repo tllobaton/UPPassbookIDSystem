@@ -109,7 +109,7 @@
 					<div class = "details">
 						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
 						<label style="font-size:26px">
-							@if($user->isemployed=='yes')
+							@if($type=='employee')
 								{{$user->empnum}}
 							@else
 								{{$user->sn_year}}-{{$user->sn_num}}
@@ -118,19 +118,19 @@
 						<div style="font-size: 12px; width: 200px;"><label>{{$user->dept}}</label></div>
 					</div>
 				</div>
-				@if($user->isemployed=='yes')
-					<img src = <?php echo 'wallet//'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+				@if($type=='employee')
+					<img src = <?php echo '/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<div class = "bcode">
+						<img src=<?php echo "/barcode/img/".$user->empnum?> alt="barcode">
+					</div>
+					<a href="{{ url('/ViewEmergency/employee') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@else
-					<img src = <?php echo 'wallet//'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<img src = <?php echo '/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<div class = "bcode">
+						<img src=<?php echo "/barcode/img/".$user->sn_year."-".$user->sn_num?> alt="barcode">
+					</div>
+					<a href="{{ url('/ViewEmergency/student') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@endif
-				<div class = "bcode">
-					@if($user->isemployed=='yes')
-						<img src=<?php echo "barcode/img/".$user->empnum?> alt="barcode">
-					@else
-						<img src=<?php echo "barcode/img/".$user->sn_year."-".$user->sn_num?> alt="barcode">
-					@endif
-				</div>
-				<a href="{{ url('/ViewEmergency') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 			</div>
 			<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Download ID</button></a>
 		</div>

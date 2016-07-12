@@ -43,7 +43,7 @@ Route::get('/Details/{type?}', 'CreateIdController@showCreateIdDetails');
 
 Route::get('/Contacts/{type?}', 'CreateIdController@showCreateContacts');
 
-Route::get('/ViewEmergency', 'CreateIdController@showEmergencyDetails');		//first back_of_id format; contains person to contact
+Route::get('/ViewEmergency/{type?}', 'CreateIdController@showEmergencyDetails');		//first back_of_id format; contains person to contact
 
 Route::get('/ViewEmergency1', 'CreateIdController@showEmergencyDetails1');		//second format; contains person to contact as well as barcode
 
