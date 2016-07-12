@@ -327,7 +327,7 @@ class CreateIdController extends Controller {
 		}
 		// for employee ids
 		else {
-			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
+			$pass_identifier = $user->empnum;  // This, if set, it would allow for retrieval later on of the created Pass
 			
 			if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
 				Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
