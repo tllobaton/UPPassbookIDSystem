@@ -82,10 +82,10 @@ Route::post('/PromoteUser', 'AdminController@createAdmin');
 Route::get('/SearchUser', 'AdminController@search');
 
 
-Route::any('/MakePass2', 'PassbookIdController@makePass');
+Route::any('/Include', 'CreateIdController@test');
 
 Route::any('/MakePass', 'CreateIdController@makePass');
-Route::any('/RemovePass', 'PassbookIdController@removePass');
+
 Route::get('/UPV', function(){
 	return view('UPV');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\PassKit;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -305,10 +306,12 @@ class CreateIdController extends Controller {
 		]);
 	}
 	
-	public function removePass() {
-		if (Storage::disk('passgenerator')->has('mingsming.pkpass')) {	
-            Storage::disk('passgenerator')->delete('mingsming.pkpass');
-        }
-		return redirect("/Landing");
+	public function test() {
+		$apiKey = "7RxgL2HIDBM0RFXOtWVt";
+		$apiSecret = "SNgplReG0dY9NMTUT1bzMOqvY4FKlfHH7r3NcOmLDTFqeOCHX28z";
+		
+		$pk = new PassKit($apiKey, $apiSecret);
+		
+		$pk->PKAddPassButton();
 	}
 }
