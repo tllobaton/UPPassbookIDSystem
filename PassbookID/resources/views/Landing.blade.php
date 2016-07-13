@@ -10,6 +10,7 @@
 		transform: translate(-50%, -50%);
 		left: 50%;
 		top: 375px;
+		width: 100%;
 	}
 	h1 {
 		text-align: center;
@@ -22,13 +23,12 @@
 		color: white;
 		margin-top: 10px;
 	}
-	table, th, td {
-		border: 1px solid black;
+	.tbl{
+		width: 100%;
 	}
 	
 	th, td {
 		text-align: center;
-		width: 200px;
 	}
 
 </style>
@@ -54,23 +54,27 @@
 		@endif
 			<a href="/Include"><button class="btn btn-primary">TEST INCLUDE</button></a>
 		<br><br>
-		<table>
-			<tr>
-				<th>Campus</th>
-				<th>Number of students using app</th>
-				<th>Total number of students</th>
-				<th>Number of employees using app</th>
-				<th>Total number of employees</th>
-			</tr>
-			@foreach ($campuses as $campus)
-			<tr>
-				<td>{{$campus->cname}}</td>
-				<td>{{$campus->studentuse}} <?php if($campus->totalstudents != 0) { echo "(".$campus->studentuse*100/$campus->totalstudents."%)";}?></td>
-				<td>{{$campus->totalstudents}}</td>
-				<td>{{$campus->empuse}} <?php if($campus->totalemps != 0) { echo "(".$campus->empuse*100/$campus->totalemps."%)";}?></td>
-				<td>{{$campus->totalemps}}</td>
-			</tr>
-			@endforeach
+		<div class="container">
+			<div class="table-responsive">
+				<table class="tbl table table-hover table-condensed">
+					<tr>
+						<th>Campus</th>
+						<th>Number of students using app</th>
+						<th>Total number of students</th>
+						<th>Number of employees using app</th>
+						<th>Total number of employees</th>
+					</tr>
+					@foreach ($campuses as $campus)
+					<tr>
+						<td>{{$campus->cname}}</td>
+						<td>{{$campus->studentuse}} <?php if($campus->totalstudents != 0) { echo "(".$campus->studentuse*100/$campus->totalstudents."%)";}?></td>
+						<td>{{$campus->totalstudents}}</td>
+						<td>{{$campus->empuse}} <?php if($campus->totalemps != 0) { echo "(".$campus->empuse*100/$campus->totalemps."%)";}?></td>
+						<td>{{$campus->totalemps}}</td>
+					</tr>
+					@endforeach
+			</div>
+		</div>
 	</div>
 </div>
 @endsection

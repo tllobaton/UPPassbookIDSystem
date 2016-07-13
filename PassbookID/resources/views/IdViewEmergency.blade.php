@@ -35,16 +35,16 @@
 			.header{
 				font-size: 18px;
 				margin-left: 7%;
-				margin-top: 4%;
+				margin-top: 2%;
 				color: #800000;
 			}
 			.txt{
-				font-size: 15px;
+				font-size: 14px;
 				margin-left: 5%;
 			}
 			.txtdetails{
-				font-size: 14px;
-				margin-left: 3%;
+				font-size: 12px;
+				margin-left: 2%;
 				font-style: italic;
 			}
 			.fa-arrow-left{
@@ -61,8 +61,8 @@
 						Employee Details
 					</label><hr class="hr1">
 					<label class="txt">GSIS No: </label><label class="txtdetails">{{$user->gsis}}</label>
-					<label class="txt" style="margin-left: 12%;">Blood Type: </label><label class="txtdetails">{{$user->blood}}</label><br><hr>
 					<label class="txt">TIN: </label><label class="txtdetails">{{$user->tin}}</label><br><hr>
+					<label class="txt">Blood Type: </label><label class="txtdetails">{{$user->blood}}</label>
 					<label class="txt">Employment Status: </label><label class="txtdetails">{{$user->empstatus}}</label><br><hr>
 					<label class="txt">Contact in case of emergency: </label><label class="txtdetails">{{$user->ename}}</label><br><hr>
 				@else
@@ -72,7 +72,7 @@
 					<label class="txt">Name: </label><label class="txtdetails">{{$user->ename}}</label><br><hr>
 				@endif
 				<label class="txt">Contact Number: </label><label class="txtdetails">{{$user->enum}}</label><br><hr>
-				<label class="txt">Address: </label><label class="txtdetails">{{$user->eaddress}}</label><br>
+				<label class="txt">Address: </label><div class="txtdetails" style="margin-left: 20px;">{{$user->eaddress}}</div>
 			</div>
 		</div>
     </body>

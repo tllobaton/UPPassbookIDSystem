@@ -100,16 +100,16 @@
 						@endif
 						
 							<label class = "inform">First Name:</label>
-							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required ></input><br>
+							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required pattern="^[A-Za-z\-Ññ'\s](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+"></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" name = "mname" required value = {{$user->mname}}></input><br>
+							<input class = "inform" type="text" name = "mname" pattern="^[A-Za-zÑñ]" value = {{$user->mname}}></input><br>
 						
 							<label class = "inform">Last Name:</label>
-							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required></input><br>
+							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required  pattern="^[A-Za-z\-Ññ'\s](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+"></input><br>
 					
 							<label class = "inform">Suffix Name:</label>
-							<input class = "inform" type="text" name = "sname" placeholder="Jr., Sr., III, etc." value = {{$user->sname}} ></input><br>
+							<input class = "inform" type="text" name = "sname" placeholder="Jr., Sr., III, etc." value = {{$user->sname}}></input><br>
 										
 							@if ($type == 'student')
 								<label class = "inform">Student Number:</label>

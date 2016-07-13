@@ -13,7 +13,7 @@
 		
 		.box {
 			position: absolute;
-			top: 400px;
+			top: 300px;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			padding:20px;
@@ -34,7 +34,7 @@
 							</div>";
 					}
 					?>
-					<label>Set ID expire date</label><br>
+					<label style="font-size: 20px; margin-bottom: 20px">Set ID expire date</label><br>
 					<label>Campus: </label>
 					<select name = "campus" required>
 					@foreach ($campuses as $campus)

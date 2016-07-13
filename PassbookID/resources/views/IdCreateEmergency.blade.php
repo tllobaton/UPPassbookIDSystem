@@ -51,22 +51,16 @@
 					@endif
 					<label class = "header">Person to contact in case of emergency</label><br>
 					<label class = "inform">Name:</label>
-					<input class = "inform"type="text" name = "ename" required value = <?php echo '"'.$user->ename.'"'?>></input><br><br>
+					<input class = "inform"type="text" name = "ename" required pattern = "^[A-Za-z\-Ññ'\s](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+" value = <?php echo '"'.$user->ename.'"'?>></input><br><br>
 					
 					<label class = "inform">Contact number:</label>
-					<input class = "inform" type="text" name = "enum" required pattern = "[0-9].{0,11}" value = {{$user->enum}}></input><br><br>
+					<input class = "inform" type="text" name = "enum" required pattern = "\d{7}|\d{11}|\d{13}" value = {{$user->enum}}></input><br><br>
 					
 					<label class = "inform">Address:</label>
-					<input class = "inform"type="text" name = "eaddress" required value = <?php echo '"'.$user->eaddress.'"'?>></input><br><br>
+					<input class = "inform"type="text" name = "eaddress" required pattern = "^[0-9A-Za-z,!@#&\-Ññ'\s](?!.*?[\,!@#&'-]{2})[0-9A-Za-z,!@#&\-Ññ\'\s]+" value = <?php echo '"'.$user->eaddress.'"'?>></input><br><br>
 					
 					<button type="submit">Back</button>
-					<button type="submit">
-					@if($user->createdsid=='no' || $user->createdeid=='no')
-						Create ID
-					@else
-						Confirm Changes
-					@endif
-					</button>
+					<button type="submit">Create ID</button>
 
 				</div>
 			</form>

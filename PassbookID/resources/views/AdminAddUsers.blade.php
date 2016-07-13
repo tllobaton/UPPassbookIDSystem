@@ -12,8 +12,9 @@
 		}
 		
 		.box {
+			width: 100%;
 			position: absolute;
-			top: 400px;
+			top: 300px;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			padding:20px;
@@ -21,9 +22,17 @@
 		}
 		
 		input {
+			position: absolute;
+			transform: translate(-50%, -50%);
+			left: 53%;
 			align: center;
-			margin-left: 300px;
-			margin-right: 200px;
+		}
+		.display{
+			position: absolute;
+			transform: translate(-50%, -50%);
+			top: 50%;
+			left: 50%;
+			width: 80%;
 		}
 		</style>
 	</head>
@@ -47,10 +56,12 @@
 							</div>";
 					}
 					?>
-					<label>Add Users</label><br><br>
-					<label>Select CSV file. </br>File format must be: email,lastname,firstname,middleinitial,isnerolled,isemployed</br>In case of error, program adds all users to the database up to the line of error</label><br><br>
-					<input type = "file" name = "filetoopen" required><br>
-					<button type = "submit" class="btn btn-primary">Upload</button>
+					<div  class="display">
+						<label style = "font-size: 20px; margin-top: 20px">Add Users</label><br><br>
+						<label>Select CSV file. </br>File format must be: email,lastname,firstname,middleinitial,isnerolled,isemployed</br>In case of error, program adds all users to the database up to the line of error</label><br><br>
+						<input type = "file" name = "filetoopen" required><br>
+						<button type = "submit" class="btn btn-primary" style="margin-top: 1%;">Upload</button>
+					</div>
 				</div>
 			</form>
 		</div>

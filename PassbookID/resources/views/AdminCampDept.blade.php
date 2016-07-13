@@ -13,11 +13,16 @@
 		
 		.box {
 			position: absolute;
-			top: 400px;
+			top: 340px;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			padding:20px;
 			text-align: center;
+		}
+		
+		.header{
+			font-size: 20px; 
+			margin-bottom: 20px;
 		}
 		</style>
 	</head>
@@ -41,17 +46,17 @@
 							</div>";
 					}
 				?>
-					<label>Add Campus</label><br>
-					<label>Campus Name: </label><input type = "text" name = "campus"></input><br><br>
+					<label class = "header">Add Campus</label><br>
+					<label>Campus Name: </label><input type = "text" name = "campus" pattern="[A-Za-zñ\s]+"></input><br><br>
 					<button type = "submit" name = "action" value = "addCampus" class="btn btn-primary">Add Campus</button><br><br><br>
-					<label>Add Department</label><br>
+					<label class = "header">Add Department</label><br>
 					<label>Campus: </label>
 					<select name = "campusdept">
 					@foreach ($campuses as $campus)
 						<option value = '{{$campus->cname}}'>{{$campus->cname}}</option>
 					@endforeach
 					</select><br><br>
-					<label>Department Name:</label><input type = "text" name = "dept"></input><br><br>
+					<label>Department Name:</label><input type = "text" name = "dept" pattern="[A-Za-zñ\s]+"></input><br><br>
 					<button type = "submit" name = "action" value = "addDept" class="btn btn-primary">Add Department</button>
 				</div>
 			</form>
