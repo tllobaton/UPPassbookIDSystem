@@ -232,6 +232,10 @@ class CreateIdController extends Controller {
    public function makePass($type = null) {
 		
 		$user = $this->getLoggedInUser();
+		$campusexpire = DB::table('campus')
+					->select('expire')
+					->where('cname', $user->campus)
+					->first();
 		if ($type == "student"){
 			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
 			
@@ -248,6 +252,7 @@ class CreateIdController extends Controller {
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
 				"serialNumber"      => "123456",
 				"teamIdentifier"    => "A7FDKGVVEB",
+				"expirationDate"	=> $campusexpire."T00:00:00",
 				"foregroundColor"   => "rgb(99, 99, 99)",
 				"backgroundColor"   => "rgb(212, 212, 212)",
 				"logoText" => "University of the Philippines ".$user->campus,
