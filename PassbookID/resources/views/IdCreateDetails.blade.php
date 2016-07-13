@@ -103,7 +103,7 @@
 							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required ></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" name = "mname" required value = {{$user->mname}}></input><br>
+							<input class = "inform" type="text" name = "mname" pattern = "(?=.*[A-Z]).{1,1}"  title = "Middle Initial Only, no period" required value = {{$user->mname}}></input><br>
 						
 							<label class = "inform">Last Name:</label>
 							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required></input><br>
