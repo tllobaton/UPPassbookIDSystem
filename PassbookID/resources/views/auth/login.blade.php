@@ -15,12 +15,15 @@
 		text-align: center;
 		margin-bottom: 10px;
 	}
-	button {
+	.button {
 		background-color: maroon;
 		text-align: center;
 		border-radius: 20px;
 		color: white;
 		margin-top: 10px;
+		border: none;
+		width: 225px;
+		height: 50px;
 	}
 	img {
 		width:70px;
@@ -33,7 +36,7 @@
 	
 	<div class = "box">		
 		<h1>UP ID GENERATOR</h1>
-		<a href="/redirect"><button><img src = "/img/UPLogo.png">Sign in with UP Mail</button></a>
+		<a href="/redirect"><button class="btn button btn-primary"><h4>Sign in with UP Mail</h4></button></a>
 		<?php
 			if (session('xdomain')){
 				echo"<br><br><div class='alert alert-danger'>

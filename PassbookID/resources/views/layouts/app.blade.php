@@ -92,12 +92,16 @@
             <div id = "bars" class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed row" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+				@if(!Auth::guest())
+					<button type="button" class="navbar-toggle collapsed row" data-toggle="collapse" data-target="#app-navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				@else
+					<div class="visible-xs" style="background-color: #800000; width: 100%; height: 70px"></div>
+				@endif
 
                 <!-- Branding Image -->
 				<h1 class="navbar-left"><img class="hidden-xs" id = "navbarlogo" src = "/img/UPLogo.png"><img class="visible-xs" id = "navbarlogo_xs" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
