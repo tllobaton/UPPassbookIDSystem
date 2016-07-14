@@ -49,19 +49,33 @@ class CreateIdController extends Controller {
 	   return view('IdCreateEmpDetails' , ['user' => $this->getLoggedInUser(), 'bloodtype' => $blood]);
    }
    
+   public function FirstTimeLogin(Request $request) {
+	   User::where('email', $this->getLoggedInUser()->email)->update(['campus' => $request->campus]);
+	   return redirect('/Landing');
+   }
+   
    public function showLandingPage() {
-	   $campuses = DB::select('SELECT cname FROM campus');
 	   
-	   foreach ($campuses as $campus) {
-		   Campus::where('cname', $campus->cname)->update(['studentuse' => User::where('campus', $campus->cname)->where('createdsid', "yes")->count()]);
-		   Campus::where('cname', $campus->cname)->update(['totalstudents' => User::where('campus', $campus->cname)->where('isenrolled', 'yes')->count()]);
+	   if ($this->getLoggedInUser()->campus != null) {
+		   $campuses = DB::select('SELECT cname FROM campus');
+		   foreach ($campuses as $campus) {
+			   Campus::where('cname', $campus->cname)->update(['studentuse' => User::where('campus', $campus->cname)->where('createdsid', "yes")->count()]);
+			   Campus::where('cname', $campus->cname)->update(['totalstudents' => User::where('campus', $campus->cname)->where('isenrolled', 'yes')->count()]);
+			   
+			   Campus::where('cname', $campus->cname)->update(['empuse' => User::where('campus', $campus->cname)->where('createdeid', "yes")->count()]);
+			   Campus::where('cname', $campus->cname)->update(['totalemps' => User::where('campus', $campus->cname)->where('isemployed', 'yes')->count()]);
+		   }
+		   $studentnull = User::where('campus', null)->where('isenrolled', 'yes')->count();
+		   $empnull = User::where('campus', null)->where('isemployed', 'yes') ->count();
+		   $campuses = Campus::all();
 		   
-		   Campus::where('cname', $campus->cname)->update(['empuse' => User::where('campus', $campus->cname)->where('createdeid', "yes")->count()]);
-		   Campus::where('cname', $campus->cname)->update(['totalemps' => User::where('campus', $campus->cname)->where('isemployed', 'yes')->count()]);
+		   return view('Landing', ['campuses' => $campuses, 'studentnull' => $studentnull, 'empnull' => $empnull]);
+	   }
+	   else {
+		   $campuses = Campus::all();
+		   return view('LandingDetails', ['campuses' => $campuses]);
 	   }
 	   
-	   $campuses = Campus::all();
-	   return view('Landing', ['campuses' => $campuses]);
    }
    
    public function showEmergencyDetails($type = null) {
