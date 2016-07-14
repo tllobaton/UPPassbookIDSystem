@@ -248,7 +248,35 @@ class CreateIdController extends Controller {
 					->select('expire')
 					->where('cname', $user->campus)
 					->first();
-
+		
+		if($user->mname != null) {
+			if ($user->sname != null) {
+					if ($user->sname == "Jr" OR $user->sname == "Sr") {
+						$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname.".";
+					}
+					else {
+						$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname;
+					}
+				
+			}
+			else {
+				$name = $user->fname." ".$user->mname.". ".$user->lname;
+			}
+			
+		}
+		else {
+			if ($user->sname == null) {
+				$name = $user->fname." ".$user->lname;
+			}
+			else {
+				if ($user->sname == "Jr" OR $user->sname == "Sr"){
+					$name = $user->fname." ".$user->lname. " ". $user->sname. ".";
+				}
+				else {
+					$name = $user->fname." ".$user->lname. " ". $user->sname;
+				}
+			}
+		}
 		if ($type == "student"){
 			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
 			
@@ -279,7 +307,7 @@ class CreateIdController extends Controller {
 						[
 							"key" => "name",
 							"label" => "Name:",
-							"value" => $user->fname." ".$user->mname.". ".$user->lname,
+							"value" => $name
 						]
 					],
 					"secondaryFields" => [
@@ -365,7 +393,7 @@ class CreateIdController extends Controller {
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
-				"serialNumber"      => $user->sn_year.$user->sn_num,
+				"serialNumber"      => $user->empnum,
 				"teamIdentifier"    => "A7FDKGVVEB",
 				"expirationDate"	=> $campusexpire->expire."T00:00:00",
 				"foregroundColor"   => "rgb(0, 0, 0)",
@@ -381,7 +409,7 @@ class CreateIdController extends Controller {
 						[
 							"key" => "name",
 							"label" => "Employee Name:",
-							"value" => $user->fname." ".$user->mname.". ".$user->lname
+							"value" => $name
 						],
 
 					],
