@@ -40,7 +40,10 @@
         <div class="container">
             <form method="post" action="{{url('/AdminAddUsers')}}" enctype="multipart/form-data">
 				{!! csrf_field() !!}
+				
 				<div class="box">
+					
+					<div  class="display">
 					<?php
 					if (session('success')){
 						echo"<br><br><div class='alert alert-success'>
@@ -56,7 +59,6 @@
 							</div>";
 					}
 					?>
-					<div  class="display">
 						<label style = "font-size: 20px; margin-top: 20px">Add Users</label><br><br>
 						<label>Select CSV file. </br>File format must be: email,lastname,firstname,middleinitial,isnerolled,isemployed</br>In case of error, program adds all users to the database up to the line of error</label><br><br>
 						<input type = "file" name = "filetoopen" required><br>
