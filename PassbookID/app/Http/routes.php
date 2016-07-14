@@ -52,6 +52,7 @@ Route::get('/ViewEmergency2', 'CreateIdController@showEmergencyDetails2');		//th
 Route::get('/EmpDetails', 'CreateIdController@showCreateEmpDetails');
 
 Route::any('/Landing', 'CreateIdController@showLandingPage');
+Route::post('/FirstLanding', 'CreateIdController@FirstTimeLogin');
 
 Route::post('/Branch', 'CreateIdController@createIdBranch');
 

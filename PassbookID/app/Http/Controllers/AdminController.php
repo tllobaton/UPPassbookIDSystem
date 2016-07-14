@@ -172,7 +172,7 @@ class AdminController extends Controller
 		
 		
 		while ($uploadArray != false){
-			if (sizeof($uploadArray) != 6) {
+			if (sizeof($uploadArray) != 7) {
 				Session::flash('fail', 'Invalid format at line ' .$linenumber);
 				fclose($file);
 				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
@@ -186,7 +186,7 @@ class AdminController extends Controller
 				return redirect("/AdminAddUsers");
 			}
 			
-			if (($uploadArray[4] != "yes") AND ($uploadArray[5] != "yes")) {
+			if (($uploadArray[5] != "yes") AND ($uploadArray[6] != "yes")) {
 				Session::flash('fail', 'User must be enrolled or employed at line ' .$linenumber);
 				fclose($file);
 				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
@@ -205,17 +205,30 @@ class AdminController extends Controller
 			
 			$user->lname = $uploadArray[1];
 			$user->fname = $uploadArray[2];
-			$user->mname = $uploadArray[3];
 			
-			if ($uploadArray[4] == "yes") {
-				$user->isenrolled = $uploadArray[4];
+			if ($uploadArray[3] ==""){
+				$user->mname = null;
+			}
+			else {
+				$user->mname = $uploadArray[3];
 			}
 			
+			if ($uploadArray[4] == ""){
+				$user->sname = null;
+				$user->name = $uploadArray[2]." ".$uploadArray[1];
+			}
+			else {
+				$user->sname = $uploadArray[4];
+				$user->name = $uploadArray[2]." ".$uploadArray[1]. " ". $uploadArray[4];
+			}
 			if ($uploadArray[5] == "yes") {
-				$user->isemployed = $uploadArray[5];
+				$user->isenrolled = $uploadArray[5];
+			}
+			if ($uploadArray[6] == "yes") {
+				$user->isemployed = $uploadArray[6];
 			}
 			
-			$user->name = $uploadArray[2]." ".$uploadArray[1];
+			
 			$user->save();
 			$uploadArray = fgetcsv($file);
 			$linenumber = $linenumber + 1;

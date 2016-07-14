@@ -73,6 +73,13 @@
 						<td>{{$campus->totalemps}}</td>
 					</tr>
 					@endforeach
+					<tr>
+						<td>People who haven't opened the app at all</td>
+						<td>n/a</td>
+						<td>{{$studentnull}}</td>
+						<td>n/a</td>
+						<td>{{$empnull}}</td>
+					</tr>
 			</div>
 		</div>
 	</div>

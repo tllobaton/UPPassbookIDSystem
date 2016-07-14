@@ -49,19 +49,33 @@ class CreateIdController extends Controller {
 	   return view('IdCreateEmpDetails' , ['user' => $this->getLoggedInUser(), 'bloodtype' => $blood]);
    }
    
+   public function FirstTimeLogin(Request $request) {
+	   User::where('email', $this->getLoggedInUser()->email)->update(['campus' => $request->campus]);
+	   return redirect('/Landing');
+   }
+   
    public function showLandingPage() {
-	   $campuses = DB::select('SELECT cname FROM campus');
 	   
-	   foreach ($campuses as $campus) {
-		   Campus::where('cname', $campus->cname)->update(['studentuse' => User::where('campus', $campus->cname)->where('createdsid', "yes")->count()]);
-		   Campus::where('cname', $campus->cname)->update(['totalstudents' => User::where('campus', $campus->cname)->where('isenrolled', 'yes')->count()]);
+	   if ($this->getLoggedInUser()->campus != null) {
+		   $campuses = DB::select('SELECT cname FROM campus');
+		   foreach ($campuses as $campus) {
+			   Campus::where('cname', $campus->cname)->update(['studentuse' => User::where('campus', $campus->cname)->where('createdsid', "yes")->count()]);
+			   Campus::where('cname', $campus->cname)->update(['totalstudents' => User::where('campus', $campus->cname)->where('isenrolled', 'yes')->count()]);
+			   
+			   Campus::where('cname', $campus->cname)->update(['empuse' => User::where('campus', $campus->cname)->where('createdeid', "yes")->count()]);
+			   Campus::where('cname', $campus->cname)->update(['totalemps' => User::where('campus', $campus->cname)->where('isemployed', 'yes')->count()]);
+		   }
+		   $studentnull = User::where('campus', null)->where('isenrolled', 'yes')->count();
+		   $empnull = User::where('campus', null)->where('isemployed', 'yes') ->count();
+		   $campuses = Campus::all();
 		   
-		   Campus::where('cname', $campus->cname)->update(['empuse' => User::where('campus', $campus->cname)->where('createdeid', "yes")->count()]);
-		   Campus::where('cname', $campus->cname)->update(['totalemps' => User::where('campus', $campus->cname)->where('isemployed', 'yes')->count()]);
+		   return view('Landing', ['campuses' => $campuses, 'studentnull' => $studentnull, 'empnull' => $empnull]);
+	   }
+	   else {
+		   $campuses = Campus::all();
+		   return view('LandingDetails', ['campuses' => $campuses]);
 	   }
 	   
-	   $campuses = Campus::all();
-	   return view('Landing', ['campuses' => $campuses]);
    }
    
    public function showEmergencyDetails($type = null) {
@@ -83,7 +97,7 @@ class CreateIdController extends Controller {
 		// add details to database
 		DB::table('users')
 			->where('email', \Auth::user()->email)
-			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
+			->update(['fname' => $request->fname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
 		
 		// check if user has suffix name (IV, Sr., Jr.)
 		if ($request->sname != "") {
@@ -96,6 +110,18 @@ class CreateIdController extends Controller {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sname' => null]);
+		}
+		
+		if ($request->mname != "") {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['mname' => $request->mname]);
+		}
+		
+		else {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['mname' => null]);
 		}
 		
 		// check if user set idnum (employee id number) or sn_year/sn_num(student id number)
@@ -236,6 +262,35 @@ class CreateIdController extends Controller {
 					->select('expire')
 					->where('cname', $user->campus)
 					->first();
+		
+		if($user->mname != null) {
+			if ($user->sname != null) {
+					if ($user->sname == "Jr" OR $user->sname == "Sr") {
+						$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname.".";
+					}
+					else {
+						$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname;
+					}
+				
+			}
+			else {
+				$name = $user->fname." ".$user->mname.". ".$user->lname;
+			}
+			
+		}
+		else {
+			if ($user->sname == null) {
+				$name = $user->fname." ".$user->lname;
+			}
+			else {
+				if ($user->sname == "Jr" OR $user->sname == "Sr"){
+					$name = $user->fname." ".$user->lname. " ". $user->sname. ".";
+				}
+				else {
+					$name = $user->fname." ".$user->lname. " ". $user->sname;
+				}
+			}
+		}
 		if ($type == "student"){
 			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
 			
@@ -250,9 +305,9 @@ class CreateIdController extends Controller {
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
-				"serialNumber"      => "123456",
+				"serialNumber"      => $user->sn_year.$user->sn_num,
 				"teamIdentifier"    => "A7FDKGVVEB",
-				"expirationDate"	=> $campusexpire."T00:00:00",
+				"expirationDate"	=> $campusexpire->expire."T00:00:00",
 				"foregroundColor"   => "rgb(99, 99, 99)",
 				"backgroundColor"   => "rgb(212, 212, 212)",
 				"logoText" => "University of the Philippines ".$user->campus,
@@ -266,7 +321,7 @@ class CreateIdController extends Controller {
 						[
 							"key" => "name",
 							"label" => "Name:",
-							"value" => $user->fname." ".$user->mname.". ".$user->lname,
+							"value" => $name
 						]
 					],
 					"secondaryFields" => [
@@ -286,6 +341,11 @@ class CreateIdController extends Controller {
 							"key" => "unit",
 							"label" => "Unit/College:",
 							"value" => $user->dept
+						],
+						[
+							"key" => "validity",
+							"label" => "Valid until:",
+							"value" => $campusexpire->expire
 						]
 					],
 					"backFields" => [
@@ -347,8 +407,9 @@ class CreateIdController extends Controller {
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
-				"serialNumber"      => "123456",
+				"serialNumber"      => $user->empnum,
 				"teamIdentifier"    => "A7FDKGVVEB",
+				"expirationDate"	=> $campusexpire->expire."T00:00:00",
 				"foregroundColor"   => "rgb(0, 0, 0)",
 				"backgroundColor"   => "rgb(255, 255, 255)",
 				"logoText" => "University of the Philippines ".$user->campus,
@@ -362,7 +423,7 @@ class CreateIdController extends Controller {
 						[
 							"key" => "name",
 							"label" => "Employee Name:",
-							"value" => $user->fname." ".$user->mname.". ".$user->lname
+							"value" => $name
 						],
 
 					],
@@ -383,6 +444,11 @@ class CreateIdController extends Controller {
 							"key" => "unit",
 							"label" => "Unit/College:",
 							"value" => $user->dept
+						],
+						[
+							"key" => "validity",
+							"label" => "Valid until:",
+							"value" => $campusexpire->expire
 						]
 					],
 					"backFields" => [
