@@ -83,7 +83,7 @@ class CreateIdController extends Controller {
 		// add details to database
 		DB::table('users')
 			->where('email', \Auth::user()->email)
-			->update(['fname' => $request->fname, 'mname' => $request->mname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
+			->update(['fname' => $request->fname, 'lname' => $request->lname, 'campus' => $request->campus, 'dept' => $request->dept]);
 		
 		// check if user has suffix name (IV, Sr., Jr.)
 		if ($request->sname != "") {
@@ -96,6 +96,18 @@ class CreateIdController extends Controller {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sname' => null]);
+		}
+		
+		if ($request->mname != "") {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['mname' => $request->mname]);
+		}
+		
+		else {
+			DB::table('users')
+				->where('email', \Auth::user()->email)
+				->update(['mname' => null]);
 		}
 		
 		// check if user set idnum (employee id number) or sn_year/sn_num(student id number)
@@ -236,6 +248,7 @@ class CreateIdController extends Controller {
 					->select('expire')
 					->where('cname', $user->campus)
 					->first();
+
 		if ($type == "student"){
 			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
 			
@@ -250,9 +263,9 @@ class CreateIdController extends Controller {
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
-				"serialNumber"      => "123456",
+				"serialNumber"      => $user->sn_year.$user->sn_num,
 				"teamIdentifier"    => "A7FDKGVVEB",
-				"expirationDate"	=> $campusexpire."T00:00:00",
+				"expirationDate"	=> $campusexpire->expire."T00:00:00",
 				"foregroundColor"   => "rgb(99, 99, 99)",
 				"backgroundColor"   => "rgb(212, 212, 212)",
 				"logoText" => "University of the Philippines ".$user->campus,
@@ -286,6 +299,11 @@ class CreateIdController extends Controller {
 							"key" => "unit",
 							"label" => "Unit/College:",
 							"value" => $user->dept
+						],
+						[
+							"key" => "validity",
+							"label" => "Valid until:",
+							"value" => $campusexpire->expire
 						]
 					],
 					"backFields" => [
@@ -347,8 +365,9 @@ class CreateIdController extends Controller {
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
-				"serialNumber"      => "123456",
+				"serialNumber"      => $user->sn_year.$user->sn_num,
 				"teamIdentifier"    => "A7FDKGVVEB",
+				"expirationDate"	=> $campusexpire->expire."T00:00:00",
 				"foregroundColor"   => "rgb(0, 0, 0)",
 				"backgroundColor"   => "rgb(255, 255, 255)",
 				"logoText" => "University of the Philippines ".$user->campus,
@@ -383,6 +402,11 @@ class CreateIdController extends Controller {
 							"key" => "unit",
 							"label" => "Unit/College:",
 							"value" => $user->dept
+						],
+						[
+							"key" => "validity",
+							"label" => "Valid until:",
+							"value" => $campusexpire->expire
 						]
 					],
 					"backFields" => [
