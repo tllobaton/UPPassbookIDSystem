@@ -68,11 +68,12 @@
     </head>
     <body onload="CampusDeptLoad(document.getElementById('campus') ,document.getElementById('dept'), document.getElementById('chosendept').value )">
 	
-        <div class="container">
-            <form method = "post" action = "{{url('/Branch')}}" enctype="multipart/form-data">
-				{!! csrf_field() !!}
-				<div class ="outerbox">
-					<div class="box">
+	<div class="container">
+			<div class ="outerbox">
+				<div class="box">
+					<form method = "post" action = "{{url('/Branch')}}" enctype="multipart/form-data">
+						{!! csrf_field() !!}
+						
 						<?php
 						if (session('xsize')){
 							echo"<br><br><div class='alert alert-danger'>
@@ -100,13 +101,13 @@
 						@endif
 						
 							<label class = "inform">First Name:</label>
-							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required pattern="^[A-Za-z\-Ññ'\s](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+"></input><br>
+							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required pattern="^[A-Za-z\-Ññ'](?!.*?[\'-\.]{2})[A-Za-z\-Ññ\'\.\s]+"></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" name = "mname" pattern = "(?=.*[A-Z]).{1,1}"  title = "Middle Initial Only, no period" required value = {{$user->mname}}></input><br>
+							<input class = "inform" type="text" name = "mname" pattern = "^[A-Z]{1,2}"  title = "Middle Initial Only, no period" required value = {{$user->mname}}></input><br>
 						
 							<label class = "inform">Last Name:</label>
-							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required  pattern="^[A-Za-z\-Ññ'\s](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+"></input><br>
+							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required  pattern="^[A-Za-z\-Ññ'](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+"></input><br>
 					
 							<label class = "inform">Suffix Name:</label>
 							<input class = "inform" type="text" name = "sname" placeholder="Jr., Sr., III, etc." value = {{$user->sname}}></input><br>
@@ -145,11 +146,11 @@
 							<option>Select a campus</option>
 							</select><br>
 						
-						<button type="submit">Next page</button>
-					</div>
+						<button class="btn btn-primary" type="submit">Next page</button>
+					</form>
+						<a href="/Landing"><button class="btn btn-primary" type="submit">Cancel</button></a>
 				</div>
-			</form>
-			
+			</div>
         </div>
     </body>
 </html>

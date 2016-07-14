@@ -13,6 +13,9 @@
 				padding:20px;
 				text-align: center;
 			}
+			.table-responsive{
+				overflow-x: auto;
+			}
 		</style>
 	</head>
 	<body>
@@ -26,7 +29,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading"><h3>Students</h3></div>
 								<div class="panel-body table-responsive">
-									<table class="tbl table table-hover table-condensed text-center">
+									<table class="table table-hover table-condensed text-center">
 										 <tr>
 											<th class="text-center">Student Number</th>
 											<th class="text-center">Name</th>

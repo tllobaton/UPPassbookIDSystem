@@ -15,6 +15,14 @@
 				border-style:solid;
 				height: 265px;
 				width: 402px;
+				display: inline-block;
+				/*top: 340px;					ROTATE CARD IF SCREEN IS XS; TEST ONLY
+				left: 40%;
+				-webkit-transform: rotate(90deg);
+				-moz-transform: rotate(90deg);
+				-o-transform: rotate(90deg);
+				-ms-transform: rotate(90deg);
+				-transform: rotate(90deg);*/
 			}
 			.upper {
 				position:inherit;
@@ -135,7 +143,6 @@
 			</div>
 			<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Download ID</button></a>
 		</div>
-		
     </body>
 </html>
 @endsection

@@ -41,9 +41,9 @@
     </head>
     <body>
         <div class="container">
-            <form method = "post" action = {{url('/CreateId')}}>
-				{!! csrf_field() !!}
-				<div class="box">
+			<div class="box">
+				<form method = "post" action = {{url('/CreateId')}}>
+					{!! csrf_field() !!}
 					@if ($type == 'student') 
 						<input class = "idtype" type = "text" name = "type" value = "student" size ="7" hidden readonly></input>
 					@else 
@@ -51,19 +51,21 @@
 					@endif
 					<label class = "header">Person to contact in case of emergency</label><br>
 					<label class = "inform">Name:</label>
-					<input class = "inform"type="text" name = "ename" required pattern = "^[A-Za-z\-Ññ'\s](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+" value = <?php echo '"'.$user->ename.'"'?>></input><br><br>
+					<input class = "inform"type = "text" name = "ename" required pattern = "^[A-Za-z\-Ññ'](?!.*?[\'-\.]{2})[A-Za-z\-Ññ\'\.\s]+" value = <?php echo '"'.$user->ename.'"'?>></input><br><br>
 					
 					<label class = "inform">Contact number:</label>
-					<input class = "inform" type="text" name = "enum" required pattern = "\d{7}|\d{11}|\d{13}" value = {{$user->enum}}></input><br><br>
+					<input class = "inform" type = "text" name = "enum" required pattern = "\d{7}|\d{11}|\d{13}" value = {{$user->enum}}></input><br><br>
 					
 					<label class = "inform">Address:</label>
-					<input class = "inform"type="text" name = "eaddress" required pattern = "^[0-9A-Za-z,!@#&\-Ññ'\s](?!.*?[\,!@#&'-]{2})[0-9A-Za-z,!@#&\-Ññ\'\s]+" value = <?php echo '"'.$user->eaddress.'"'?>></input><br><br>
-					
-					<button type="submit">Back</button>
-					<button type="submit">Create ID</button>
-
-				</div>
-			</form>
+					<input class = "inform"type = "text" name = "eaddress" required pattern = "^[0-9A-Za-z,!@#&\-Ññ'](?!.*?[\,!@#&'-\.]{2})[0-9A-Za-z,!@#&\-Ññ\'\s\.]+" value = <?php echo '"'.$user->eaddress.'"'?>></input><br><br>
+					<button class = "btn btn-primary" type="submit">Create ID</button>
+				</form>
+				@if ($type == 'student')
+					<a href="/Details/student"><button type="submit" class = "btn btn-primary">Back</button></a>
+				@else
+					<a href="/EmpDetails"><button type="submit" class = "btn btn-primary">Back</button></a>
+				@endif
+			</div>
         </div>
     </body>
 </html>

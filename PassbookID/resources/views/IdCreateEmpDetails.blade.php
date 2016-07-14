@@ -43,9 +43,9 @@
     </head>
     <body>
         <div class="container">
-            <form method = "post" action = "{{url('/Branch')}}">
-				{!! csrf_field() !!}
-				<div class="box">
+			<div class="box">
+				<form method = "post" action = "{{url('/Branch')}}">
+					{!! csrf_field() !!}
 					<label class = "header">
 					@if($user->createdeid=='no')
 						Create
@@ -82,9 +82,10 @@
 							<option value = 'temporary'> Temporary</option>
 						@endif
 						</select><br>
-					<button type="submit">Next page</button>
-				</div>
-			</form>
+					<button class="btn btn-primary" type="submit">Next page</button>
+				</form>
+				<a href="/Details/employee"><button class="btn btn-primary" type="submit">Back</button></a>
+			</div>
         </div>
     </body>
 </html>
