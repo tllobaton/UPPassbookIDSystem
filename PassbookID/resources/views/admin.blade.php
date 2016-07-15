@@ -12,6 +12,7 @@
 				transform: translate(-50%, -50%);
 				padding:20px;
 				text-align: center;
+				width: 100%;
 			}
 			.table-responsive{
 				overflow-x: auto;
