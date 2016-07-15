@@ -57,7 +57,7 @@
     <body>
         <div class="container">
 			<div class="box">
-				<label class = "header">Deactivate Users</label><br>
+				<label class = "header">Activate/Deactivate Users</label><br>
 				<form method="get" action="{{url('/SearchUser1')}}">
 					{!! csrf_field() !!}
 					<input class = "inform" type = "text" id = "searchinput" name = "searchinput" placeholder = "Name or email address"  title = "Input UP Mail address or Name" required></input><br>
@@ -71,7 +71,7 @@
 						<div class="panel-heading">User List</div>
 						<div class="panel-body table-responsive">
 							<table class="tbl table table-hover table-condensed text-center">
-								<form method="post" action="{{url('/DeactivateUser')}}">
+								<form method="post" action="{{url('/AdminActDeactUsers')}}">
 								{!! csrf_field() !!}
 									<tr>
 										<th>Name</th>
@@ -87,12 +87,15 @@
 											{{ $result->email }}
 										</td>
 										<td>
-											<input type="checkbox" name="delete[]" id="{{ $result->name }}" value="{{ $result->name }}">
+											<input type="checkbox" name="selected[]" id="{{ $result->name }}" value="{{ $result->name }}">
 										</td>
 									</tr>
 									@endforeach
 									<tr>
-										<td colspan="3"><button class="btn btn-primary" type="submit" onClick = "return confirm('Are you sure you want to disable the user account/s?')">Deactivate User/s</button></td>
+										<td colspan="3"><button class="btn btn-primary" name = "action" value = "activate" type="submit" onClick = "return confirm('Are you sure you want to enable the user account/s?')">Reactivate User/s</button></td>
+									</tr>
+									<tr>
+										<td colspan="3"><button class="btn btn-primary" name = "action" value = "deactivate" type="submit" onClick = "return confirm('Are you sure you want to disable the user account/s?')">Deactivate User/s</button></td>
 									</tr>
 								</form>
 							</table>

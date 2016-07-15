@@ -241,6 +241,61 @@ class AdminController extends Controller
 		return redirect('/AdminAddUsers');
 	}
 	
+	public function AddDeactBranch(Request $request) {
+		$input = $request->all();
+		if ($input['action'] == 'deactivate') {
+			$checked = Input::get('selected');
+			if(is_array($checked)){
+				foreach($checked as $row){
+					$db_active = DB::table('users')
+						->where('name', '=', $row)
+						->value('active');
+					if($db_active == 'yes'){
+						DB::table('users')
+							->where('name', $row)
+							->update(array('active' => 'no'));
+							$msg = "The selected user account/s has/have been deactivated.";
+							return view('AdminDeleteUsers', ['msg'=>$msg]);
+					}
+					else{
+						$message = "The user is already deactivated.";
+						return view('AdminDeleteUsers', ['message'=>$message]);
+					}
+				}
+			}
+			else{
+				$message = "Please select at least one record from the list of users.";
+				return view('AdminDeleteUsers', ['message'=>$message]);
+			}
+		}
+		
+		else {
+			$checked = Input::get('selected');
+			if(is_array($checked)){
+				foreach($checked as $row){
+					$db_active = DB::table('users')
+						->where('name', '=', $row)
+						->value('active');
+					if($db_active == 'no'){
+						DB::table('users')
+							->where('name', $row)
+							->update(array('active' => 'yes'));
+							$msg = "The selected user account/s has/have been reactivated.";
+							return view('AdminDeleteUsers', ['msg'=>$msg]);
+					}
+					else{
+						$message = "The user is already active.";
+						return view('AdminDeleteUsers', ['message'=>$message]);
+					}
+				}
+			}
+			else{
+				$message = "Please select at least one record from the list of users.";
+				return view('AdminDeleteUsers', ['message'=>$message]);
+			}
+		}
+	}
+	
 	public function showDeleteUsers() {
 		return view('AdminDeleteUsers');
 	}
@@ -267,7 +322,7 @@ class AdminController extends Controller
 	}
 	
 	public function deactivateUser(Request $request){
-		$checked = Input::get('delete');
+		$checked = Input::get('selected');
 		if(is_array($checked)){
 			foreach($checked as $row){
 				$db_active = DB::table('users')

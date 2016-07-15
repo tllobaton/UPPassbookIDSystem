@@ -73,6 +73,8 @@ Route::post('/AdminCampDept', 'AdminController@addCampDeptBranch');
 Route::get('/AdminAddUsers', 'AdminController@showAddUsers');
 Route::post('/AdminAddUsers', 'AdminController@AddUsers');
 
+Route::post('/AdminActDeactUsers', 'AdminController@AddDeactBranch');
+
 Route::get('/AdminDeleteUsers', 'AdminController@showDeleteUsers');
 Route::post('/DeactivateUser', 'AdminController@deactivateUser');
 Route::get('/SearchUser1', 'AdminController@search1');
