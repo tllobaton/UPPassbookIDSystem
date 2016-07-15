@@ -72,6 +72,13 @@
 					margin-left: 30%;
 				}
 			}
+			@media screen and (max-width: 768px){
+				.panel{
+					width: 100%;
+					margin-top: 30px;
+					margin-left: 0%;
+				}
+			}
 			th{
 				text-align: center;
 			}
@@ -120,7 +127,7 @@
 										</tr>
 										@endforeach
 										<tr>
-											<td colspan="3"><button class="btn btn-primary" type="submit">Remove Admin/s</button></td>
+											<td colspan="3"><button class="btn btn-primary" type="submit" onClick = "return confirm('Are you sure you want to remove the admin status of the selected users?')">Remove Admin/s</button></td>
 										</tr>
 									</form>
 								</table>

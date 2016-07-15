@@ -216,6 +216,62 @@ class AdminController extends Controller
 		return redirect('/AdminAddUsers');
 	}
 	
+	public function AddDeactBranch(Request $request) {
+		$input = $request->all();
+		$msg = "";
+		if ($input['action'] == 'deactivate') {
+			$checked = Input::get('selected');
+			if(is_array($checked)){
+				foreach($checked as $row){
+					$db_active = DB::table('users')
+						->where('name', '=', $row)
+						->value('active');
+					if($db_active == 'yes'){
+						DB::table('users')
+							->where('name', $row)
+							->update(array('active' => 'no'));
+							$msg = "The selected user account/s has/have been deactivated.";
+					}
+					else{
+						$message = "The user is already deactivated.";
+						return view('AdminDeleteUsers', ['message'=>$message]);
+					}
+				}
+				return view('AdminDeleteUsers', ['msg'=>$msg]);
+			}
+			else{
+				$message = "Please select at least one record from the list of users.";
+				return view('AdminDeleteUsers', ['message'=>$message]);
+			}
+		}
+		
+		else {
+			$checked = Input::get('selected');
+			if(is_array($checked)){
+				foreach($checked as $row){
+					$db_active = DB::table('users')
+						->where('name', '=', $row)
+						->value('active');
+					if($db_active == 'no'){
+						DB::table('users')
+							->where('name', $row)
+							->update(array('active' => 'yes'));
+							$msg = "The selected user account/s has/have been reactivated.";
+					}
+					else{
+						$message = "The user is already active.";
+						return view('AdminDeleteUsers', ['message'=>$message]);
+					}
+				}
+				return view('AdminDeleteUsers', ['msg'=>$msg]);
+			}
+			else{
+				$message = "Please select at least one record from the list of users.";
+				return view('AdminDeleteUsers', ['message'=>$message]);
+			}
+		}
+	}
+	
 	public function showDeleteUsers() {
 		return view('AdminDeleteUsers');
 	}
@@ -226,8 +282,7 @@ class AdminController extends Controller
 		
 		if($inp!="" || $inp!=null){
 			$results = DB::table('users')
-				->select('name', 'email')
-				->where('active', '=', 'yes')
+				->select('name', 'email', 'active')
 				->where(function ($query) use ($inp){
 					$query->where('name', 'LIKE', $inp)
 						->orWhere('email', 'LIKE', $inp);
@@ -238,23 +293,6 @@ class AdminController extends Controller
 		}
 		else{
 			$message = "No results found.";
-			return view('AdminDeleteUsers', ['message'=>$message]);
-		}
-	}
-	
-	public function deactivateUser(Request $request){
-		$checked = Input::get('delete');
-		if(is_array($checked)){
-			foreach($checked as $row){
-				DB::table('users')
-					->where('name', $row)
-					->update(array('active' => 'no'));
-			}
-			$msg = "The selected user account/s has/have been deactivated.";
-			return view('AdminDeleteUsers', ['msg'=>$msg]);
-		}
-		else{
-			$message = "Please select at least one record from the list of users.";
 			return view('AdminDeleteUsers', ['message'=>$message]);
 		}
 	}
