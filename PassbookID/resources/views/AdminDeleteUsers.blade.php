@@ -10,20 +10,17 @@
 			  -moz-box-sizing: border-box;
 			  box-sizing: border-box;
 			}
-			#box {
+			.box {
 				position: absolute;
-				top: 425px;
+				top: 250px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
 				text-align: center;
-				width: 100%;
 			}
-			.table-responsive{
-				overflow-x: auto;
-			}
+			
 			.inform, button {
-				margin: 10px;
+				margin: 10px;		
 			}
 			label.inform {
 				width: 150px;
@@ -31,25 +28,29 @@
 			input.inform {
 				width: 200px;
 				padding: 5px;
+				margin:0px;
 			}
 			.header {
 				font-size: 20px;
 				margin-bottom: 20px;
 			}
+			.search_display{
+				position: absolute;
+				top: 275px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				width: 150%;	
+			}
+			.panel{
+				position: absolute;
+				top: 400px;
+			}
 			.panel-heading{
 				font-size: 16px;
 			}
-			.panel{
-				width: 100%;
-				margin-top: 30px;
-			}
 			th{
 				text-align: center;
-			}
-			.alert{
-				width: 150px;
-				transform: translate(-50%, -50%);
-				margin-left: 50%;
 			}
         </style>
     </head>
@@ -100,8 +101,8 @@
 							</table>
 							{!! $results->appends(['searchinput' => Input::get('searchinput')])->render() !!}
 						</div>
-					@endif 
 					</div>
+					@endif 
 				@endif
 				@if(isset($message))
 					<br><br><div class="alert alert-danger">{{ $message }}</div>
@@ -109,13 +110,13 @@
 				@if(isset($msg))
 					<br><br><div class="alert alert-success">{{ $msg }}</div>
 				@endif
-			</div>
-			<div class="flash-message">
-				@foreach (['danger', 'warning', 'success', 'info'] as $msg)
-				  @if(Session::has('alert-' . $msg))
-					<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-					@endif
-					@endforeach
+				<div class="flash-message">
+					@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+					  @if(Session::has('alert-' . $msg))
+						<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+						@endif
+						@endforeach
+				</div>
 			</div>
 		</div>
     </body>
