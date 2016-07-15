@@ -72,13 +72,6 @@
 					margin-left: 30%;
 				}
 			}
-			@media screen and (max-width: 768px){
-				.panel{
-					width: 100%;
-					margin-top: 30px;
-					margin-left: 0%;
-				}
-			}
 			th{
 				text-align: center;
 			}
@@ -91,8 +84,8 @@
     </head>
     <body>
         <div class="container" id="box">
-			<label class = "header">Promote to Admin</label><br>
-			<form method="get" action="{{url('/SearchUser')}}">
+			<label class = "header">Revoke Admin Status</label><br>
+			<form method="get" action="{{url('/SearchAdmin')}}">
 				{!! csrf_field() !!}
 				<input class = "inform" type = "text" id = "searchinput" name = "searchinput" placeholder = "Name or email address"  title = "Input UP Mail address or Name" required></input><br>
 				<button class="btn btn-primary" type="submit">Search</button>
@@ -103,10 +96,10 @@
 						<br><br><div class="alert alert-danger">No results found.</div>
 					@elseif(count($results) >= 1)
 						<div class="panel panel-default">
-							<div class="panel-heading">List of Regular Users</div>
+							<div class="panel-heading">List of Admin Users</div>
 							<div class="panel-body table-responsive">
 								<table class="table table-hover table-condensed text-center">
-									<form method="post" action="{{url('/PromoteUser')}}">
+									<form method="post" action="{{url('/RemoveAdmin')}}">
 									{!! csrf_field() !!}
 										<tr>
 											<th>Name</th>
@@ -122,12 +115,12 @@
 												{{ $result->email }}
 											</td>
 											<td>
-												<input type="checkbox" name="promote[]" id="{{ $result->name }}" value="{{ $result->name }}">
+												<input type="checkbox" name="revoke[]" id="{{ $result->name }}" value="{{ $result->name }}">
 											</td>
 										</tr>
 										@endforeach
 										<tr>
-											<td colspan="3"><button class="btn btn-primary" type="submit">Promote User/s</button></td>
+											<td colspan="3"><button class="btn btn-primary" type="submit">Remove Admin/s</button></td>
 										</tr>
 									</form>
 								</table>

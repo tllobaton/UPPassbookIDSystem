@@ -49,10 +49,13 @@ class AdminController extends Controller
 		if($inp!="" || $inp!=null){
 			$results = DB::table('users')
 				->select('name', 'email')
-				->where('name', 'LIKE', $inp)
-				->orWhere('email', 'LIKE', $inp)
-				->where('name', 'LIKE', $inp)
-				->orWhere('email', 'LIKE', $inp)
+				->where('isadmin', '=', 'no')
+				->where('isemployed', '=', 'yes')
+				->where('active', '=', 'yes')
+				->where(function ($query) use ($inp){
+					$query->where('name', 'LIKE', $inp)
+						->orWhere('email', 'LIKE', $inp);
+				})
 				->orderBy('lname', 'asc')
 				->paginate(5);
 				return view('AdminCreate',['results'=>$results]);
@@ -67,40 +70,12 @@ class AdminController extends Controller
 		$checked = Input::get('promote');
 		if(is_array($checked)){
 			foreach($checked as $row){
-				//print_r($row);
-				$db_name = DB::table('users')
-					->where('name', '=', $row)
-					->first();
-				if(!is_null($db_name)){
-					$db_emp = DB::table('users')
-						->where('name', '=', $row)
-						->value('isemployed');
-					if($db_emp=='yes'){
-						$db_admin = DB::table('users')
-							->where('name', '=', $row)
-							->value('isadmin');
-						if($db_admin=='no'){
-							DB::table('users')
-								->where('name', $row)
-								->update(array('isadmin' => 'yes'));
-								$msg = "The selected user/s has/have been granted Administrator status.";
-								return view('AdminCreate', ['msg'=>$msg]);
-						}
-						else{
-							$message = "The selected user is already an Administrator.";
-							return view('AdminCreate', ['message'=>$message]);
-						}
-					}
-					else{
-						$message = "The user must have an employee status.";
-						return view('AdminCreate', ['message'=>$message]);
-					}
-				}
-				else{
-					$message = "The user with the email " . $email . " does not exist.";
-					return view('AdminCreate', ['message'=>$message]);
-				}
+				DB::table('users')
+					->where('name', $row)
+					->update(array('isadmin' => 'yes'));
 			}
+			$msg = "The selected user/s has/have been granted Administrator status.";
+			return view('AdminCreate', ['msg'=>$msg]);
 		}
 		else{
 			$message = "Please select at least one record from the list of users.";
@@ -252,10 +227,11 @@ class AdminController extends Controller
 		if($inp!="" || $inp!=null){
 			$results = DB::table('users')
 				->select('name', 'email')
-				->where('name', 'LIKE', $inp)
-				->orWhere('email', 'LIKE', $inp)
-				->where('name', 'LIKE', $inp)
-				->orWhere('email', 'LIKE', $inp)
+				->where('active', '=', 'yes')
+				->where(function ($query) use ($inp){
+					$query->where('name', 'LIKE', $inp)
+						->orWhere('email', 'LIKE', $inp);
+				})
 				->orderBy('lname', 'asc')
 				->paginate(5);
 			return view('AdminDeleteUsers',['results'=>$results]);
@@ -270,21 +246,12 @@ class AdminController extends Controller
 		$checked = Input::get('delete');
 		if(is_array($checked)){
 			foreach($checked as $row){
-				$db_active = DB::table('users')
-					->where('name', '=', $row)
-					->value('active');
-				if($db_active == 'yes'){
-					DB::table('users')
-						->where('name', $row)
-						->update(array('active' => 'no'));
-						$msg = "The selected user account/s has/have been deactivated.";
-						return view('AdminDeleteUsers', ['msg'=>$msg]);
-				}
-				else{
-					$message = "The user is already deactivated.";
-					return view('AdminDeleteUsers', ['message'=>$message]);
-				}
+				DB::table('users')
+					->where('name', $row)
+					->update(array('active' => 'no'));
 			}
+			$msg = "The selected user account/s has/have been deactivated.";
+			return view('AdminDeleteUsers', ['msg'=>$msg]);
 		}
 		else{
 			$message = "Please select at least one record from the list of users.";
@@ -292,4 +259,45 @@ class AdminController extends Controller
 		}
 	}
 	
+	public function showRevokeView() {
+		return view('AdminRevoke');
+	}
+	public function search_revoke(Request $request){
+		$inp = $request['searchinput'];
+		$inp = '%'.$inp.'%';
+		
+		if($inp!="" || $inp!=null){
+			$results = DB::table('users')
+				->select('name', 'email')
+				->where('isadmin', '=', 'yes')
+				->where('active', '=', 'yes')
+				->where(function ($query) use ($inp){
+					$query->where('name', 'LIKE', $inp)
+						->orWhere('email', 'LIKE', $inp);
+				})
+				->orderBy('lname', 'asc')
+				->paginate(5);
+			return view('AdminRevoke',['results'=>$results]);
+		}
+		else{
+			$message = "No results found.";
+			return view('AdminRevoke', ['message'=>$message]);
+		}
+	}
+	public function removeAdmin(){
+		$checked = Input::get('revoke');
+		if(is_array($checked)){
+			foreach($checked as $row){
+				DB::table('users')
+					->where('name', $row)
+					->update(array('isadmin' => 'no'));
+			}
+			$msg = "Admin status revoked.";
+			return view('AdminRevoke', ['msg'=>$msg]);
+		}
+		else{
+			$message = "Please select at least one record from the list of users.";
+			return view('AdminRevoke', ['message'=>$message]);
+		}
+	}
 }

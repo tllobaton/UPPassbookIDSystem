@@ -40,14 +40,43 @@
 				font-size: 16px;
 			}
 			.panel{
-				width: 100%;
+				width: 400px;
 				margin-top: 30px;
+				margin-left: 34%;
+			}
+			@media screen and (max-width: 768px){
+				.panel{
+					width: 100%;
+					margin-top: 30px;
+					margin-left: 0%;
+				}
+			}
+			@media screen and (min-width: 768px){
+				.panel{
+					width: 80%;
+					margin-top: 30px;
+					margin-left: 10%;
+				}
+			}			
+			@media screen and (min-width: 1020px){
+				.panel{
+					width: 60%;
+					margin-top: 30px;
+					margin-left: 20%;
+				}
+			}			
+			@media screen and (min-width: 1920px){
+				.panel{
+					width: 40%;
+					margin-top: 30px;
+					margin-left: 30%;
+				}
 			}
 			th{
 				text-align: center;
 			}
 			.alert{
-				width: 150px;
+				width: 300px;
 				transform: translate(-50%, -50%);
 				margin-left: 50%;
 			}
@@ -67,7 +96,7 @@
 						<br><br><div class="alert alert-danger">No results found.</div>
 					@elseif(count($results) >= 1)
 						<div class="panel panel-default search_display">
-							<div class="panel-heading">User List</div>
+							<div class="panel-heading">List of Users</div>
 							<div class="panel-body table-responsive">
 								<table class="tbl table table-hover table-condensed text-center">
 									<form method="post" action="{{url('/DeactivateUser')}}">

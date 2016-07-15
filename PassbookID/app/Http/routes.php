@@ -63,6 +63,7 @@ Route::get('/AdminViewStud', 'AdminController@s_index');
 Route::get('/AdminViewEmp', 'AdminController@e_index');
 
 Route::get('/AdminCreate', 'AdminController@showPromoteView');
+Route::get('/AdminRemove', 'AdminController@showRevokeView');
 
 Route::get('/AdminExpire', 'AdminController@showIdExpire');
 Route::post('/AdminExpire', 'AdminController@setIdExpire');
@@ -82,6 +83,8 @@ Route::post('/CreateId', 'CreateIdController@createId');
 Route::post('/PromoteUser', 'AdminController@createAdmin');
 Route::get('/SearchUser', 'AdminController@search');
 
+Route::post('/RemoveAdmin', 'AdminController@removeAdmin');
+Route::get('/SearchAdmin', 'AdminController@search_revoke');
 
 Route::any('/Include', 'CreateIdController@test');
 

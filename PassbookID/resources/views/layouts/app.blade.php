@@ -131,6 +131,7 @@
 								@if (Auth::user()->isadmin == 'yes')
 									<li><a href="{{ url('/AdminView') }}"><i class="fa fa-btn fa-exchange"></i>Switch to Admin View</a></li>
 									<li><a href="{{ url('/AdminCreate') }}"><i class="fa fa-btn fa-level-up"></i>Promote a User to Admin</a></li>
+									<li><a href="{{ url('/AdminRemove') }}"><i class="fa fa-btn fa-user-times"></i>Remove a User's Admin Status</a></li>
 									<li><a href="{{ url('/AdminCampDept') }}"><i class="fa fa-btn fa-university"></i>Add Campus/Department</a></li>
 									<li><a href="{{ url('/AdminExpire') }}"><i class="fa fa-btn fa-clock-o"></i>Set ID Expiration Date</a></li>
 									<li><a href="{{ url('/AdminDeleteUsers') }}"><i class="fa fa-btn fa-user-times"></i>Deactivate Users</a></li>
