@@ -26,17 +26,17 @@ class CreateIdController extends Controller {
 	}
 	
    public function showCreateIdDetails($type = null) {
+	   // get all campuses
 	   $campuses = DB::table('campus')
 			->get();
 		
+		// get all departments in each campus, return as an array with index as campus name, e.g. $array['Diliman']
 		foreach ($campuses as $campus) {
 			$array[$campus->cname] = DB::table('campus_dept')
 				->select('dname')
 				->where('cname', $campus->cname)
 				->get();
 		}
-	   
-				
 	   return view('IdCreateDetails', ['type' => $type, 'user' => $this->getLoggedInUser(), 'array' => $array, 'campuses' => $campuses]);	// $type determines if student or empployee
    }
    
@@ -45,32 +45,53 @@ class CreateIdController extends Controller {
    }
    
    public function showCreateEmpDetails() {
+	   // array for blood type
 	   $blood = ['A', 'B', 'AB', 'O'];
 	   return view('IdCreateEmpDetails' , ['user' => $this->getLoggedInUser(), 'bloodtype' => $blood]);
    }
    
    public function FirstTimeLogin(Request $request) {
+	   
+	   // update user's campus
 	   User::where('email', $this->getLoggedInUser()->email)->update(['campus' => $request->campus]);
 	   return redirect('/Landing');
    }
    
    public function showLandingPage() {
 	   
+	   // if campus is null, user has logged in before
 	   if ($this->getLoggedInUser()->campus != null) {
+		   
+		   // select all campus names
 		   $campuses = DB::select('SELECT cname FROM campus');
 		   foreach ($campuses as $campus) {
+			   
+			   // count all students who have created ids, noted by createsid column
 			   Campus::where('cname', $campus->cname)->update(['studentuse' => User::where('campus', $campus->cname)->where('createdsid', "yes")->count()]);
+			   
+			   // count all students in the database, noted by isenrolled column
 			   Campus::where('cname', $campus->cname)->update(['totalstudents' => User::where('campus', $campus->cname)->where('isenrolled', 'yes')->count()]);
 			   
+			   // count all employees who have created ids, noted by createeid column
 			   Campus::where('cname', $campus->cname)->update(['empuse' => User::where('campus', $campus->cname)->where('createdeid', "yes")->count()]);
+			   
+			   // count all employees in the database, noted by isemployed column
 			   Campus::where('cname', $campus->cname)->update(['totalemps' => User::where('campus', $campus->cname)->where('isemployed', 'yes')->count()]);
 		   }
+		   
+		   // count all students who haven't logged in at all
 		   $studentnull = User::where('campus', null)->where('isenrolled', 'yes')->count();
+		   
+		   // count all employees who haven't logged in at all
 		   $empnull = User::where('campus', null)->where('isemployed', 'yes') ->count();
+		   
+		   // return all campuses
 		   $campuses = Campus::all();
 		   
 		   return view('Landing', ['campuses' => $campuses, 'studentnull' => $studentnull, 'empnull' => $empnull]);
 	   }
+	   
+	   // first time user logs in
 	   else {
 		   $campuses = Campus::all();
 		   return view('LandingDetails', ['campuses' => $campuses]);
@@ -105,19 +126,18 @@ class CreateIdController extends Controller {
 				->where('email', \Auth::user()->email)
 				->update(['sname' => $request->sname]);
 		}
-		
 		else {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['sname' => null]);
 		}
 		
+		// check if user has middle initial
 		if ($request->mname != "") {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
 				->update(['mname' => $request->mname]);
 		}
-		
 		else {
 			DB::table('users')
 				->where('email', \Auth::user()->email)
@@ -144,12 +164,15 @@ class CreateIdController extends Controller {
 		
 		// check if photo is less than 10MB
 		if ($request->file('photo')->getClientSize() < 1000000){
+			// photos are stored in /public/wallet/studentnumber, e.g. /public/wallet/201349426
 			if ($request->type == 'student') {
 				$dirname = $request->sn_year.$request->sn_num;
 			}
+			// photos are stored in /public/wallet/empnumber, e.g. /public/wallet/201349426
 			else {
 				$dirname = $request->empnum;
 			}
+			// move photo to directory above, save picture as thumbnail.png
 			$request->file('photo')->move('wallet\\'.$dirname, 'thumbnail.png');
 		}
 		else {
@@ -160,26 +183,28 @@ class CreateIdController extends Controller {
    }
    
    public function processContacts(Request $request){
+		// store contacts in database from contacts form
 		DB::table('users')
 			->where('email', \Auth::user()->email)
 			->update(['ename' => $request->ename, 'enum' => $request->enum, 'eaddress' => $request->eaddress]);
    }
    
    public function processEmpDetails(Request $request) {
+		// store contacts in database from employee details form
 		DB::table('users')
 			->where('email', \Auth::user()->email)
 			->update(['gsis' => $request->gsis, 'blood' => $request->blood, 'tin' => $request->tin, 'empstatus' => $request->empstatus]);
    }
    public function createIdBranch(Request $request) {
 	   
-	   // if user is creating student id, go to emergency contact details
+	   // if user is creating student id, go to emergency contact details for students
 	   if ($request->type == 'student'){
 			if($this->processDetails($request) == 0){
 				return redirect()->back();
 			}
 			return redirect('/Contacts/student');
 	   }
-	   // if user came from employee details, go to emergency contact details
+	   // if user came from employee details, go to emergency contact details for employees
 	   else if ($request->type == 'employeeL') {
 		   $this->processEmpDetails($request);
 		   return redirect('/Contacts/employee');
@@ -190,7 +215,6 @@ class CreateIdController extends Controller {
 			if($this->processDetails($request) == 0){
 				return redirect()->back();
 			}
-			
 			return redirect('/EmpDetails');
 	   }
    }
@@ -199,10 +223,11 @@ class CreateIdController extends Controller {
 		// process emergency contact detials
 		$this->processContacts($request);
 		
+		// if user clicks "create student id", update database 
 		if ($request->type == 'student') {
 			User::where('email', $this->getLoggedInUser()->email)->update(['createdsid' => 'yes']);
 		}
-		
+		// if user clicks "create employee id", update database 
 		else {
 			User::where('email', $this->getLoggedInUser()->email)->update(['createdeid' => 'yes']);
 		}
@@ -214,37 +239,7 @@ class CreateIdController extends Controller {
    public function viewId($type = null) {
 	   $user = $this->getLoggedInUser();
 	   $campus = $user->campus;
-	 
-	   // check campus of user, return respective ID layout
-	   /*if($campus == "Baguio"){
-		   return view("UPB", ['user' => $user]);
-	   }
-	   else if($campus == "Cebu"){
-		   
-	   }
-	   else if($campus == "Diliman"){
-		   return view('UPD', ['user' => $user]);
-	   }
-	   else if($campus == "Los Baños"){
-		   return view('UPLB', ['user' => $user]);
-	   }
-	   else if($campus == "Manila"){
-		   return view('UPM', ['user' => $user]);
-	   }
-	   else if($campus == "Mindanao "){
-		   
-	   }
-	   else if($campus == "Open University"){
-		   return view('UPOU', ['user' => $user]);
-	   }
-	   else if($campus == "Visayas"){
-		   return view('UPV', ['user' => $user]);
-	   }
-	   else{
-		   $message = "You have not yet created a virtual ID.";
-		   echo "<script type='text/javascript'>alert('$message');</script>";
-		   return view("/Landing");
-	   } */
+		// view what the id looks like
 	   if(isset($campus)){
 			return view('ID', ['user' => $user, 'type' => $type]);
 	   }
@@ -255,34 +250,42 @@ class CreateIdController extends Controller {
 	   }
    }
    
+   // function that generates the .pkpass file
    public function makePass($type = null) {
 		
 		$user = $this->getLoggedInUser();
+		
+		// get expiration date
 		$campusexpire = DB::table('campus')
 					->select('expire')
 					->where('cname', $user->campus)
 					->first();
 		
+		// check if user has middle initial
 		if($user->mname != null) {
+			// check if user has suffix
 			if ($user->sname != null) {
-					if ($user->sname == "Jr" OR $user->sname == "Sr") {
-						$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname.".";
-					}
-					else {
-						$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname;
-					}
-				
+				// add dot if suffix is Jr. or Sr.
+				if ($user->sname == "Jr" OR $user->sname == "Sr") {
+					$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname.".";
+				}
+				else {
+					$name = $user->fname." ".$user->mname.". ".$user->lname." ".$user->sname;
+				}
 			}
 			else {
 				$name = $user->fname." ".$user->mname.". ".$user->lname;
 			}
 			
 		}
+		// check if user doesn't have middle initial
 		else {
 			if ($user->sname == null) {
 				$name = $user->fname." ".$user->lname;
 			}
+			// check if user has suffix
 			else {
+				// add dot if suffix is Jr. or Sr.
 				if ($user->sname == "Jr" OR $user->sname == "Sr"){
 					$name = $user->fname." ".$user->lname. " ". $user->sname. ".";
 				}
@@ -291,9 +294,12 @@ class CreateIdController extends Controller {
 				}
 			}
 		}
+		
+		// if user is creating a student id
 		if ($type == "student"){
 			$pass_identifier = $user->sn_year.$user->sn_num;  // This, if set, it would allow for retrieval later on of the created Pass
 			
+			// check and delete if user already made previous id
 			if (Storage::disk('passgenerator')->has($pass_identifier.'.pkpass')) {	
 				Storage::disk('passgenerator')->delete($pass_identifier.'.pkpass');
 			}
@@ -319,6 +325,7 @@ class CreateIdController extends Controller {
 				"generic" => [
 					"primaryFields" => [
 						[
+							// full name
 							"key" => "name",
 							"label" => "Name:",
 							"value" => $name
@@ -326,11 +333,13 @@ class CreateIdController extends Controller {
 					],
 					"secondaryFields" => [
 						[
+							// student number
 							"key" => "snNo",
 							"label" => "Student #:",
 							"value" => $user->sn_year."-".$user->sn_num
 						],
 						[
+							// if user is student, align right
 							"key" => "type",
 							"label" => "Student",
 							"textAlignment" => "PKTextAlignmentRight"
@@ -338,16 +347,19 @@ class CreateIdController extends Controller {
 					],
 					"auxiliaryFields" => [
 						[
+							// college/department
 							"key" => "unit",
 							"label" => "Unit/College:",
 							"value" => $user->dept
 						],
 						[
+							// expiration date of ID
 							"key" => "validity",
 							"label" => "Valid until:",
 							"value" => $campusexpire->expire
 						]
 					],
+					// person to contact in case of emergency
 					"backFields" => [
 						[
 							"key" => "label",
@@ -375,14 +387,15 @@ class CreateIdController extends Controller {
 			// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
 
 			// Add assets to the PKPass package
-			//$pass->addAsset(base_path('barcode/img/".$user->sn_year."-".$user->sn_num'));
 			
+			// get saved photo, must be named as thumbnail.png
 			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
 			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
 
 			$pkpass = $pass->create();
 			
+			// download the pass
 			return new Response($pkpass, 200, [
 				'Content-Transfer-Encoding' => 'binary',
 				'Content-Description' => 'File Transfer',
@@ -495,14 +508,5 @@ class CreateIdController extends Controller {
 				'Pragma' => 'no-cache',
 			]);
 		}
-	}
-	
-	public function test() {
-		$apiKey = "7RxgL2HIDBM0RFXOtWVt";
-		$apiSecret = "SNgplReG0dY9NMTUT1bzMOqvY4FKlfHH7r3NcOmLDTFqeOCHX28z";
-		
-		$pk = new PassKit($apiKey, $apiSecret);
-		
-		$pk->PKAddPassButton();
 	}
 }
