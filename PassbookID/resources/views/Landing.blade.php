@@ -52,7 +52,6 @@
 		@elseif(Auth::user()->isemployed == 'yes' && Auth::user()->createdeid == 'yes')
 			<a href="/Details/employee"><button class="btn btn-primary">Edit Employee ID</button></a>
 		@endif
-			<a href="/Include"><button class="btn btn-primary">TEST INCLUDE</button></a>
 		<br><br>
 		<div class="container">
 			<div class="table-responsive">
