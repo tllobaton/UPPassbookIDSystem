@@ -29,7 +29,7 @@
 				height: 265px;
 				width: 402px;
 				transform: translate(-50%, -50%);
-				top: 50%;
+				top: 340px;
 				left: 50%;
 			}
 			.header{
