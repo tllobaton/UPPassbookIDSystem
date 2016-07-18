@@ -93,7 +93,7 @@
 				right: 0px;
 				bottom: 0px;
 				border: 2px solid #800000;
-				margin-right: 30px;
+				margin-right: 5px;
 				margin-bottom: 30px;
 			}
 			#dl {

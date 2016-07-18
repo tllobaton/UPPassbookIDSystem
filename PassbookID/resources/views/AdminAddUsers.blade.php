@@ -60,7 +60,7 @@
 					}
 					?>
 						<label style = "font-size: 20px; margin-top: 20px">Add Users</label><br><br>
-						<label>Select CSV file. </br>File format must be: email,lastname,firstname,middleinitial,isnerolled,isemployed</br>In case of error, program adds all users to the database up to the line of error</label><br><br>
+						<label>Select CSV file. </br>File format must be: email,lastname,firstname,middleinitial(no period),suffixname(no period),isnerolled (yes/no),isemployed(yes/no)</br>Leave as blank if user does not have column</br>In case of error, program adds all users to the database up to the line of error</label><br><br>
 						<input type = "file" name = "filetoopen" required><br>
 						<button type = "submit" class="btn btn-primary" style="margin-top: 1%;">Upload</button>
 					</div>
