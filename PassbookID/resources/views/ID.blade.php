@@ -98,7 +98,12 @@
 			}
 			#dl {
 				position:inherit;
-
+				background: url('{{ asset('wallet/add_to_apple_wallet.svg') }}') no-repeat scroll 0 0 transparent;
+				background-size: cover;
+				width: 150px;
+				height: 45px;
+				margin-TOP: 10px;
+				border: none;
 			}
 			.bcode {
 				position: inherit;
@@ -157,7 +162,7 @@
 				@endif
 			</div>
 			<div class = "outer">
-				<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Add to apple wallet</button></a>
+				<a href="/MakePass/{{$type}}"><button id = "dl"></button></a>
 			</div>
 		</div>
     </body>
