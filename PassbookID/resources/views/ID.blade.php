@@ -127,6 +127,14 @@
     </head>
     <body>
 		<div class = "container">
+			<?php
+				if (session('null')){
+					echo"<br><br><br><br><br><br><br><div class='alert alert-danger'>
+						<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+						".session('null')."
+						</div>";
+				}
+			?>
 			<div class = "card">
 				<div class = "upper">
 					<img src = "/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">

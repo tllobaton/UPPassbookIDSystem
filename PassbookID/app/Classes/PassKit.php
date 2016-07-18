@@ -66,6 +66,7 @@ class PassKit {
 			curl_setopt ($ch, CURLOPT_USERPWD, $this->apiKey.':'.$this->apiSecret);
 		}
 		else {
+			
 			// Defaults to via HMAC algorithm. The Authorization header needs to have the following format: PKAuth key hash timestamp
 			// The hash is: requestMethod\n requestUri (minus / at the end)\n data\n timestamp
 			$to_hash = $method . "\n" . trim($this->apiVersion . "/" . $path, '/') . "\n" . $dataString . "\n" . time();
@@ -86,7 +87,6 @@ class PassKit {
 		
 		// Execute then close curl connection
 		$response = curl_exec($ch);
-		
 		// If there is a response, then decode it into a JSON object
 		$result = ($response ? json_decode($response, true) : false);
 		

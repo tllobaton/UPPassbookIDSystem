@@ -13,6 +13,8 @@ use Redirect;
 use App\User;
 use App\Campus;
 
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Response;
 
 use Thenextweb\PassGenerator;
@@ -260,6 +262,15 @@ class CreateIdController extends Controller {
 					->select('expire')
 					->where('cname', $user->campus)
 					->first();
+					
+		// check if campus expire is null
+		$currdate = new DateTime();
+		$currdate->setTimezone(new DateTimeZone('Asia/Manila'));
+		$currdate = $currdate->format('Y-m-d H:i:s');
+		if ($campusexpire == null OR $campusexpire >= $currdate) {
+			Session::flash('null', 'Expiry date invalid. Contact admin to fix.');
+			return redirect("/ViewId/".$type);
+		}
 		
 		// check if user has middle initial
 		if($user->mname != null) {
@@ -511,12 +522,12 @@ class CreateIdController extends Controller {
 	}
 	
 	public function test() {
- 		$apiKey = "7RxgL2HIDBM0RFXOtWVt";
- 		$apiSecret = "SNgplReG0dY9NMTUT1bzMOqvY4FKlfHH7r3NcOmLDTFqeOCHX28z.";
+ 		$apiKey = '7RxgL2HIDBM0RFXOtWVt';
+ 		$apiSecret = 'SNgplReG0dY9NMTUT1bzMOqvY4FKlfHH7r3NcOmLDTFqeOCHX28z.';
  		$templateName = "testID";
  		$pk = new PassKit($apiKey, $apiSecret);
- 		dd($pk->authenticate());
+ 	
  		$result = $pk->getTemplateFieldNames($templateName);
-		
+		dd($result);
  	}
 }
