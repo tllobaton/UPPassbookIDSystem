@@ -91,7 +91,7 @@ Route::any('/Include', 'CreateIdController@test');
 
 Route::any('/MakePass/{type?}', 'CreateIdController@makePass');
 
-
+Route::any('/Include', 'CreateIdController@test');
 Route::get('/UPV', function(){
 	return view('UPV');
 });

@@ -509,4 +509,14 @@ class CreateIdController extends Controller {
 			]);
 		}
 	}
+	
+	public function test() {
+ 		$apiKey = "7RxgL2HIDBM0RFXOtWVt";
+ 		$apiSecret = "SNgplReG0dY9NMTUT1bzMOqvY4FKlfHH7r3NcOmLDTFqeOCHX28z.";
+ 		$templateName = "testID";
+ 		$pk = new PassKit($apiKey, $apiSecret);
+ 		dd($pk->authenticate());
+ 		$result = $pk->getTemplateFieldNames($templateName);
+		
+ 	}
 }
