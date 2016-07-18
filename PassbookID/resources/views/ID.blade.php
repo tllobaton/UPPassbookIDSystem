@@ -5,24 +5,40 @@
     <head>
         <title>UP Visayas</title>
         <style>
+			* {
+			  -webkit-box-sizing: border-box;
+			  -moz-box-sizing: border-box;
+			  box-sizing: border-box;
+			  
+			}
 			.card {
 				position:absolute;
 				border: .5px;
 				transform: translate(-50%, -50%);
-				top: 50%;
+				top: 340px;
 				left: 50%;
 				border-radius: 10px;
 				border-style:solid;
 				height: 265px;
 				width: 402px;
 				display: inline-block;
-				/*top: 340px;					ROTATE CARD IF SCREEN IS XS; TEST ONLY
+				/*					ROTATE CARD IF SCREEN IS XS; TEST ONLY
 				left: 40%;
 				-webkit-transform: rotate(90deg);
 				-moz-transform: rotate(90deg);
 				-o-transform: rotate(90deg);
 				-ms-transform: rotate(90deg);
 				-transform: rotate(90deg);*/
+			}
+			.outer {
+				position: absolute;
+				display: inline-block;
+				top:500px;
+				text-align:center;
+				left: 50%;
+				width: 100%;
+				transform: translate(-50%, -50%);
+				
 			}
 			.upper {
 				position:inherit;
@@ -81,9 +97,8 @@
 				margin-bottom: 30px;
 			}
 			#dl {
-				position:absolute;
-				bottom:0px;
-				right: 0px;
+				position:inherit;
+
 			}
 			.bcode {
 				position: inherit;
@@ -141,7 +156,9 @@
 					<a href="{{ url('/ViewEmergency/student') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@endif
 			</div>
-			<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Download ID</button></a>
+			<div class = "outer">
+				<a href="/MakePass/{{$type}}"><button class="btn btn-primary" id = "dl">Add to apple wallet</button></a>
+			</div>
 		</div>
     </body>
 </html>
