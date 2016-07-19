@@ -7,7 +7,7 @@
 		<style>
 			#content{
 				position: absolute;
-				top: 375px;
+				top: 500px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
