@@ -42,7 +42,7 @@
 			.panel{
 				width: 400px;
 				margin-top: 30px;
-				margin-left: 34%;
+				margin-left: 36%;
 			}
 			@media screen and (max-width: 768px){
 				.panel{
@@ -55,28 +55,21 @@
 				.panel{
 					width: 80%;
 					margin-top: 30px;
-					margin-left: 10%;
+					margin-left: 11%;
 				}
 			}			
 			@media screen and (min-width: 1020px){
 				.panel{
 					width: 60%;
 					margin-top: 30px;
-					margin-left: 20%;
+					margin-left: 21%;
 				}
 			}			
 			@media screen and (min-width: 1920px){
 				.panel{
 					width: 40%;
 					margin-top: 30px;
-					margin-left: 30%;
-				}
-			}
-			@media screen and (max-width: 768px){
-				.panel{
-					width: 100%;
-					margin-top: 30px;
-					margin-left: 0%;
+					margin-left: 31%;
 				}
 			}
 			th{
