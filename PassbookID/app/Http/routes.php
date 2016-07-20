@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 	Route::get('/AdminView', 'AdminController@index');
 	Route::get('/AdminViewStud', 'AdminController@s_index');
 	Route::get('/AdminViewEmp', 'AdminController@e_index');
+	Route::get('/Search_adminview', 'AdminController@search_adminview');
 
 	Route::get('/AdminCreate', 'AdminController@showPromoteView');
 	Route::get('/AdminRemove', 'AdminController@showRevokeView');

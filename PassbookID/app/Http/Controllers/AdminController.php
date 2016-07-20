@@ -23,7 +23,7 @@ class AdminController extends Controller
     public function s_index(){
 		// pagination for students
 		$s_users = DB::table('users')
-		->select('sn_year', 'sn_num', 'name', 'isenrolled', 'active')
+		->select('sn_year', 'sn_num', 'fname', 'mname', 'lname', 'sname', 'active')
 		->where('isenrolled', '=', 'yes')
 		->orderBy('lname', 'asc')
 		->paginate(10);
@@ -33,12 +33,28 @@ class AdminController extends Controller
 	public function e_index(){
 		// pagination for employees
 		$e_users = DB::table('users')
-		->select('empnum', 'name', 'isemployed', 'active')
+		->select('empnum', 'fname', 'mname', 'lname', 'sname', 'active')
 		->where('isemployed', '=', 'yes')
 		->orderBy('lname', 'asc')
 		->paginate(10);
 		return view('admin', ['e_users'=>$e_users]);
 	}
+   
+   public function search_adminview(Request $request){
+	   //search for viewing users
+	   $inp = $request['searchinput'];
+	   $inp = '%'.$inp.'%';
+	   
+	   if($inp!="" || $inp!=null){
+		   $results = DB::table('users')
+				->select('fname', 'mname', 'lname', 'sname', 'email', 'sn_year', 'sn_num', 'empnum', 'isenrolled', 'active')
+				->where('name', 'LIKE', $inp)
+				->orWhere('email', 'LIKE', $inp)
+				->orderBy('lname', 'asc')
+				->paginate(10);
+				return view('admin', ['results'=>$results]);
+	   }
+   }
    
 	public function showPromoteView(){
 		return view('AdminCreate');
