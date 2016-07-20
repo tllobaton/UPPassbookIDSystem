@@ -12,18 +12,7 @@
 				transform: translate(-50%, -50%);
 				padding:20px;
 				text-align: center;
-				width: 65%;
-			}
-			@media screen and (max-width: 768px){
-				#content{
-					position: absolute;
-					top: 500px;
-					left: 50%;
-					transform: translate(-50%, -50%);
-					padding:20px;
-					text-align: center;
-					width: 100%;
-				}
+				width: 100%;
 			}
 			#searchfield{
 				margin-top: 30px;
