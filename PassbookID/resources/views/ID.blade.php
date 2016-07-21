@@ -98,7 +98,7 @@
 			}
 			#dl {
 				position:inherit;
-				background: url('{{ asset('wallet/add_to_apple_wallet.svg') }}') no-repeat scroll 0 0 transparent;
+				background: url('{{ asset('/UPPassbookIDSystem/Passbook/public/wallet/add_to_apple_wallet.svg') }}') no-repeat scroll 0 0 transparent;
 				background-size: cover;
 				width: 150px;
 				height: 45px;
@@ -137,7 +137,7 @@
 			?>
 			<div class = "card">
 				<div class = "upper">
-					<img src = "/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
+					<img src = "/UPPassbookIDSystem/Passbook/public/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
 					<label class = "campus" id = "UP">University of the Philippines {{$user->campus}}</label>
 				</div>
 				<hr>
@@ -156,13 +156,15 @@
 				</div>
 
 				@if($type=='employee')
-					<img src = <?php echo '/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<!--Generate ID picture and barcode for employees-->
+					<img src = <?php echo '/UPPassbookIDSystem/Passbook/public/wallet/'.$user->empnum.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
 					<div class = "bcode">
 						<img src=<?php echo "/barcode/img/".$user->empnum?> alt="barcode">
 					</div>
 					<a href="{{ url('/ViewEmergency/employee') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@else
-					<img src = <?php echo '/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<!--Generate ID picture and barcode for students-->
+					<img src = <?php echo '/UPPassbookIDSystem/Passbook/public/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
 					<div class = "bcode">
 						<img src=<?php echo "/barcode/img/".$user->sn_year."-".$user->sn_num?> alt="barcode">
 					</div>
