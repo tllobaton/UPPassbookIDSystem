@@ -164,7 +164,7 @@
 					<a href="{{ url('/ViewEmergency/employee') }}"><i class="fa fa-btn fa-info-circle"></i></a>
 				@else
 					<!--Generate ID picture and barcode for students-->
-					<img src = <?php echo '/UPPassbookIDSystem/PassbookID/public/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
+					<img src = <?php echo "/UPPassbookIDSystem/PassbookID/public/wallet/".$user->sn_year.$user->sn_num.'/thumbnail.png'?> id = "pic" alt = "1x1" width = "135" height = "135">
 					<div class = "bcode">
 						<img src=<?php echo "/barcode/img/".$user->sn_year."-".$user->sn_num?> alt="barcode">
 					</div>

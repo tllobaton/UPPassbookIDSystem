@@ -175,7 +175,7 @@ class CreateIdController extends Controller {
 				$dirname = $request->empnum;
 			}
 			// move photo to directory above, save picture as thumbnail.png
-			$request->file('photo')->move('wallet\\'.$dirname, 'thumbnail.png');
+			$request->file('photo')->move(base_path('public/wallet/'.$dirname), 'thumbnail.png');
 		}
 		else {
 			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
@@ -267,7 +267,7 @@ class CreateIdController extends Controller {
 		$currdate = new DateTime();
 		$currdate->setTimezone(new DateTimeZone('Asia/Manila'));
 		$currdate = $currdate->format('Y-m-d H:i:s');
-		if ($campusexpire == null OR $campusexpire >= $currdate) {
+		if ($campusexpire == null OR $campusexpire <= $currdate) {
 			Session::flash('null', 'Expiry date invalid. Contact admin to fix.');
 			return redirect("/ViewId/".$type);
 		}
@@ -400,9 +400,9 @@ class CreateIdController extends Controller {
 			// Add assets to the PKPass package
 			
 			// get saved photo, must be named as thumbnail.png
-			$pass->addAsset(base_path('public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
-			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
-			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
+			$pass->addAsset(base_path('/public/wallet/'.$user->sn_year.$user->sn_num.'/thumbnail.png'));
+			$pass->addAsset(base_path('/resources/assets/wallet/icon.png'));
+			$pass->addAsset(base_path('/resources/assets/wallet/logo.png'));
 
 			$pkpass = $pass->create();
 			
@@ -504,9 +504,9 @@ class CreateIdController extends Controller {
 			// Add assets to the PKPass package
 			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
 			
-			$pass->addAsset(base_path('public\wallet\\'.$user->empnum.'\thumbnail.png'));
-			$pass->addAsset(base_path('resources\assets\wallet\icon.png'));
-			$pass->addAsset(base_path('resources\assets\wallet\logo.png'));
+			$pass->addAsset(base_path('/public/wallet/'.$user->empnum.'/thumbnail.png'));
+			$pass->addAsset(base_path('/resources/assets/wallet/icon.png'));
+			$pass->addAsset(base_path('/resources/assets/wallet/logo.png'));
 
 			$pkpass = $pass->create();
 			
