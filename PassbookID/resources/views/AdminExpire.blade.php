@@ -42,7 +42,7 @@
 					@endforeach
 					</select><br><br>
 					<label>Expiration Date: </label>
-					<input type = "date" name = "expdate"></input><br><br>
+					<input type = "date" name = "expdate" required></input><br><br>
 					<button type = "submit" class="btn btn-primary">Set</button>
 				</div>
 			</form>
