@@ -104,7 +104,7 @@
 				@endif
 
                 <!-- Branding Image -->
-				<h1 class="navbar-left"><img class="hidden-xs" id = "navbarlogo" src = "/img/UPLogo.png"><img class="visible-xs" id = "navbarlogo_xs" src = "/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
+				<h1 class="navbar-left"><img class="hidden-xs" id = "navbarlogo" src = "/UPPassbookIDSystem/PassbookID/public/img/UPLogo.png"><img class="visible-xs" id = "navbarlogo_xs" src = "/UPPassbookIDSystem/PassbookID/public/img/UPLogo.png"><span class="hidden-xs">UNIVERSITY OF THE PHILIPPINES</span><span class="visible-xs" id="UPlogo">U.P.</span></h1>
 				<!--<a href = "#" class = "navbar-brand"></a>-->
             </div>
 

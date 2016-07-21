@@ -148,8 +148,8 @@ class AdminController extends Controller
 	public function addUsers(Request $request) {
 		
 		// move uploaded file to /public folder of directory
-		$request->file('filetoopen')->move("C:\wamp64\www\PassbookID\PassbookID\public", "UploadedUsers.csv");
-		$file = fopen("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv", "r");
+		$request->file('filetoopen')->move(__DIR__."/UPPassbookIDSystem/PassbookID/public", "UploadedUsers.csv");
+		$file = fopen(__DIR__."/UPPassbookIDSystem/PassbookID/public/UploadedUsers.csv", "r");
 		// record line number for error checking
 		$linenumber = 1;
 		
@@ -228,7 +228,7 @@ class AdminController extends Controller
 		
 		Session::flash('success', 'Successfully imported file');
 		fclose($file);
-		unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+		unlink(__DIR__."\UPPassbookIDSystem\PassbookID\public\UploadedUsers.csv");
 		
 		return redirect('/AdminAddUsers');
 	}
