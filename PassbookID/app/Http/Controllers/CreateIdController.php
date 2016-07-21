@@ -400,9 +400,9 @@ class CreateIdController extends Controller {
 			// Add assets to the PKPass package
 			
 			// get saved photo, must be named as thumbnail.png
-			$pass->addAsset(base_path(__DIR__.'\UPPassbookIDSystem\PassbookID\public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
-			$pass->addAsset(base_path(__DIR__.'\UPPassbookIDSystem\PassbookID\resources\assets\wallet\icon.png'));
-			$pass->addAsset(base_path(__DIR__.'\UPPassbookIDSystem\PassbookID\resources\assets\wallet\logo.png'));
+			$pass->addAsset(base_path('\UPPassbookIDSystem\PassbookID\public\wallet\\'.$user->sn_year.$user->sn_num.'\thumbnail.png'));
+			$pass->addAsset(base_path('\UPPassbookIDSystem\PassbookID\resources\assets\wallet\icon.png'));
+			$pass->addAsset(base_path('\UPPassbookIDSystem\PassbookID\resources\assets\wallet\logo.png'));
 
 			$pkpass = $pass->create();
 			
@@ -504,9 +504,9 @@ class CreateIdController extends Controller {
 			// Add assets to the PKPass package
 			//$pass->addAsset(base_path('resources\assets\wallet\background.png'));
 			
-			$pass->addAsset(base_path(__DIR__.'\UPPassbookIDSystem\PassbookID\public\wallet\\'.$user->empnum.'\thumbnail.png'));
-			$pass->addAsset(base_path(__DIR__.'\UPPassbookIDSystem\PassbookID\resources\assets\wallet\icon.png'));
-			$pass->addAsset(base_path(__DIR__.'\UPPassbookIDSystem\PassbookID\resources\assets\wallet\logo.png'));
+			$pass->addAsset(base_path('\UPPassbookIDSystem\PassbookID\public\wallet\\'.$user->empnum.'\thumbnail.png'));
+			$pass->addAsset(base_path('\UPPassbookIDSystem\PassbookID\resources\assets\wallet\icon.png'));
+			$pass->addAsset(base_path('\UPPassbookIDSystem\PassbookID\resources\assets\wallet\logo.png'));
 
 			$pkpass = $pass->create();
 			
