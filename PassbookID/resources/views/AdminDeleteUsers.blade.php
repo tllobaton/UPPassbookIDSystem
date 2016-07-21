@@ -12,7 +12,7 @@
 			}
 			#box {
 				position: absolute;
-				top: 450px;
+				top: 475px;
 				left: 50%;
 				transform: translate(-50%, -50%);
 				padding:20px;
