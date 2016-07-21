@@ -137,7 +137,7 @@
 			?>
 			<div class = "card">
 				<div class = "upper">
-					<img src = __DIR__."/UPPassbookIDSystem/PassbookID/public/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
+					<img src = "/UPPassbookIDSystem/PassbookID/public/img/UPLogo.png" id = "logo" alt = "logo" width = "70" height = "70">
 					<label class = "campus" id = "UP">University of the Philippines {{$user->campus}}</label>
 				</div>
 				<hr>
