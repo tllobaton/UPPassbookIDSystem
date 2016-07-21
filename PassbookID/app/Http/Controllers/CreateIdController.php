@@ -267,7 +267,7 @@ class CreateIdController extends Controller {
 		$currdate = new DateTime();
 		$currdate->setTimezone(new DateTimeZone('Asia/Manila'));
 		$currdate = $currdate->format('Y-m-d H:i:s');
-		if ($campusexpire == null OR $campusexpire >= $currdate) {
+		if ($campusexpire == null OR $campusexpire <= $currdate) {
 			Session::flash('null', 'Expiry date invalid. Contact admin to fix.');
 			return redirect("/ViewId/".$type);
 		}
