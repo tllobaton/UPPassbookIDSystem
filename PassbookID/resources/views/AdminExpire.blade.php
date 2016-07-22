@@ -33,6 +33,12 @@
 							".session('success')."
 							</div>";
 					}
+					if (session('danger')){
+						echo"<br><br><div class='alert alert-danger'>
+							<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+							".session('danger')."
+							</div>";
+					}
 					?>
 					<label style="font-size: 20px; margin-bottom: 20px">Set ID expire date</label><br>
 					<label>Campus: </label>
@@ -42,7 +48,7 @@
 					@endforeach
 					</select><br><br>
 					<label>Expiration Date: </label>
-					<input type = "date" name = "expdate"></input><br><br>
+					<input type = "date" name = "expdate" required></input><br><br>
 					<button type = "submit" class="btn btn-primary">Set</button>
 				</div>
 			</form>

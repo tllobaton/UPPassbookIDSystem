@@ -110,10 +110,19 @@ class AdminController extends Controller
 	
 	public function setIdExpire(Request $request) {
 		// set expiration date of ID
-		DB::table('campus')
-			->where('cname', $request->campus)
-			->update(['expire' => $request->expdate]);
-		Session::flash('success', 'The expiry date set');
+		$currdate = new DateTime();
+		$currdate->setTimezone(new DateTimeZone('Asia/Manila'));
+		$currdate = $currdate->format('Y-m-d H:i:s');
+		
+		if($request->expdate==null || $request->expdate<=$currdate){
+			Session::flash('danger', 'The expiry date is invalid.');
+		}
+		else{
+			DB::table('campus')
+				->where('cname', $request->campus)
+				->update(['expire' => $request->expdate]);
+			Session::flash('success', 'The expiry date has been set.');
+		}
 		return redirect('/AdminExpire');
 	}
 	
