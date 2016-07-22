@@ -164,8 +164,8 @@ class AdminController extends Controller
 	public function addUsers(Request $request) {
 		
 		// move uploaded file to /public folder of directory
-		$request->file('filetoopen')->move(__DIR__."/UPPassbookIDSystem/PassbookID/public", "UploadedUsers.csv");
-		$file = fopen(__DIR__."/UPPassbookIDSystem/PassbookID/public/UploadedUsers.csv", "r");
+		$request->file('filetoopen')->move(base_path("public"), "UploadedUsers.csv");
+		$file = fopen(base_path("public/UploadedUsers.csv"), "r");
 		// record line number for error checking
 		$linenumber = 1;
 		
@@ -179,7 +179,7 @@ class AdminController extends Controller
 			if (sizeof($uploadArray) != 7) {
 				Session::flash('fail', 'Invalid format at line ' .$linenumber);
 				fclose($file);
-				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				unlink(base_path("public/UploadedUsers.csv"));
 				return redirect("/AdminAddUsers");
 			}
 			
@@ -187,7 +187,7 @@ class AdminController extends Controller
 			if (DB::table('users')->where('email', $uploadArray[0])->first()) {
 				Session::flash('fail', 'User already in database at line ' .$linenumber);
 				fclose($file);
-				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				unlink(base_path("public/UploadedUsers.csv"));
 				return redirect("/AdminAddUsers");
 			}
 			
@@ -195,7 +195,7 @@ class AdminController extends Controller
 			if (($uploadArray[5] != "yes") AND ($uploadArray[6] != "yes")) {
 				Session::flash('fail', 'User must be enrolled or employed at line ' .$linenumber);
 				fclose($file);
-				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				unlink(base_path("public/UploadedUsers.csv"));
 				return redirect("/AdminAddUsers");
 			}
 			
@@ -203,7 +203,7 @@ class AdminController extends Controller
 			if ($uploadArray[0] == "") {
 				Session::flash('fail', 'User must have email at line ' .$linenumber);
 				fclose($file);
-				unlink("C:\wamp64\www\PassbookID\PassbookID\public\UploadedUsers.csv");
+				unlink(base_path("public/UploadedUsers.csv"));
 				return redirect("/AdminAddUsers");
 			}
 			
@@ -244,7 +244,7 @@ class AdminController extends Controller
 		
 		Session::flash('success', 'Successfully imported file');
 		fclose($file);
-		unlink(__DIR__."\UPPassbookIDSystem\PassbookID\public\UploadedUsers.csv");
+		unlink(base_path("public/UploadedUsers.csv"));
 		
 		return redirect('/AdminAddUsers');
 	}

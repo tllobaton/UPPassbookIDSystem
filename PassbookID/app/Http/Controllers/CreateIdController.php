@@ -178,7 +178,7 @@ class CreateIdController extends Controller {
 			$request->file('photo')->move(base_path('public/wallet/'.$dirname), 'thumbnail.png');
 		}
 		else {
-			Session::flash('xsize', 'Photo is tubig, use less than 10MB');
+			Session::flash('xsize', 'Photo is too big, use less than 10MB');
 			return 0;
 		}
 		return 1;
