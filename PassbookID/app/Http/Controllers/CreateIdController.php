@@ -527,7 +527,11 @@ class CreateIdController extends Controller {
  		$templateName = "testID";
  		$pk = new PassKit($apiKey, $apiSecret);
  	
- 		$result = $pk->getTemplateFieldNames($templateName);
+ 		$data["Name"] = "mingmin ng karunungan";
+		$pathh = $pk->addImageByLocalFile("strip", base_path('public/wallet/201349426/thumbnail.png'));
+		dd($pathh);
+		$data["stripImage"] = $pathh["imageID"];
+		$result = $pk->issuePass($templateName, $data);
 		dd($result);
  	}
 }
