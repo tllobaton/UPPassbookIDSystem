@@ -104,7 +104,7 @@
 							<input class = "inform" type="text" name = "fname" value = <?php echo '"'.$user->fname.'"'?> required pattern="^[A-Za-z\-Ññ'](?!.*?[\'-\.]{2})[A-Za-z\-Ññ\'\.\s]+"></input><br>
 						
 							<label class = "inform">Middle Initial:</label>
-							<input class = "inform" type="text" name = "mname" pattern = "^[A-Z]{1,2}"  title = "Middle Initial Only, no period" required value = {{$user->mname}}></input><br>
+							<input class = "inform" type="text" name = "mname" pattern = "^[A-Z]{1,2}"  title = "Middle Initial Only, no period" value = {{$user->mname}}></input><br>
 						
 							<label class = "inform">Last Name:</label>
 							<input class = "inform" type="text" name = "lname" value = <?php echo '"'.$user->lname.'"'?> required  pattern="^[A-Za-z\-Ññ'](?!.*?[\'-]{2})[A-Za-z\-Ññ\'\s]+"></input><br>

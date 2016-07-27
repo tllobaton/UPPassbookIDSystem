@@ -143,7 +143,7 @@
 				<hr>
 				<div class = "lower">
 					<div class = "details">
-						<label>{{$user->fname}} {{$user->mname}}. {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
+						<label>{{$user->fname}} <?php if($user->mname != null) echo $user->mname?> {{$user->lname}} <?php if($user->sname != null) echo $user->sname?></label><br>
 						<label style="font-size:26px">
 							@if($type=='employee')
 								{{$user->empnum}}

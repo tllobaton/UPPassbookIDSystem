@@ -32,7 +32,7 @@ class SocialAuthController extends Controller
 			}
 		}
 		else {
-			Session::flash('xdomain', 'Please use @up.edu.ph.');				// Otherwise, return to login page with error message
+			Session::flash('xdomain', 'Your account is not in the database.');				// Otherwise, return to login page with error message
 			return redirect("/login");
 		}
     }

@@ -164,8 +164,8 @@ class CreateIdController extends Controller {
 			return 0;			
 		}
 		
-		// check if photo is less than 10MB
-		if ($request->file('photo')->getClientSize() < 1000000){
+		// check if photo is less than or equal to 500KB
+		if ($request->file('photo')->getClientSize() < 4000000){
 			// photos are stored in /public/wallet/studentnumber, e.g. /public/wallet/201349426
 			if ($request->type == 'student') {
 				$dirname = $request->sn_year.$request->sn_num;
@@ -178,7 +178,7 @@ class CreateIdController extends Controller {
 			$request->file('photo')->move(base_path('public/wallet/'.$dirname), 'thumbnail.png');
 		}
 		else {
-			Session::flash('xsize', 'Photo is too big, use less than 10MB');
+			Session::flash('xsize', 'Photo is too big, use less than or equal to 500KB');
 			return 0;
 		}
 		return 1;
@@ -324,7 +324,7 @@ class CreateIdController extends Controller {
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
 				"serialNumber"      => $user->sn_year.$user->sn_num,
 				"teamIdentifier"    => "A7FDKGVVEB",
-				"expirationDate"	=> $campusexpire->expire."T00:00:00",
+				"expirationDate"	=> $campusexpire->expire."T09:00:00",
 				"foregroundColor"   => "rgb(99, 99, 99)",
 				"backgroundColor"   => "rgb(212, 212, 212)",
 				"logoText" => "University of the Philippines ".$user->campus,
@@ -382,7 +382,7 @@ class CreateIdController extends Controller {
 						], [
 							"key" => "enum",
 							"label" => "Number: ",
-							"value" => $user->ename
+							"value" => $user->enum
 						], [
 							"key" => "eadd",
 							"label" => "Address: ",
@@ -393,7 +393,7 @@ class CreateIdController extends Controller {
 			];
 
 			$pass->setPassDefinition($pass_definition);
-
+			
 			// Definitions can also be set from a JSON string
 			// $pass->setPassDefinition(file_get_contents('/path/to/pass.json));
 
@@ -405,12 +405,12 @@ class CreateIdController extends Controller {
 			$pass->addAsset(base_path('/resources/assets/wallet/logo.png'));
 
 			$pkpass = $pass->create();
-			
+			$filename = $user->sn_year.$user->sn_num;
 			// download the pass
 			return new Response($pkpass, 200, [
 				'Content-Transfer-Encoding' => 'binary',
 				'Content-Description' => 'File Transfer',
-				'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+				'Content-Disposition' => 'attachment; filename='.$filename,
 				'Content-length' => strlen($pkpass),
 				'Content-Type' => PassGenerator::getPassMimeType(),
 				'Pragma' => 'no-cache',
@@ -486,11 +486,27 @@ class CreateIdController extends Controller {
 						], [
 							"key" => "enum",
 							"label" => "Number: ",
-							"value" => $user->ename
+							"value" => $user->enum
 						], [
 							"key" => "eadd",
 							"label" => "Address: ",
 							"value" => $user->eaddress
+						], [
+							"key" => "TIN",
+							"label" => "TIN: ",
+							"value" => $user->tin
+						], [
+							"key" => "GSIS",
+							"label" => "GSIS: ",
+							"value" => $user->gsis
+						], [
+							"key" => "blood",
+							"label" => "Blood Type",
+							"value" => $user->blood
+						], [
+							"key" => "empstatus",
+							"label" => "Employment Status",
+							"value" => $user->empstatus
 						]
 					],
 				],
@@ -509,11 +525,11 @@ class CreateIdController extends Controller {
 			$pass->addAsset(base_path('/resources/assets/wallet/logo.png'));
 
 			$pkpass = $pass->create();
-			
+			$filename = $user->empnum . ".pkpass";			
 			return new Response($pkpass, 200, [
 				'Content-Transfer-Encoding' => 'binary',
 				'Content-Description' => 'File Transfer',
-				'Content-Disposition' => 'attachment; filename="pass.pkpass"',
+				'Content-Disposition' => 'attachment; filename=' . $filename,
 				'Content-length' => strlen($pkpass),
 				'Content-Type' => PassGenerator::getPassMimeType(),
 				'Pragma' => 'no-cache',

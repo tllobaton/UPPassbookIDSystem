@@ -192,7 +192,14 @@ class AdminController extends Controller
 				unlink(base_path("public/UploadedUsers.csv"));
 				return redirect("/AdminAddUsers");
 			}
-			
+			// if domain of email is not up.edu.ph			
+			if (substr($uploadArray[0], -9) != 'up.edu.ph') {
+                                Session::flash('fail', 'Email not UP domain  at line ' .$linenumber);
+                                fclose($file);
+                                unlink(base_path("public/UploadedUsers.csv"));
+                                return redirect("/AdminAddUsers");
+                        }
+
 			// if user is already in database
 			if (DB::table('users')->where('email', $uploadArray[0])->first()) {
 				Session::flash('fail', 'User already in database at line ' .$linenumber);
@@ -216,7 +223,22 @@ class AdminController extends Controller
 				unlink(base_path("public/UploadedUsers.csv"));
 				return redirect("/AdminAddUsers");
 			}
-			
+			// if isenrolled is neither a yes/no
+			$choice = array('yes', 'no');
+			if (!in_array(strtolower($uploadArray[5]), $choice)) {
+                                Session::flash('fail', 'isenrolled neither yes/no  at line ' .$linenumber);
+                                fclose($file);
+                                unlink(base_path("public/UploadedUsers.csv"));
+                                return redirect("/AdminAddUsers");
+                        }
+			// if isemployed is neither a yes/no	
+			if (!in_array(strtolower($uploadArray[6]), $choice)) {
+                                Session::flash('fail', 'isemployed neither yes/no  at line ' .$linenumber);
+                                fclose($file);
+                                unlink(base_path("public/UploadedUsers.csv"));
+                                return redirect("/AdminAddUsers");
+                        }
+
 			// add to database
 			$user = new User;
 			$user->email = $uploadArray[0];

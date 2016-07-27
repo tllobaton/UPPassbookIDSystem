@@ -22,18 +22,6 @@ class SocialAccountService
 			}
         }	
 		
-		else {															// If email does not exist,
-			if (isset($providerUser->user['domain'])) {					// Check if email has a different domain other than @gmail.com
-				if ($providerUser->user['domain'] == "up.edu.ph") {		// Check if email's domain is up.edu.ph
-					$user = new User();									// Create user and add to database
-					$user->name = $providerUser->getName();
-					$user->email = $providerUser->getEmail();
-					$user->save();
-					return $user;
-				}
-			}
-			return NULL;												// Return null if no domain
-        }
-
+	return NULL;
     }
 }
