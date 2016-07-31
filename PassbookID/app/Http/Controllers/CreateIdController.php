@@ -321,18 +321,25 @@ class CreateIdController extends Controller {
 				"description"       => "UP ID",
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
-				"passTypeIdentifier"=> "ph.edu.up.PassID",
-				"serialNumber"      => $user->sn_year.$user->sn_num,
+				"passTypeIdentifier"=> "pass.ph.edu.up.PassID",
+				"serialNumber"      => strval($user->sn_year.$user->sn_num),
 				"teamIdentifier"    => "A7FDKGVVEB",
-				"expirationDate"	=> $campusexpire->expire."T09:00:00",
+				"expirationDate"	=> $campusexpire->expire."T00:00:00Z",
+				"voided"	=> false,
 				"foregroundColor"   => "rgb(99, 99, 99)",
 				"backgroundColor"   => "rgb(212, 212, 212)",
 				"logoText" => "University of the Philippines ".$user->campus,
-				"barcode" => [
+				"barcodes" => [
 					"message"   => $user->sn_year."-".$user->sn_num,
 					"format"    => "PKBarcodeFormatCode128",
 					"messageEncoding"=> "utf-8"
 				],
+				"barcode" => [
+                                        "message"   => $user->sn_year."-".$user->sn_num,
+                                        "format"    => "PKBarcodeFormatQR",
+                                        "messageEncoding"=> "utf-8"
+                                ],
+
 				"generic" => [
 					"primaryFields" => [
 						[
@@ -352,7 +359,8 @@ class CreateIdController extends Controller {
 						[
 							// if user is student, align right
 							"key" => "type",
-							"label" => "Student",
+							"label" => "Type",
+							"value" => "Student",
 							"textAlignment" => "PKTextAlignmentRight"
 						]
 					],
@@ -405,13 +413,14 @@ class CreateIdController extends Controller {
 			$pass->addAsset(base_path('/resources/assets/wallet/logo.png'));
 
 			$pkpass = $pass->create();
-			$filename = $user->sn_year.$user->sn_num;
+			$filename = $user->sn_year.$user->sn_num.".pkpass";
 			// download the pass
 			return new Response($pkpass, 200, [
 				'Content-Transfer-Encoding' => 'binary',
 				'Content-Description' => 'File Transfer',
 				'Content-Disposition' => 'attachment; filename='.$filename,
 				'Content-length' => strlen($pkpass),
+				//'Content-Type' => 'application/vnd.apple.pkpass',
 				'Content-Type' => PassGenerator::getPassMimeType(),
 				'Pragma' => 'no-cache',
 			]);
@@ -433,15 +442,21 @@ class CreateIdController extends Controller {
 				"passTypeIdentifier"=> "ph.edu.up.PassID",
 				"serialNumber"      => $user->empnum,
 				"teamIdentifier"    => "A7FDKGVVEB",
-				"expirationDate"	=> $campusexpire->expire."T00:00:00",
+				"expirationDate"	=> $campusexpire->expire."T00:00:00Z",
 				"foregroundColor"   => "rgb(0, 0, 0)",
 				"backgroundColor"   => "rgb(255, 255, 255)",
 				"logoText" => "University of the Philippines ".$user->campus,
-				"barcode" => [
+				"barcodes" => [
 					"message"   => $user->empnum,
 					"format"    => "PKBarcodeFormatCode128",
 					"messageEncoding"=> "utf-8"
 				],
+				"barcode" => [
+                                        "message"   => $user->empnum,
+                                        "format"    => "PKBarcodeFormatQR",
+                                        "messageEncoding"=> "utf-8"
+                                ],
+
 				"generic" => [
 					"primaryFields" => [
 						[
@@ -459,7 +474,8 @@ class CreateIdController extends Controller {
 						],
 						[
 							"key" => "type",
-							"label" => "Faculty",
+							"label" => "Type",
+							"value" => "Faculty",
 							"textAlignment" => "PKTextAlignmentRight"
 						]
 					],
