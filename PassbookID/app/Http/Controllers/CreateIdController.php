@@ -329,17 +329,12 @@ class CreateIdController extends Controller {
 				"foregroundColor"   => "rgb(99, 99, 99)",
 				"backgroundColor"   => "rgb(212, 212, 212)",
 				"logoText" => "University of the Philippines ".$user->campus,
-				"barcodes" => [
+				"barcode" => [
 					"message"   => $user->sn_year."-".$user->sn_num,
 					"format"    => "PKBarcodeFormatCode128",
 					"messageEncoding"=> "utf-8"
 				],
-				"barcode" => [
-                                        "message"   => $user->sn_year."-".$user->sn_num,
-                                        "format"    => "PKBarcodeFormatQR",
-                                        "messageEncoding"=> "utf-8"
-                                ],
-
+				
 				"generic" => [
 					"primaryFields" => [
 						[
@@ -439,24 +434,19 @@ class CreateIdController extends Controller {
 				"description"       => "UP ID",
 				"formatVersion"     => 1,
 				"organizationName"  => "University of the Philippines",
-				"passTypeIdentifier"=> "ph.edu.up.PassID",
+				"passTypeIdentifier"=> "pass.ph.edu.up.PassID",
 				"serialNumber"      => $user->empnum,
 				"teamIdentifier"    => "A7FDKGVVEB",
 				"expirationDate"	=> $campusexpire->expire."T00:00:00Z",
 				"foregroundColor"   => "rgb(0, 0, 0)",
 				"backgroundColor"   => "rgb(255, 255, 255)",
 				"logoText" => "University of the Philippines ".$user->campus,
-				"barcodes" => [
+				"barcode" => [
 					"message"   => $user->empnum,
 					"format"    => "PKBarcodeFormatCode128",
 					"messageEncoding"=> "utf-8"
 				],
-				"barcode" => [
-                                        "message"   => $user->empnum,
-                                        "format"    => "PKBarcodeFormatQR",
-                                        "messageEncoding"=> "utf-8"
-                                ],
-
+				
 				"generic" => [
 					"primaryFields" => [
 						[
